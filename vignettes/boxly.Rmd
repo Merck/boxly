@@ -1,0 +1,46 @@
+---
+title: "boxly"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{boxly}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,
+                        collapse = TRUE,
+  comment = "#>",
+  warning = FALSE,
+  message = FALSE)
+```
+
+```{r}
+library(metalite)
+library(dplyr)
+library(ggplot2)
+library(plotly)
+library(htmlwidgets)
+library(crosstalk)
+library(boxly)
+library(htmltools)
+```
+
+```{r}
+meta <- meta_boxly()
+meta
+```
+
+```{r}
+outdata <- prepare_boxly(meta,
+              population = "apat",
+              observation = "wk12",
+              parameter = "sodium;bili;urate",
+              analysis = "lb_boxly")
+```
+
+```{r}
+tmp1 <- outdata |>
+  boxly()
+tmp1
+```

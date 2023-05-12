@@ -1,0 +1,6 @@
+^boxly\.Rproj$
+^\.Rproj\.user$
+^README\.Rmd$
+^LICENSE\.md$
+^jenkins$
+^jobs-configuration.groovy$

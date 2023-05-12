@@ -1,0 +1,45 @@
+Package: boxly
+Type: Package
+Title: Package to Create Interactive Box Plot
+Version: 0.0.9
+Authors@R: c(
+        person("Benjamin", "Wang", email = "benjamin.wang@merck.com", role = c("aut", "cre")),
+        person("Yujie", "Zhao", role = c("aut")),
+        person("Sarad", "Nepal",  role = c("ctb")),
+        person("Madhusudhan", "Ginnaram", role = c("ctb")),
+        person("Merck Sharp & Dohme Corp", role = "cph")
+       )
+Description: Interactive Box Plot using `plotly`.
+License: GPL (>= 3)
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.3
+Imports: 
+    crosstalk,
+    htmlwidgets,
+    htmltools,
+    ggplot2,
+    plotly,
+    dplyr,
+    DT,
+    metalite,
+    brew
+Suggests: 
+    devtools,
+    testthat (>= 3.0.0),
+    knitr,
+    rmarkdown,
+    covr,
+    colorspace,
+    r2rtf,
+    kableExtra,
+    readxl,
+    pkgdown,
+    png,
+    rprojroot,
+    vdiffr
+Depends: 
+    R (>= 4.1)
+Config/testthat/edition: 3
+VignetteBuilder: knitr
