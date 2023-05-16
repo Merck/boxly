@@ -43,3 +43,4 @@ Depends:
     R (>= 4.1)
 Config/testthat/edition: 3
 VignetteBuilder: knitr
+URL: https://merck.github.io/boxly/
