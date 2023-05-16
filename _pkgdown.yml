@@ -37,16 +37,16 @@ articles:
 - title: Get Started
   contents: boxly
 - title: Package Design
-  contents: boxly-design-pattern
+  contents: box-design-pattern
 reference:
 - title: box plot
   contents:
   - meta_boxly
-  - prepare_forestly
+  - prepare_boxly
   - boxly
 - title: Example Data
   contents:
-  - boxlyly_adlb
-  - boxlyly_adeg
-  - boxlyly_advs
+  - boxly_adlb
+  - boxly_adeg
+  - boxly_advs
 

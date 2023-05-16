@@ -2,7 +2,7 @@
 title: "Boxly Design Pattern"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{boxly Design Pattern}
+  %\VignetteIndexEntry{Boxly Design Pattern}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
