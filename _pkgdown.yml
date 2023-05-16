@@ -25,7 +25,7 @@ navbar:
   - text: Reference
     href: reference/index.html
   - text: Get Started
-    href: articles/forestly.html
+    href: articles/boxly.html
   - text: Articles
     href: articles/index.html
   - text: Changelog
@@ -41,7 +41,7 @@ articles:
 reference:
 - title: box plot
   contents:
-  - meta_fboxly
+  - meta_boxly
   - prepare_forestly
   - boxly
 - title: Example Data
