@@ -16,7 +16,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#' A example ADLB dataset
+#' An example ADLB dataset
 #'
 #' @format A data frame with 24746 and 24 variables:
 #' \describe{
@@ -46,7 +46,8 @@
 #'   \item{ablfl}{Baseline Record Flag}
 #' }
 "boxly_adlb"
-#' A example ADVS dataset
+
+#' An example ADVS dataset
 #'
 #' @format A data frame with 32139 and 34 variables:
 #' \describe{
@@ -86,7 +87,8 @@
 #'   \item{ABLFL}{Baseline Record Flag}
 #' }
 "boxly_advs"
-#' A example ADEG dataset
+
+#' An example ADEG dataset
 #'
 #' @format A data frame with 32139 and 35 variables:
 #' \describe{

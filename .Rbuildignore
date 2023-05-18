@@ -1,10 +1,8 @@
-^boxly\.Rproj$
+^.*\.Rproj$
 ^\.Rproj\.user$
-^README\.Rmd$
-^LICENSE\.md$
-^jenkins$
-^jobs-configuration.groovy$
 ^_pkgdown\.yml$
-^docs$
 ^pkgdown$
+^docs$
+^LICENSE\.md$
+^LICENSES_THIRD_PARTY$
 ^\.github$

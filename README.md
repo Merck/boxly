@@ -2,7 +2,7 @@
 
 ## Overview
 
-The aim of `boxly` is to create an interactive box plot for analysis & reporting using R. 
+The aim of boxly is to create an interactive box plot for analysis & reporting using R.
 
 ## Workflow
 
@@ -12,11 +12,8 @@ The general workflow covers:
 - Step 2: prepare datasets for interactive box plot by `prepare_boxly()`.
 - Step 3: generate the interactive box plot using `boxly()`.
 
+## Highlighted features
 
-## Highlighted Features
-
-- Parameters can be selected. e.g., in laboratory(LB) analysis, (i) Sodium (ii) Billirubin (iii) Urate.
-
-- Different labels can be revealed by hovering the mouse over a box or outlier.
-
-- Count table is able to be appended under interactive box plot.
+- Parameters can be selected. For example, in laboratory (LB) analysis, (i) Sodium, (ii) Billirubin, (iii) Urate.
+- Different labels can be revealed by hovering over a box or outlier.
+- Count table can be appended under the interactive box plot.

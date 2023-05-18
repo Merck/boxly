@@ -16,30 +16,32 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#' A function to create a interactive box plot
-
 #' Prepare data for interactive box plot
 #'
 #' @inheritParams metalite.ae::prepare_ae_specific
-#' @param analysis Name of analysis plan
+#' @param analysis Name of analysis plan.
+#'
+#' @return Metadata list with plotting dataset.
+#'
+#' @export
 #'
 #' @examples
 #' library(metalite)
 #' library(dplyr)
+#'
 #' meta <- meta_boxly()
-#' prepare_boxly(meta,
-#'               population = "apat",
-#'               observation = "wk12",
-#'               analysis = "lb_boxly",
-#'               parameter = "sodium;bili;urate")
-#' @return Metadata list with plotting dataset
-#' @export
+#' prepare_boxly(
+#'   meta,
+#'   population = "apat",
+#'   observation = "wk12",
+#'   analysis = "lb_boxly",
+#'   parameter = "sodium;bili;urate"
+#' )
 prepare_boxly <- function(meta,
                           population,
                           observation,
                           analysis,
                           parameter) {
-
   # Obtain variables
   obs_var <- metalite::collect_adam_mapping(meta, observation)$var
   pop_var <- metalite::collect_adam_mapping(meta, population)$var
@@ -49,15 +51,21 @@ prepare_boxly <- function(meta,
 
   # Obtain Data
   pop <- metalite::collect_population_record(meta, population, var = pop_var)
-  obs <- do.call(rbind,
-          lapply(unlist(strsplit(parameter, ";")),
-                 function(s){
-                   metalite::collect_observation_record(meta, population, observation, parameter = s,
-                                              var = unique(c(obs_var, y, x
-                                                             ###, hover_outlier###
-                                                             )))}
-                 )
-          )
+  obs <- do.call(
+    rbind,
+    lapply(
+      unlist(strsplit(parameter, ";")),
+      function(s) {
+        metalite::collect_observation_record(meta, population, observation,
+          parameter = s,
+          var = unique(c(
+            obs_var, y, x
+            ### , hover_outlier###
+          ))
+        )
+      }
+    )
+  )
 
   # Obtain variable name
   pop_id <- metalite::collect_adam_mapping(meta, population)$id
@@ -131,10 +139,10 @@ prepare_boxly <- function(meta,
   # rownames(outlier) <- NULL
   # Return value
   outdata(meta, population, observation, parameter,
-          x_var = x, y_var = y, group_var = obs_group,
-          param_var = obs_var,
-          # hover_var_outlier = hover_outlier,
-          n = n_tbl, order = NULL, group = NULL, reference_group = NULL,
-          plotds = plotds
+    x_var = x, y_var = y, group_var = obs_group,
+    param_var = obs_var,
+    # hover_var_outlier = hover_outlier,
+    n = n_tbl, order = NULL, group = NULL, reference_group = NULL,
+    plotds = plotds
   )
 }

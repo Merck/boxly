@@ -2,13 +2,16 @@
 % Please edit documentation in R/meta_boxly.R
 \name{meta_boxly}
 \alias{meta_boxly}
-\title{Create a dummy data for box plot}
+\title{Create an example metadata object}
 \usage{
 meta_boxly()
 }
 \value{
-Metadata for creating interactive box plot
+Metadata for creating interactive box plot.
 }
 \description{
-Create a dummy data for box plot
+Create an example metadata object
+}
+\examples{
+meta_boxly()
 }

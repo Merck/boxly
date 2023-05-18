@@ -3,7 +3,7 @@
 \docType{data}
 \name{boxly_adeg}
 \alias{boxly_adeg}
-\title{A example ADEG dataset}
+\title{An example ADEG dataset}
 \format{
 A data frame with 32139 and 35 variables:
 \describe{
@@ -48,6 +48,6 @@ A data frame with 32139 and 35 variables:
 boxly_adeg
 }
 \description{
-A example ADEG dataset
+An example ADEG dataset
 }
 \keyword{datasets}
