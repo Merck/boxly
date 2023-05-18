@@ -16,21 +16,30 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#' Create a dummy data for box plot
-#' @export
-#' @return Metadata for creating interactive box plot
+#' Create an example metadata object
 #'
+#' @return Metadata for creating interactive box plot.
+#'
+#' @export
+#'
+#' @examples
+#' meta_boxly()
 meta_boxly <- function() {
   adsl <- r2rtf::r2rtf_adsl |>
     dplyr::rename(TRTA = TRT01A) |>
-    dplyr::mutate(TRTA = factor(TRTA,
-                         levels = c("Placebo", "Xanomeline High Dose", "Xanomeline Low Dose")))
+    dplyr::mutate(
+      TRTA = factor(
+        TRTA,
+        levels = c("Placebo", "Xanomeline High Dose", "Xanomeline Low Dose")
+      )
+    )
 
   adlb <- boxly_adlb
 
   names(adlb) <- toupper(names(adlb))
   adlb$TRTA <- factor(adlb$TRTA,
-                      levels = c("Placebo", "Xanomeline High Dose", "Xanomeline Low Dose"))
+    levels = c("Placebo", "Xanomeline High Dose", "Xanomeline Low Dose")
+  )
 
   plan <- metalite::plan(
     analysis = "lb_boxly", population = "apat",
@@ -58,7 +67,7 @@ meta_boxly <- function() {
       name = "wk24",
       group = "TRTA",
       var = "PARAM",
-      subset = ANL01FL == "Y" & AVISITN > 12 & AVISITN <=24 & !is.na(CHG),
+      subset = ANL01FL == "Y" & AVISITN > 12 & AVISITN <= 24 & !is.na(CHG),
       label = "Weeks 12 to 24"
     ) |>
     metalite::define_analysis(

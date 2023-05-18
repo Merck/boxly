@@ -2,8 +2,7 @@
 % Please edit documentation in R/prepare_boxly.R
 \name{prepare_boxly}
 \alias{prepare_boxly}
-\title{A function to create a interactive box plot
-Prepare data for interactive box plot}
+\title{Prepare data for interactive box plot}
 \usage{
 prepare_boxly(meta, population, observation, analysis, parameter)
 }
@@ -16,25 +15,27 @@ The term name is used as key to link information.}
 \item{observation}{A character value of observation term name.
 The term name is used as key to link information.}
 
-\item{analysis}{Name of analysis plan}
+\item{analysis}{Name of analysis plan.}
 
 \item{parameter}{A character value of parameter term name.
 The term name is used as key to link information.}
 }
 \value{
-Metadata list with plotting dataset
+Metadata list with plotting dataset.
 }
 \description{
-A function to create a interactive box plot
 Prepare data for interactive box plot
 }
 \examples{
 library(metalite)
 library(dplyr)
+
 meta <- meta_boxly()
-prepare_boxly(meta,
-              population = "apat",
-              observation = "wk12",
-              analysis = "lb_boxly",
-              parameter = "sodium;bili;urate")
+prepare_boxly(
+  meta,
+  population = "apat",
+  observation = "wk12",
+  analysis = "lb_boxly",
+  parameter = "sodium;bili;urate"
+)
 }

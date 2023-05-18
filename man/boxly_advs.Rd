@@ -3,7 +3,7 @@
 \docType{data}
 \name{boxly_advs}
 \alias{boxly_advs}
-\title{A example ADVS dataset}
+\title{An example ADVS dataset}
 \format{
 A data frame with 32139 and 34 variables:
 \describe{
@@ -47,6 +47,6 @@ A data frame with 32139 and 34 variables:
 boxly_advs
 }
 \description{
-A example ADVS dataset
+An example ADVS dataset
 }
 \keyword{datasets}

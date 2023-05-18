@@ -16,46 +16,51 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#' A function to create a interactive box plot
+#' Create an interactive box plot
 #'
-#' @param outdata an `outdata` object created from `prepare_ae_forestly`
-#' @param color color for box plot
-#' @param hover_summary_var a character vector of statistics to be displayed on hover label of box
-#' @param hover_outlier_label a character vector of hover label for outlier
-#' @param x_label x-axis label
-#' @param y_label y-axis label
-#' @param heading_select_list Select list menu label
-#' @param heading_summary_table Summary table label
+#' @param outdata An `outdata` object created from `prepare_ae_forestly()`.
+#' @param color Color for box plot.
+#' @param hover_summary_var A character vector of statistics to be displayed
+#'   on hover label of box.
+#' @param hover_outlier_label A character vector of hover label for outlier.
+#' @param x_label x-axis label.
+#' @param y_label y-axis label.
+#' @param heading_select_list Select list menu label.
+#' @param heading_summary_table Summary table label.
 #'
-#' @export
-#' @importFrom ggplot2 ggplot aes geom_point position_jitterdodge scale_color_manual ylab xlab theme_bw
+#' @return Interactive box plot.
+#'
+#' @importFrom ggplot2 ggplot aes geom_point position_jitterdodge
+#'   scale_color_manual ylab xlab theme_bw
 #' @importFrom dplyr mutate select filter
 #' @importFrom plotly config layout add_trace ggplotly
 #' @importFrom stats reshape
-#' @return Interactive box plot
+#'
+#' @export
+#'
 #' @examples
-#' \dontrun{
-#' library(metalite)
-#' library(dplyr)
-#' library(ggplot2)
-#' meta <- meta_boxly()
-#' prepare_boxly(meta,
-#'               population = "apat",
-#'               observation = "wk12",
-#'               analysis = "lb_boxly",
-#'               parameter = "sodium;bili;urate") |>
-#' boxly()
+#' # Only run this example in interactive R sessions
+#' if (interactive()) {
+#'   library(metalite)
+#'
+#'   meta_boxly() |>
+#'     prepare_boxly(
+#'       population = "apat",
+#'       observation = "wk12",
+#'       analysis = "lb_boxly",
+#'       parameter = "sodium;bili;urate"
+#'     ) |>
+#'     boxly()
 #' }
 boxly <- function(outdata,
                   color = NULL,
                   hover_summary_var = c("n", "min", "q1", "median", "mean", "q3", "max"),
-                  #hover_outlier_var = c("USUBJID", "AVAL"),
+                  # hover_outlier_var = c("USUBJID", "AVAL"),
                   hover_outlier_label = c("Participant Id", "Parameter value"),
                   x_label = "Visit",
                   y_label = "Change",
                   heading_select_list = "Lab parameter",
                   heading_summary_table = "Number of Participants") {
-
   # Test if two treatment
   # tbl <- tbl|>
   #   filter(TRTA %in% unique(outdata$plotds$TRTA)[1:2])
@@ -75,21 +80,26 @@ boxly <- function(outdata,
 
   # ============ TODO begin ==================#
   # adjust this part to align with hover_summary_var
-  tbl$label <- paste("N :", tbl$n,
-                     "<br>Min :", tbl$min,
-                     "<br>Q1 :", tbl$q1,
-                     "<br>Median :", tbl$median,
-                     "<br>Mean :", tbl$mean,
-                     "<br>Q3 :", tbl$q3,
-                     "<br>Max :", tbl$max)
+  tbl$label <- paste(
+    "N :", tbl$n,
+    "<br>Min :", tbl$min,
+    "<br>Q1 :", tbl$q1,
+    "<br>Median :", tbl$median,
+    "<br>Mean :", tbl$mean,
+    "<br>Q3 :", tbl$q3,
+    "<br>Max :", tbl$max
+  )
   # ============ TODO end ====================#
 
   # ============ TODO begin ==================#
   # paste multiple hover_outlier_labels
   tbl$text <- ifelse(!is.na(tbl$outlier),
-                     paste(hover_outlier_label[1], tbl[["USUBJID"]],
-                           "\n", hover_outlier_label[2], tbl[["outlier"]]),
-                     NA)
+    paste(
+      hover_outlier_label[1], tbl[["USUBJID"]],
+      "\n", hover_outlier_label[2], tbl[["outlier"]]
+    ),
+    NA
+  )
   # ============ TODO end ====================#
 
   # This looks overlap with the aboe tbl$text.
@@ -105,7 +115,7 @@ boxly <- function(outdata,
   if (is.null(color)) {
     color_pal <- c("#00857C", "#6ECEB2", "#BFED33", "#FFF063", "#0C2340", "#5450E4")
     color <- c("#66203A", rep(color_pal, length.out = n_group - 1))
-  }else{
+  } else {
     color <- rep(color, length.out = n_group)
   }
 
@@ -121,7 +131,7 @@ boxly <- function(outdata,
   box_outlier <- crosstalk::SharedData$new(tbl |> subset(is.na(tbl$outlier)), key = ~param, group = "groupdata")
 
   # get the summary of subjects counts
-  cnt <- tbl[!duplicated(tbl[, c("param", "x", "group", "n")]),c("param", "x", "group", "n")] |>
+  cnt <- tbl[!duplicated(tbl[, c("param", "x", "group", "n")]), c("param", "x", "group", "n")] |>
     reshape(timevar = "x", idvar = c("param", "group"), v.names = "n", direction = "wide")
   # cnt <- cnt[,2:ncol(cnt)]
   names(cnt) <- c("param", "Treatment Group", as.character(unique(tbl$AVISITN)))
@@ -131,11 +141,13 @@ boxly <- function(outdata,
 
 
   # get the select list of parameters
-  select_list <- crosstalk::filter_select(id = "filter_param",
-                                          label = heading_select_list,
-                                          sharedData = box_all,
-                                          group = ~ param,
-                                          multiple = FALSE)
+  select_list <- crosstalk::filter_select(
+    id = "filter_param",
+    label = heading_select_list,
+    sharedData = box_all,
+    group = ~param,
+    multiple = FALSE
+  )
   # get the slider bar of counts
   # slider_bar <- crosstalk::filter_slider(id = "cut_off",
   #                                        label = heading_slider_bar,
@@ -147,9 +159,13 @@ boxly <- function(outdata,
   #                                        max = 100)
 
   # get the interactive box plot
-  p <- ggplot(box_all,
-              aes(x = x, y = outlier, color = group, group = group,
-                  text = text)) +
+  p <- ggplot(
+    box_all,
+    aes(
+      x = x, y = outlier, color = group, group = group,
+      text = text
+    )
+  ) +
     geom_point(position = position_jitterdodge(jitter.width = 0), show.legend = FALSE) +
     scale_color_manual(values = color) +
     ylab(y_label) +
@@ -159,7 +175,7 @@ boxly <- function(outdata,
   # combine into interactive plots & tables
   ans <- htmltools::div(
     select_list,
-    #slider_bar,
+    # slider_bar,
     ggplotly(p, tooltip = "text", dynamicTicks = TRUE) |>
       add_trace(
         data = box_outlier, x = ~x, y = ~y, type = "box", boxpoints = FALSE, color = ~group,
@@ -170,7 +186,7 @@ boxly <- function(outdata,
       add_trace(
         data = bar, x = ~x, y = ~range, base = ~min, type = "bar", color = ~group,
         opacity = 0, text = ~label, colors = color,
-        hovertemplate = paste('%{text}<br>', "<extra></extra>"),
+        hovertemplate = paste("%{text}<br>", "<extra></extra>"),
         legendgroup = "group", showlegend = FALSE
       ) |>
       layout(
@@ -184,22 +200,25 @@ boxly <- function(outdata,
         barmode = "group",
         boxmode = "group"
       ) |>
-      config(displayModeBar = F) |>
+      config(displayModeBar = FALSE) |>
       htmlwidgets::onRender("function(el,x){el.on('plotly_legendclick', function(){ return false; })}"),
-
     heading_summary_table,
-    DT::datatable(cnt, options = list(columnDefs = list(list(visible = FALSE, targets = c(0)))),
-                                      rownames = FALSE))
+    DT::datatable(cnt,
+      options = list(columnDefs = list(list(visible = FALSE, targets = c(0)))),
+      rownames = FALSE
+    )
+  )
 
-  offline = TRUE
+  offline <- TRUE
 
   # Get first parameter name
   default_param <- as.character(unique(tbl$param)[1])
 
   brew::brew(system.file("js/filter_default.js", package = "boxly"),
-             output = file.path(tempdir(),  "filter_default.js"))
+    output = file.path(tempdir(), "filter_default.js")
+  )
 
-  paste(readLines(file.path(tempdir(),  "filter_default.js")), collapse = "\n")
+  paste(readLines(file.path(tempdir(), "filter_default.js")), collapse = "\n")
 
   htmltools::browsable(htmltools::tagList(
     htmltools::htmlDependency(
@@ -212,6 +231,6 @@ boxly <- function(outdata,
       # Exclude all other files in src directory
       all_files = FALSE
     ),
-    ans))
-
+    ans
+  ))
 }

@@ -3,7 +3,7 @@
 \docType{data}
 \name{boxly_adlb}
 \alias{boxly_adlb}
-\title{A example ADLB dataset}
+\title{An example ADLB dataset}
 \format{
 A data frame with 24746 and 24 variables:
 \describe{
@@ -37,6 +37,6 @@ A data frame with 24746 and 24 variables:
 boxly_adlb
 }
 \description{
-A example ADLB dataset
+An example ADLB dataset
 }
 \keyword{datasets}
