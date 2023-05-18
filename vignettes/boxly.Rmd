@@ -8,11 +8,13 @@ vignette: >
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE,
-                        collapse = TRUE,
+knitr::opts_chunk$set(
+  echo = TRUE,
+  collapse = TRUE,
   comment = "#>",
   warning = FALSE,
-  message = FALSE)
+  message = FALSE
+)
 ```
 
 ```{r}
@@ -33,14 +35,14 @@ meta
 
 ```{r}
 outdata <- prepare_boxly(meta,
-              population = "apat",
-              observation = "wk12",
-              parameter = "sodium;bili;urate",
-              analysis = "lb_boxly")
+  population = "apat",
+  observation = "wk12",
+  parameter = "sodium;bili;urate",
+  analysis = "lb_boxly"
+)
 ```
 
 ```{r}
-tmp1 <- outdata |>
-  boxly()
+tmp1 <- outdata |> boxly()
 tmp1
 ```
