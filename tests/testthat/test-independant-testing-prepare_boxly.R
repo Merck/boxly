@@ -22,36 +22,33 @@ library(dplyr)
 
 meta <- meta_boxly()
 meta$observation$wk12$subset <- quote(ANL01FL == "Y" & as.numeric(AVISITN) <= 12 & !is.na(CHG))
-meta$data_observation$AVISITN <- factor(meta$data_observation$AVISITN , levels = sort(unique(meta$data_observation$AVISITN)))
-meta$data_observation$PARAM <- factor(meta$data_observation$PARAM , levels = sort(unique(meta$data_observation$PARAM)))
+meta$data_observation$AVISITN <- factor(meta$data_observation$AVISITN, levels = sort(unique(meta$data_observation$AVISITN)))
+meta$data_observation$PARAM <- factor(meta$data_observation$PARAM, levels = sort(unique(meta$data_observation$PARAM)))
 
 
 test_that("Its class is 'outdata'", {
   output <- prepare_boxly(meta,
-                          population = "apat",
-                          observation = "wk12",
-                          analysis = "lb_boxly",
-                          parameter = "sodium;bili;urate")
+    population = "apat",
+    observation = "wk12",
+    analysis = "lb_boxly",
+    parameter = "sodium;bili;urate"
+  )
   expect_equal(class(output), "outdata")
-  expect_equal(output$population,"apat")
-  expect_equal(output$observation,"wk12")
-  expect_equal(output$x_var,"AVISITN")
-  expect_equal(output$y_var,"CHG")
-  expect_equal(output$group_var,"TRTA")
-  expect_equal(output$param_var,"PARAM")
-  expect_equal(output$parameter,"sodium;bili;urate")
-  expect_equal(output$order,NULL)
-  expect_equal(output$group,NULL)
-  expect_equal(names(output), c("meta","population","observation","parameter","n","order","group","reference_group","x_var","y_var","group_var","param_var","plotds"))
-  expect_equal(names(output$meta), c("data_population","data_observation","plan","observation","population","parameter","analysis"))
-  expect_equal(nrow(output$meta$data_population),nrow(meta$data_population))
-  expect_equal(nrow(output$meta$data_observation),nrow(meta$data_observation))
-  expect_equal(ncol(output$meta$data_population),ncol(meta$data_population))
-  expect_equal(ncol(output$meta$data_observation),ncol(meta$data_observation))
-  expect_equal(output$meta$plan,meta$plan)
-  expect_equal(output$meta,meta)
-
-  })
-
-
-
+  expect_equal(output$population, "apat")
+  expect_equal(output$observation, "wk12")
+  expect_equal(output$x_var, "AVISITN")
+  expect_equal(output$y_var, "CHG")
+  expect_equal(output$group_var, "TRTA")
+  expect_equal(output$param_var, "PARAM")
+  expect_equal(output$parameter, "sodium;bili;urate")
+  expect_equal(output$order, NULL)
+  expect_equal(output$group, NULL)
+  expect_equal(names(output), c("meta", "population", "observation", "parameter", "n", "order", "group", "reference_group", "x_var", "y_var", "group_var", "param_var", "plotds"))
+  expect_equal(names(output$meta), c("data_population", "data_observation", "plan", "observation", "population", "parameter", "analysis"))
+  expect_equal(nrow(output$meta$data_population), nrow(meta$data_population))
+  expect_equal(nrow(output$meta$data_observation), nrow(meta$data_observation))
+  expect_equal(ncol(output$meta$data_population), ncol(meta$data_population))
+  expect_equal(ncol(output$meta$data_observation), ncol(meta$data_observation))
+  expect_equal(output$meta$plan, meta$plan)
+  expect_equal(output$meta, meta)
+})

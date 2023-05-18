@@ -17,7 +17,6 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 test_that("validation of boxly plot Case 1", {
-
   library(metalite)
   library(ggplot2)
   library(plotly)
@@ -25,24 +24,24 @@ test_that("validation of boxly plot Case 1", {
 
   meta <- meta_boxly()
   meta$observation$wk12$subset <- quote(ANL01FL == "Y" & as.numeric(AVISITN) <= 12 & !is.na(CHG))
-  meta$data_observation$AVISITN <- factor(meta$data_observation$AVISITN , levels = sort(unique(meta$data_observation$AVISITN)))
-  meta$data_observation$PARAM <- factor(meta$data_observation$PARAM , levels = sort(unique(meta$data_observation$PARAM)))
+  meta$data_observation$AVISITN <- factor(meta$data_observation$AVISITN, levels = sort(unique(meta$data_observation$AVISITN)))
+  meta$data_observation$PARAM <- factor(meta$data_observation$PARAM, levels = sort(unique(meta$data_observation$PARAM)))
 
   x <- prepare_boxly(meta,
-                     population = "apat",
-                     observation = "wk12",
-                     analysis = "lb_boxly",
-
-                     parameter = "sodium;bili;urate")
+    population = "apat",
+    observation = "wk12",
+    analysis = "lb_boxly",
+    parameter = "sodium;bili;urate"
+  )
 
   y <- boxly(x,
-             color = c("black", "grey", "red"),
-             hover_summary_var = c("n", "min", "q1", "median", "mean", "q3", "max"),
-             hover_outlier_label = c("Subject Id", "Change from Baseline"),
-             x_label = "Time",
-             y_label = "Value",
-             heading_select_list = "Laboratory Parameter",
-             heading_summary_table = "Number of Subjects"
+    color = c("black", "grey", "red"),
+    hover_summary_var = c("n", "min", "q1", "median", "mean", "q3", "max"),
+    hover_outlier_label = c("Subject Id", "Change from Baseline"),
+    x_label = "Time",
+    y_label = "Value",
+    heading_select_list = "Laboratory Parameter",
+    heading_summary_table = "Number of Subjects"
   )
 
   ylab <- y[[2]][["children"]][[2]][["x"]][["layout"]][["xaxis"]][["title"]][["text"]]
@@ -57,17 +56,15 @@ test_that("validation of boxly plot Case 1", {
   header <- y[[2]][["children"]][[1]][["children"]][[1]][["children"]][[1]]
   expect_equal(header, "Laboratory Parameter")
 
-  intlabel <- y[[2]][["children"]][[2]][["x"]][["data"]][[1]][["text"]] [283]
-  subj <- substr(intlabel,1,10)
-  baselabel <- substr(intlabel,26,45)
+  intlabel <- y[[2]][["children"]][[2]][["x"]][["data"]][[1]][["text"]][283]
+  subj <- substr(intlabel, 1, 10)
+  baselabel <- substr(intlabel, 26, 45)
   expect_equal(subj, "Subject Id")
   expect_equal(baselabel, "Change from Baseline")
 })
 
 
 test_that("validation of boxly plot Case 2", {
-
-
   library(metalite)
   library(ggplot2)
   library(plotly)
@@ -75,24 +72,24 @@ test_that("validation of boxly plot Case 2", {
 
   meta <- meta_boxly()
   meta$observation$wk12$subset <- quote(ANL01FL == "Y" & as.numeric(AVISITN) <= 12 & !is.na(CHG))
-  meta$data_observation$AVISITN <- factor(meta$data_observation$AVISITN , levels = sort(unique(meta$data_observation$AVISITN)))
-  meta$data_observation$PARAM <- factor(meta$data_observation$PARAM , levels = sort(unique(meta$data_observation$PARAM)))
+  meta$data_observation$AVISITN <- factor(meta$data_observation$AVISITN, levels = sort(unique(meta$data_observation$AVISITN)))
+  meta$data_observation$PARAM <- factor(meta$data_observation$PARAM, levels = sort(unique(meta$data_observation$PARAM)))
 
   x <- prepare_boxly(meta,
-                     population = "apat",
-                     observation = "wk12",
-                     analysis = "lb_boxly",
-
-                     parameter = "sodium;bili;urate")
+    population = "apat",
+    observation = "wk12",
+    analysis = "lb_boxly",
+    parameter = "sodium;bili;urate"
+  )
 
   y <- boxly(x,
-             color = c("green", "yellow", "red"),
-             hover_summary_var = c("n", "min", "q1", "mean", "q3"),
-             hover_outlier_label = c("Patient Id", "Percent Change from Baseline"),
-             x_label = "Time Point",
-             y_label = "Analysis Value",
-             heading_select_list = "Lab Parameter",
-             heading_summary_table = "Number of Patients"
+    color = c("green", "yellow", "red"),
+    hover_summary_var = c("n", "min", "q1", "mean", "q3"),
+    hover_outlier_label = c("Patient Id", "Percent Change from Baseline"),
+    x_label = "Time Point",
+    y_label = "Analysis Value",
+    heading_select_list = "Lab Parameter",
+    heading_summary_table = "Number of Patients"
   )
 
   ylab <- y[[2]][["children"]][[2]][["x"]][["layout"]][["xaxis"]][["title"]][["text"]]
@@ -107,12 +104,9 @@ test_that("validation of boxly plot Case 2", {
   header <- y[[2]][["children"]][[1]][["children"]][[1]][["children"]][[1]]
   expect_equal(header, "Lab Parameter")
 
-  intlabel <- y[[2]][["children"]][[2]][["x"]][["data"]][[1]][["text"]] [283]
-  subj <- substr(intlabel,1,10)
-  baselabel <- substr(intlabel,26,53)
+  intlabel <- y[[2]][["children"]][[2]][["x"]][["data"]][[1]][["text"]][283]
+  subj <- substr(intlabel, 1, 10)
+  baselabel <- substr(intlabel, 26, 53)
   expect_equal(subj, "Patient Id")
   expect_equal(baselabel, "Percent Change from Baseline")
 })
-
-
-
