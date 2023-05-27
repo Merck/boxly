@@ -58,7 +58,7 @@ test_that("validation of boxly plot Case 1", {
 
   intlabel <- y[[2]][["children"]][[2]][["x"]][["data"]][[1]][["text"]][283]
   subj <- substr(intlabel, 1, 10)
-  baselabel <- substr(intlabel, 25, 46)
+  baselabel <- substr(intlabel, 26, 45)
   expect_equal(subj, "Subject Id")
   expect_equal(baselabel, "Change from Baseline: ")
 })

@@ -2,7 +2,7 @@
 % Please edit documentation in R/boxly.R
 \name{boxly}
 \alias{boxly}
-\title{A function to create a interactive box plot}
+\title{Create an interactive box plot}
 \usage{
 boxly(
   outdata,
@@ -16,39 +16,41 @@ boxly(
 )
 }
 \arguments{
-\item{outdata}{an \code{outdata} object created from \code{prepare_ae_forestly}}
+\item{outdata}{An \code{outdata} object created from \code{prepare_ae_forestly()}.}
 
-\item{color}{color for box plot}
+\item{color}{Color for box plot.}
 
-\item{hover_summary_var}{a character vector of statistics to be displayed on hover label of box}
+\item{hover_summary_var}{A character vector of statistics to be displayed
+on hover label of box.}
 
-\item{hover_outlier_label}{a character vector of hover label for outlier}
+\item{hover_outlier_label}{A character vector of hover label for outlier.}
 
-\item{x_label}{x-axis label}
+\item{x_label}{x-axis label.}
 
-\item{y_label}{y-axis label}
+\item{y_label}{y-axis label.}
 
-\item{heading_select_list}{Select list menu label}
+\item{heading_select_list}{Select list menu label.}
 
-\item{heading_summary_table}{Summary table label}
+\item{heading_summary_table}{Summary table label.}
 }
 \value{
-Interactive box plot
+Interactive box plot.
 }
 \description{
-A function to create a interactive box plot
+Create an interactive box plot
 }
 \examples{
-\dontrun{
-library(metalite)
-library(dplyr)
-library(ggplot2)
-meta <- meta_boxly()
-prepare_boxly(meta,
-              population = "apat",
-              observation = "wk12",
-              analysis = "lb_boxly",
-              parameter = "sodium;bili;urate") |>
-boxly()
+# Only run this example in interactive R sessions
+if (interactive()) {
+  library(metalite)
+
+  meta_boxly() |>
+    prepare_boxly(
+      population = "apat",
+      observation = "wk12",
+      analysis = "lb_boxly",
+      parameter = "sodium;bili;urate"
+    ) |>
+    boxly()
 }
 }

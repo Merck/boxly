@@ -16,11 +16,16 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#' Create a dummy data for box plot
-#' @export
-#' @return Metadata for creating interactive box plot
+#' Create an example metadata object
 #'
+#' @return Metadata for creating interactive box plot.
+#'
+#' @export
+#'
+#' @examples
+#' meta_boxly()
 meta_boxly <- function() {
+
   adsl <- r2rtf::r2rtf_adsl
   adsl$TRTA <- factor(adsl$TRT01A,
     levels = c("Placebo", "Xanomeline High Dose", "Xanomeline Low Dose")

@@ -16,16 +16,19 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#' A function to create a interactive box plot
-
 #' Prepare data for interactive box plot
 #'
 #' @inheritParams metalite.ae::prepare_ae_specific
-#' @param analysis Name of analysis plan
+#' @param analysis Name of analysis plan.
+#'
+#' @return Metadata list with plotting dataset.
+#'
+#' @export
 #'
 #' @examples
 #' library(metalite)
 #' library(dplyr)
+#'
 #' meta <- meta_boxly()
 #' prepare_boxly(meta,
 #'   population = "apat",

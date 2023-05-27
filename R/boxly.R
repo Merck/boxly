@@ -16,35 +16,40 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#' A function to create a interactive box plot
+#' Create an interactive box plot
 #'
-#' @param outdata an `outdata` object created from `prepare_ae_forestly`
-#' @param color color for box plot
-#' @param hover_summary_var a character vector of statistics to be displayed on hover label of box
-#' @param hover_outlier_label a character vector of hover label for outlier
-#' @param x_label x-axis label
-#' @param y_label y-axis label
-#' @param heading_select_list Select list menu label
-#' @param heading_summary_table Summary table label
+#' @param outdata An `outdata` object created from `prepare_ae_forestly()`.
+#' @param color Color for box plot.
+#' @param hover_summary_var A character vector of statistics to be displayed
+#'   on hover label of box.
+#' @param hover_outlier_label A character vector of hover label for outlier.
+#' @param x_label x-axis label.
+#' @param y_label y-axis label.
+#' @param heading_select_list Select list menu label.
+#' @param heading_summary_table Summary table label.
 #'
-#' @export
-#' @importFrom ggplot2 ggplot aes geom_point position_jitterdodge scale_color_manual ylab xlab theme_bw
+#' @return Interactive box plot.
+#'
+#' @importFrom ggplot2 ggplot aes geom_point position_jitterdodge
+#'   scale_color_manual ylab xlab theme_bw
 #' @importFrom plotly config layout add_trace ggplotly
 #' @importFrom stats reshape
-#' @return Interactive box plot
+#'
+#' @export
+#'
 #' @examples
-#' \dontrun{
-#' library(metalite)
-#' library(dplyr)
-#' library(ggplot2)
-#' meta <- meta_boxly()
-#' prepare_boxly(meta,
-#'   population = "apat",
-#'   observation = "wk12",
-#'   analysis = "lb_boxly",
-#'   parameter = "sodium;bili;urate"
-#' ) |>
-#'   boxly()
+#' # Only run this example in interactive R sessions
+#' if (interactive()) {
+#'   library(metalite)
+#'
+#'   meta_boxly() |>
+#'     prepare_boxly(
+#'       population = "apat",
+#'       observation = "wk12",
+#'       analysis = "lb_boxly",
+#'       parameter = "sodium;bili;urate"
+#'     ) |>
+#'     boxly()
 #' }
 boxly <- function(outdata,
                   color = NULL,
@@ -134,6 +139,7 @@ boxly <- function(outdata,
     group = ~param,
     multiple = FALSE
   )
+
   # get the interactive box plot
   p <- ggplot(
     box_all,
@@ -176,7 +182,7 @@ boxly <- function(outdata,
         barmode = "group",
         boxmode = "group"
       ) |>
-      config(displayModeBar = F) |>
+      config(displayModeBar = FALSE) |>
       htmlwidgets::onRender("function(el,x){el.on('plotly_legendclick', function(){ return false; })}"),
     heading_summary_table,
     DT::datatable(cnt,
