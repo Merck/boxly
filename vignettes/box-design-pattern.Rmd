@@ -9,12 +9,14 @@ vignette: >
 
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE,
-                        collapse = TRUE,
-                      eval = FALSE,
+knitr::opts_chunk$set(
+  echo = TRUE,
+  collapse = TRUE,
+  eval = FALSE,
   comment = "#>",
   warning = FALSE,
-  message = FALSE)
+  message = FALSE
+)
 ```
 
 > This document is for developers who would like to understand the internal of the `boxly` package.
@@ -82,10 +84,11 @@ Here is the structure for the expected output list of `prepare_boxly()`:
 
 ```{r}
 outdata <- prepare_boxly(meta,
-              population = "apat",
-              observation = "wk12",
-              parameter = "sodium;bili;urate",
-              analysis = "lb_boxly")
+  population = "apat",
+  observation = "wk12",
+  parameter = "sodium;bili;urate",
+  analysis = "lb_boxly"
+)
 outdata
 ```
 
@@ -125,10 +128,11 @@ The second block is an combined interactive visualization tool which contains a 
 
 ```{r}
 p_list <- prepare_boxly(meta,
-              population = "apat",
-              observation = "wk12",
-              parameter = "sodium;bili;urate",
-              analysis = "lb_boxly") %>%
+  population = "apat",
+  observation = "wk12",
+  parameter = "sodium;bili;urate",
+  analysis = "lb_boxly"
+) %>%
   boxly()
 p_list
 ```
