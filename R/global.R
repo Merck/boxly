@@ -16,5 +16,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-utils::globalVariables(c("ANL01FL", "boxly_adlb", "CHG", "Freq", "group", "label", "outdata", "outlier",
-                         "param", "PARAMCD", "text", "TRT01A", "TRTA", "x", "AVISITN"))
+utils::globalVariables(c(
+  "ANL01FL", "boxly_adlb", "CHG", "Freq", "group", "label", "outdata", "outlier",
+  "param", "PARAMCD", "text", "TRT01A", "TRTA", "x", "AVISITN"
+))

@@ -21,16 +21,17 @@
 #' @return Metadata for creating interactive box plot
 #'
 meta_boxly <- function() {
-  adsl <- r2rtf::r2rtf_adsl |>
-    dplyr::rename(TRTA = TRT01A) |>
-    dplyr::mutate(TRTA = factor(TRTA,
-                         levels = c("Placebo", "Xanomeline High Dose", "Xanomeline Low Dose")))
+  adsl <- r2rtf::r2rtf_adsl
+  adsl$TRTA <- factor(adsl$TRT01A,
+    levels = c("Placebo", "Xanomeline High Dose", "Xanomeline Low Dose")
+  )
 
   adlb <- boxly_adlb
 
   names(adlb) <- toupper(names(adlb))
   adlb$TRTA <- factor(adlb$TRTA,
-                      levels = c("Placebo", "Xanomeline High Dose", "Xanomeline Low Dose"))
+    levels = c("Placebo", "Xanomeline High Dose", "Xanomeline Low Dose")
+  )
 
   plan <- metalite::plan(
     analysis = "lb_boxly", population = "apat",
@@ -58,7 +59,7 @@ meta_boxly <- function() {
       name = "wk24",
       group = "TRTA",
       var = "PARAM",
-      subset = ANL01FL == "Y" & AVISITN > 12 & AVISITN <=24 & !is.na(CHG),
+      subset = ANL01FL == "Y" & AVISITN > 12 & AVISITN <= 24 & !is.na(CHG),
       label = "Weeks 12 to 24"
     ) |>
     metalite::define_analysis(

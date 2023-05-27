@@ -28,10 +28,11 @@
 #' library(dplyr)
 #' meta <- meta_boxly()
 #' prepare_boxly(meta,
-#'               population = "apat",
-#'               observation = "wk12",
-#'               analysis = "lb_boxly",
-#'               parameter = "sodium;bili;urate")
+#'   population = "apat",
+#'   observation = "wk12",
+#'   analysis = "lb_boxly",
+#'   parameter = "sodium;bili;urate"
+#' )
 #' @return Metadata list with plotting dataset
 #' @export
 prepare_boxly <- function(meta,
@@ -39,7 +40,6 @@ prepare_boxly <- function(meta,
                           observation,
                           analysis,
                           parameter) {
-
   # Obtain variables
   obs_var <- metalite::collect_adam_mapping(meta, observation)$var
   pop_var <- metalite::collect_adam_mapping(meta, population)$var
@@ -49,15 +49,18 @@ prepare_boxly <- function(meta,
 
   # Obtain Data
   pop <- metalite::collect_population_record(meta, population, var = pop_var)
-  obs <- do.call(rbind,
-          lapply(unlist(strsplit(parameter, ";")),
-                 function(s){
-                   metalite::collect_observation_record(meta, population, observation, parameter = s,
-                                              var = unique(c(obs_var, y, x
-                                                             ###, hover_outlier###
-                                                             )))}
-                 )
-          )
+  obs <- do.call(
+    rbind,
+    lapply(
+      unlist(strsplit(parameter, ";")),
+      function(s) {
+        metalite::collect_observation_record(meta, population, observation,
+          parameter = s,
+          var = unique(c(obs_var, y, x))
+        )
+      }
+    )
+  )
 
   # Obtain variable name
   pop_id <- metalite::collect_adam_mapping(meta, population)$id
@@ -89,14 +92,13 @@ prepare_boxly <- function(meta,
 
   # a table calculates the number of subjects per parameter per visit per arm
   n_tbl <- table(obs[, c(x, obs_group, obs_var)]) |>
-    as.data.frame() |>
-    dplyr::rename(n = Freq)
+    as.data.frame()
 
-  tbl <- obs |> dplyr::left_join(n_tbl)
+  n_tbl$n <- n_tbl$Freq
+
+  tbl <- merge(obs, n_tbl, all.x = TRUE)
 
   # Calculate summary statistics and add these variables into tbl
-  # TODO: remove dplyr dependency
-  # TODO: format the statistics
   plotds <- lapply(
     split(tbl, list(tbl[[obs_var]], tbl[[obs_group]], tbl[[x]])),
     function(s) {
@@ -110,14 +112,14 @@ prepare_boxly <- function(meta,
       } else {
         s$outlier <- NA
       }
-
-      ans <- s |>
-        mutate(min = t[1]) |>
-        mutate(q1 = t[2]) |>
-        mutate(median = t[3]) |>
-        mutate(mean = t[4]) |>
-        mutate(q3 = t[5]) |>
-        mutate(max = t[6])
+      # mutate ans for output
+      ans <- s
+      ans$min <- t[1]
+      ans$q1 <- t[2]
+      ans$median <- t[3]
+      ans$mean <- t[4]
+      ans$q3 <- t[5]
+      ans$max <- t[6]
 
       ans
     }
@@ -125,16 +127,11 @@ prepare_boxly <- function(meta,
   plotds <- do.call(rbind, plotds)
   rownames(plotds) <- NULL
 
-  # outlier <- do.call(rbind, outlier) |>
-  #   filter(!is.na(outlier))
-  #
-  # rownames(outlier) <- NULL
   # Return value
   outdata(meta, population, observation, parameter,
-          x_var = x, y_var = y, group_var = obs_group,
-          param_var = obs_var,
-          # hover_var_outlier = hover_outlier,
-          n = n_tbl, order = NULL, group = NULL, reference_group = NULL,
-          plotds = plotds
+    x_var = x, y_var = y, group_var = obs_group,
+    param_var = obs_var,
+    n = n_tbl, order = NULL, group = NULL, reference_group = NULL,
+    plotds = plotds
   )
 }

@@ -5,11 +5,14 @@ Version: 0.0.9
 Authors@R: c(
         person("Benjamin", "Wang", email = "benjamin.wang@merck.com", role = c("aut", "cre")),
         person("Yujie", "Zhao", role = c("aut")),
+        person("Yilong", "Zhang", role = c("ctb")),
+        person("Nan", "Xiao", role = c("ctb")),
         person("Sarad", "Nepal",  role = c("ctb")),
         person("Madhusudhan", "Ginnaram", role = c("ctb")),
+        person("Venkatesh", "Burla", role = c("ctb")),
         person("Merck Sharp & Dohme Corp", role = "cph")
        )
-Description: Interactive Box Plot using `plotly`.
+Description: Interactive box plot for lab test, vital signs, electrocardiogram etc..
 License: GPL (>= 3)
 Encoding: UTF-8
 LazyData: true
@@ -21,12 +24,12 @@ Imports:
     htmltools,
     ggplot2,
     plotly,
-    dplyr,
     DT,
     metalite,
     brew
 Suggests: 
     devtools,
+    dplyr,
     testthat (>= 3.0.0),
     knitr,
     rmarkdown,

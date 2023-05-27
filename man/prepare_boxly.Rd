@@ -33,8 +33,9 @@ library(metalite)
 library(dplyr)
 meta <- meta_boxly()
 prepare_boxly(meta,
-              population = "apat",
-              observation = "wk12",
-              analysis = "lb_boxly",
-              parameter = "sodium;bili;urate")
+  population = "apat",
+  observation = "wk12",
+  analysis = "lb_boxly",
+  parameter = "sodium;bili;urate"
+)
 }
