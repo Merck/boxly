@@ -25,7 +25,6 @@
 #' @examples
 #' meta_boxly()
 meta_boxly <- function() {
-
   adsl <- r2rtf::r2rtf_adsl
   adsl$TRTA <- factor(adsl$TRT01A,
     levels = c("Placebo", "Xanomeline High Dose", "Xanomeline Low Dose")
