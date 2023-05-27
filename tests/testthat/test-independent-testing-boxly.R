@@ -23,9 +23,6 @@ test_that("validation of boxly plot Case 1", {
   library(dplyr)
 
   meta <- meta_boxly()
-  meta$observation$wk12$subset <- quote(ANL01FL == "Y" & as.numeric(AVISITN) <= 12 & !is.na(CHG))
-  meta$data_observation$AVISITN <- factor(meta$data_observation$AVISITN, levels = sort(unique(meta$data_observation$AVISITN)))
-  meta$data_observation$PARAM <- factor(meta$data_observation$PARAM, levels = sort(unique(meta$data_observation$PARAM)))
 
   x <- prepare_boxly(meta,
     population = "apat",
@@ -56,24 +53,17 @@ test_that("validation of boxly plot Case 1", {
   header <- y[[2]][["children"]][[1]][["children"]][[1]][["children"]][[1]]
   expect_equal(header, "Laboratory Parameter")
 
-  intlabel <- y[[2]][["children"]][[2]][["x"]][["data"]][[1]][["text"]][283]
+  intlabel <- y[[2]][["children"]][[2]][["x"]][["data"]][[1]][["text"]][13]
   subj <- substr(intlabel, 1, 10)
-  baselabel <- substr(intlabel, 26, 45)
+  baselabel <- substr(intlabel, 25, 46)
   expect_equal(subj, "Subject Id")
   expect_equal(baselabel, "Change from Baseline: ")
 })
 
 
 test_that("validation of boxly plot Case 2", {
-  library(metalite)
-  library(ggplot2)
-  library(plotly)
-  library(dplyr)
 
   meta <- meta_boxly()
-  meta$observation$wk12$subset <- quote(ANL01FL == "Y" & as.numeric(AVISITN) <= 12 & !is.na(CHG))
-  meta$data_observation$AVISITN <- factor(meta$data_observation$AVISITN, levels = sort(unique(meta$data_observation$AVISITN)))
-  meta$data_observation$PARAM <- factor(meta$data_observation$PARAM, levels = sort(unique(meta$data_observation$PARAM)))
 
   x <- prepare_boxly(meta,
     population = "apat",
@@ -104,7 +94,7 @@ test_that("validation of boxly plot Case 2", {
   header <- y[[2]][["children"]][[1]][["children"]][[1]][["children"]][[1]]
   expect_equal(header, "Lab Parameter")
 
-  intlabel <- y[[2]][["children"]][[2]][["x"]][["data"]][[1]][["text"]][283]
+  intlabel <- y[[2]][["children"]][[2]][["x"]][["data"]][[1]][["text"]][13]
   subj <- substr(intlabel, 1, 10)
   baselabel <- substr(intlabel, 25, 54)
   expect_equal(subj, "Patient Id")

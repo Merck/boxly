@@ -19,12 +19,9 @@
 library(metalite)
 library(ggplot2)
 library(dplyr)
+library(r2rtf)
 
 meta <- meta_boxly()
-meta$observation$wk12$subset <- quote(ANL01FL == "Y" & as.numeric(AVISITN) <= 12 & !is.na(CHG))
-meta$data_observation$AVISITN <- factor(meta$data_observation$AVISITN, levels = sort(unique(meta$data_observation$AVISITN)))
-meta$data_observation$PARAM <- factor(meta$data_observation$PARAM, levels = sort(unique(meta$data_observation$PARAM)))
-
 
 test_that("Its class is 'outdata'", {
   output <- prepare_boxly(meta,
