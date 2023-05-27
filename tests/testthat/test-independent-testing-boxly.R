@@ -62,7 +62,6 @@ test_that("validation of boxly plot Case 1", {
 
 
 test_that("validation of boxly plot Case 2", {
-
   meta <- meta_boxly()
 
   x <- prepare_boxly(meta,
