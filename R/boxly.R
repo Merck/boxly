@@ -32,7 +32,6 @@
 #'
 #' @importFrom ggplot2 ggplot aes geom_point position_jitterdodge
 #'   scale_color_manual ylab xlab theme_bw
-#' @importFrom dplyr mutate select filter
 #' @importFrom plotly config layout add_trace ggplotly
 #' @importFrom stats reshape
 #'
@@ -55,16 +54,11 @@
 boxly <- function(outdata,
                   color = NULL,
                   hover_summary_var = c("n", "min", "q1", "median", "mean", "q3", "max"),
-                  # hover_outlier_var = c("USUBJID", "AVAL"),
                   hover_outlier_label = c("Participant Id", "Parameter value"),
                   x_label = "Visit",
                   y_label = "Change",
                   heading_select_list = "Lab parameter",
                   heading_summary_table = "Number of Participants") {
-  # Test if two treatment
-  # tbl <- tbl|>
-  #   filter(TRTA %in% unique(outdata$plotds$TRTA)[1:2])
-
   x_var <- outdata$x_var
   y_var <- outdata$y_var
   group_var <- outdata$group_var
@@ -78,38 +72,35 @@ boxly <- function(outdata,
   tbl$group <- tbl[[group_var]]
   tbl$param <- tbl[[param_var]]
 
-  # ============ TODO begin ==================#
-  # adjust this part to align with hover_summary_var
-  tbl$label <- paste(
-    "N :", tbl$n,
-    "<br>Min :", tbl$min,
-    "<br>Q1 :", tbl$q1,
-    "<br>Median :", tbl$median,
-    "<br>Mean :", tbl$mean,
-    "<br>Q3 :", tbl$q3,
-    "<br>Max :", tbl$max
-  )
-  # ============ TODO end ====================#
+  # prepare hover label in hover_summary_var
 
-  # ============ TODO begin ==================#
+  stat_var_label <- data.frame(
+    stat_var = c("n", "min", "q1", "median", "mean", "q3", "max"),
+    label = c("N: ", "Min: ", "Q1: ", "Median: ", "Mean: ", "Q3: ", "Max: "),
+    value = c("tbl$n", "tbl$min", "tbl$q1", "tbl$median", "tbl$mean", "tbl$q3", "tbl$max"),
+    stringsAsFactors = FALSE
+  )
+
+  tbl$label <- NULL
+  for (var in hover_summary_var) {
+    if (var %in% hover_summary_var) {
+      tbl$label <- paste0(
+        tbl$label,
+        stat_var_label$label[stat_var_label$stat_var == var],
+        eval(parse(text = stat_var_label$value[stat_var_label$stat_var == var])),
+        "\n"
+      )
+    }
+  }
+
   # paste multiple hover_outlier_labels
   tbl$text <- ifelse(!is.na(tbl$outlier),
-    paste(
-      hover_outlier_label[1], tbl[["USUBJID"]],
-      "\n", hover_outlier_label[2], tbl[["outlier"]]
+    paste0(
+      hover_outlier_label[1], ": ", tbl[["USUBJID"]],
+      "\n", hover_outlier_label[2], ": ", tbl[["outlier"]]
     ),
     NA
   )
-  # ============ TODO end ====================#
-
-  # This looks overlap with the aboe tbl$text.
-  # hover label for outlier besides default variable
-  # for (i in 1:length(hover_var_outlier)){
-  #   tbl$text <- ifelse(!is.na(tbl$outlier),
-  #                      paste(tbl$text, "\n", attr(tbl[[hover_var_outlier[i]]], "label"),
-  #                            ": ", tbl[[hover_var_outlier[i]]]),
-  #                      tbl$text)
-  # }
 
   # implement color
   if (is.null(color)) {
@@ -120,10 +111,10 @@ boxly <- function(outdata,
   }
 
   # input data set for bar
-  bar <- tbl |>
-    select(group, param, min, max, label, x) |>
-    mutate(range = max - min) |>
-    dplyr::distinct()
+  bar <- tbl[, c("group", "param", "min", "max", "label", "x")]
+  bar$range <- bar$max - bar$min
+  bar <- unique.data.frame(bar)
+
   bar <- crosstalk::SharedData$new(bar, key = ~param, group = "groupdata")
 
   # create 2 shareddata, 1 all data + 1 outlier data only
@@ -133,10 +124,10 @@ boxly <- function(outdata,
   # get the summary of subjects counts
   cnt <- tbl[!duplicated(tbl[, c("param", "x", "group", "n")]), c("param", "x", "group", "n")] |>
     reshape(timevar = "x", idvar = c("param", "group"), v.names = "n", direction = "wide")
-  # cnt <- cnt[,2:ncol(cnt)]
+
   names(cnt) <- c("param", "Treatment Group", as.character(unique(tbl$AVISITN)))
   row.names(cnt) <- NULL
-  # names(cnt) <- gsub("n.", "", names(cnt)) #??
+
   cnt <- crosstalk::SharedData$new(cnt, key = ~param, group = "groupdata")
 
 
@@ -148,15 +139,6 @@ boxly <- function(outdata,
     group = ~param,
     multiple = FALSE
   )
-  # get the slider bar of counts
-  # slider_bar <- crosstalk::filter_slider(id = "cut_off",
-  #                                        label = heading_slider_bar,
-  #                                        sharedData = box_all,
-  #                                        column = ~n,
-  #                                        width = "60%",
-  #                                        step = 1,
-  #                                        min = 0,
-  #                                        max = 100)
 
   # get the interactive box plot
   p <- ggplot(

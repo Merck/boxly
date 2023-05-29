@@ -22,6 +22,8 @@ The term name is used as key to link information.}
 }
 \value{
 Metadata list with plotting dataset.
+
+Metadata list with plotting dataset
 }
 \description{
 Prepare data for interactive box plot
@@ -31,8 +33,7 @@ library(metalite)
 library(dplyr)
 
 meta <- meta_boxly()
-prepare_boxly(
-  meta,
+prepare_boxly(meta,
   population = "apat",
   observation = "wk12",
   analysis = "lb_boxly",

@@ -25,14 +25,10 @@
 #' @examples
 #' meta_boxly()
 meta_boxly <- function() {
-  adsl <- r2rtf::r2rtf_adsl |>
-    dplyr::rename(TRTA = TRT01A) |>
-    dplyr::mutate(
-      TRTA = factor(
-        TRTA,
-        levels = c("Placebo", "Xanomeline High Dose", "Xanomeline Low Dose")
-      )
-    )
+  adsl <- r2rtf::r2rtf_adsl
+  adsl$TRTA <- factor(adsl$TRT01A,
+    levels = c("Placebo", "Xanomeline High Dose", "Xanomeline Low Dose")
+  )
 
   adlb <- boxly_adlb
 
