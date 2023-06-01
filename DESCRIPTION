@@ -11,7 +11,7 @@ Authors@R: c(
         person("Venkatesh", "Burla", role = c("ctb")),
         person("Merck Sharp & Dohme Corp", role = "cph")
        )
-Description: Interactive box plot for lab test, vital signs, electrocardiogram etc..
+Description: Interactive box plot using `plotly` for clinical trial analysis. 
 License: GPL (>= 3)
 URL: https://merck.github.io/boxly/, https://github.com/Merck/boxly
 BugReports: https://github.com/Merck/boxly/issues
