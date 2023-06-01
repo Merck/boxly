@@ -1,12 +1,21 @@
 # boxly <img src="man/figures/logo.png" align="right" width="120" />
 
+<!-- badges: start -->
+[![R-CMD-check](https://github.com/Merck/boxly/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/Merck/boxly/actions/workflows/R-CMD-check.yaml)
+[![Codecov test coverage](https://codecov.io/gh/Merck/boxly/branch/main/graph/badge.svg)](https://app.codecov.io/gh/Merck/boxly?branch=main)
+<!-- badges: end -->
+
 ## Overview
 
-The aim of boxly is to create an interactive box plot for analysis & reporting using R.
+The boxly package creates interactive boxplots for clinical trial analysis & reporting.
+
+We assume ADaM datasets are ready for analysis and
+leverage [metalite](https://merck.github.io/metalite/) data structure to define
+inputs and outputs.
 
 ## Workflow
 
-The general workflow covers:
+The general workflow is:
 
 - Step 1: construct input metadata for treatment analysis from the ADaM datasets.
 - Step 2: prepare datasets for interactive box plot by `prepare_boxly()`.
