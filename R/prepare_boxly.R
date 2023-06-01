@@ -131,7 +131,7 @@ prepare_boxly <- function(meta,
   rownames(plotds) <- NULL
 
   # Return value
-  outdata(meta, population, observation, parameter,
+  metalite::outdata(meta, population, observation, parameter,
     x_var = x, y_var = y, group_var = obs_group,
     param_var = obs_var,
     n = n_tbl, order = NULL, group = NULL, reference_group = NULL,

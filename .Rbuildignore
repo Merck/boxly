@@ -6,3 +6,7 @@
 ^LICENSE\.md$
 ^LICENSES_THIRD_PARTY$
 ^\.github$
+^boxly\.Rcheck$
+^boxly.*\.tar\.gz$
+^boxly.*\.tgz$
+^codecov\.yml$

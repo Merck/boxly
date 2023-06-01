@@ -1,19 +1,44 @@
 # boxly <img src="man/figures/logo.png" align="right" width="120" />
 
+<!-- badges: start -->
+[![R-CMD-check](https://github.com/Merck/boxly/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/Merck/boxly/actions/workflows/R-CMD-check.yaml)
+[![Codecov test coverage](https://codecov.io/gh/Merck/boxly/branch/main/graph/badge.svg)](https://app.codecov.io/gh/Merck/boxly?branch=main)
+<!-- badges: end -->
+
 ## Overview
 
-The aim of boxly is to create an interactive box plot for analysis & reporting using R.
+The boxly package creates interactive boxplots for clinical trial analysis & reporting.
+
+We assume ADaM datasets are ready for analysis and
+leverage [metalite](https://merck.github.io/metalite/) data structure to define
+inputs and outputs.
 
 ## Workflow
 
-The general workflow covers:
+The general workflow is:
 
-- Step 1: construct input metadata for treatment analysis from the ADaM datasets.
-- Step 2: prepare datasets for interactive box plot by `prepare_boxly()`.
-- Step 3: generate the interactive box plot using `boxly()`.
+1. construct an input metadata for from ADaM datasets using `metalite`. e.g. `meta_boxly()` 
+1. `prepare_boxly()` prepare datasets for interactive forest plot.
+1. `boxly()` generates an interactive box plot.
+
+Here is a quick example using dummy dataset
+
+```r
+library("boxploy")
+
+meta_boxly() |>
+  prepare_boxly(
+    meta,
+    population = "apat",
+    observation = "wk12",
+    parameter = "sodium;bili;urate",
+    analysis = "lb_boxly"
+  ) |>
+  boxply()
+```
 
 ## Highlighted features
 
-- Parameters can be selected. For example, in laboratory (LB) analysis, (i) Sodium, (ii) Billirubin, (iii) Urate.
-- Different labels can be revealed by hovering over a box or outlier.
-- Count table can be appended under the interactive box plot.
+- Parameter selection: Drop down menu to select parameter of interest.
+- Interactivity: display summary statistics and outlier information interactively.
+- Listing: provide detail information in interactive listing. 

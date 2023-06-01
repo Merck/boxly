@@ -4,3 +4,6 @@
 .Ruserdata
 inst/doc
 docs
+boxly.Rcheck/
+boxly*.tar.gz
+boxly*.tgz

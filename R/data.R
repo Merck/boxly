@@ -16,6 +16,19 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+#' A Subject Level Demographic Dataset
+#'
+#' A dataset containing the demographic information of a clinical trial following
+#' CDISC ADaM standard.
+#'
+#' Definition of each variable can be found in
+#' \url{https://github.com/phuse-org/phuse-scripts/tree/master/data/adam/cdisc}
+#'
+#' @format A data frame with 254 rows and 51 variables.
+#'
+#' @source \url{https://github.com/phuse-org/phuse-scripts/tree/master/data/adam/cdisc}
+"boxly_adsl"
+
 #' An example ADLB dataset
 #'
 #' @format A data frame with 24746 and 24 variables:
