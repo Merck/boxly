@@ -18,7 +18,13 @@
 
 #' Prepare data for interactive box plot
 #'
-#' @inheritParams metalite.ae::prepare_ae_specific
+#' @param meta A metadata object created by metalite.
+#' @param population A character value of population term name.
+#'   The term name is used as key to link information.
+#' @param observation A character value of observation term name.
+#'   The term name is used as key to link information.
+#' @param parameter A character value of parameter term name.
+#'   The term name is used as key to link information.
 #' @param analysis Name of analysis plan.
 #'
 #' @return Metadata list with plotting dataset.
@@ -27,7 +33,6 @@
 #'
 #' @examples
 #' library(metalite)
-#' library(dplyr)
 #'
 #' meta <- meta_boxly()
 #' prepare_boxly(meta,
