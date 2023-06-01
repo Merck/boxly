@@ -29,19 +29,12 @@ Imports:
     metalite,
     plotly
 Suggests:
-    colorspace,
     covr,
-    kableExtra,
     dplyr,
     knitr,
     rmarkdown,
-    r2rtf,
-    readxl,
     testthat (>= 3.0.0),
-    pkgdown,
-    png,
-    rprojroot,
-    vdiffr
+    pkgdown
 VignetteBuilder:
     knitr
 Config/testthat/edition: 3

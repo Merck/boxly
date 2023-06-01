@@ -19,7 +19,6 @@
 library(metalite)
 library(ggplot2)
 library(dplyr)
-library(r2rtf)
 
 meta <- meta_boxly()
 

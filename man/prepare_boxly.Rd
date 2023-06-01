@@ -30,7 +30,6 @@ Prepare data for interactive box plot
 }
 \examples{
 library(metalite)
-library(dplyr)
 
 meta <- meta_boxly()
 prepare_boxly(meta,
