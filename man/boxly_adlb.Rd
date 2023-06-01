@@ -7,30 +7,30 @@
 \format{
 A data frame with 24746 and 24 variables:
 \describe{
-\item{usubjid}{Unique Subject Identifier}
-\item{trta}{Actual Treatment}
-\item{trtan}{Actual Treatment (N)}
-\item{age}{Age}
-\item{race}{Race}
-\item{sex}{Sex}
-\item{saffl}{Safety Population Flag}
-\item{avisit}{Analysis Visit}
-\item{avisitn}{Analysis Visit (N)}
-\item{ady}{Analysis Relative Day}
-\item{adt}{Analysis Date}
-\item{visit}{Visit Name}
-\item{visitnum}{Visit Number}
-\item{param}{Parameter}
-\item{paramcd}{Parameter Code}
-\item{paramn}{Parameter (N)}
-\item{aval}{Analysis Value}
-\item{base}{Baseline Value}
-\item{chg}{Change from Baseline}
-\item{anl01fl}{Analysis Record Flag 1}
-\item{albtrval}{Amount Threshold Range}
-\item{anrind}{Analysis Reference Range Indicator}
-\item{bnrind}{Baseline Reference Range Indicator}
-\item{ablfl}{Baseline Record Flag}
+\item{USUBJID}{Unique Subject Identifier}
+\item{TRTA}{Actual Treatment}
+\item{TRTAN}{Actual Treatment (N)}
+\item{AGE}{Age}
+\item{RACE}{Race}
+\item{SEX}{Sex}
+\item{SAFFL}{Safety Population Flag}
+\item{AVISIT}{Analysis Visit}
+\item{AVISITN}{Analysis Visit (N)}
+\item{ADY}{Analysis Relative Day}
+\item{ADT}{Analysis Date}
+\item{VISIT}{Visit Name}
+\item{VISITNUM}{Visit Number}
+\item{PARAM}{Parameter}
+\item{PARAMCD}{Parameter Code}
+\item{PARAMN}{Parameter (N)}
+\item{AVAL}{Analysis Value}
+\item{BASE}{Baseline Value}
+\item{CHG}{Change from Baseline}
+\item{ANL01FL}{Analysis Record Flag 1}
+\item{ALBTRVAL}{Amount Threshold Range}
+\item{ANRIND}{Analysis Reference Range Indicator}
+\item{BNRIND}{Baseline Reference Range Indicator}
+\item{ABLFL}{Baseline Record Flag}
 }
 }
 \usage{
