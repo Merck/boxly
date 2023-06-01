@@ -25,13 +25,9 @@
 #' @examples
 #' meta_boxly()
 meta_boxly <- function() {
+
   adsl <- boxly_adsl
   adlb <- boxly_adlb
-  names(adlb) <- toupper(names(adlb))
-
-  adlb$TRTA <- factor(adlb$TRTA,
-    levels = c("Placebo", "Xanomeline High Dose", "Xanomeline Low Dose")
-  )
 
   plan <- metalite::plan(
     analysis = "lb_boxly", population = "apat",
