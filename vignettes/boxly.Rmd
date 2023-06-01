@@ -18,14 +18,7 @@ knitr::opts_chunk$set(
 ```
 
 ```{r}
-library(metalite)
-library(dplyr)
-library(ggplot2)
-library(plotly)
-library(htmlwidgets)
-library(crosstalk)
 library(boxly)
-library(htmltools)
 ```
 
 ```{r}
