@@ -23,13 +23,14 @@ footer:
     blank: "<span></span>"
 
 reference:
-- title: Box plot
+- title: Interactive Box plot
   contents:
   - meta_boxly
   - prepare_boxly
   - boxly
 - title: Example data
   contents:
+  - boxly_adsl
   - boxly_adlb
   - boxly_adeg
   - boxly_advs
