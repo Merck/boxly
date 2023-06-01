@@ -25,7 +25,6 @@
 #' @examples
 #' meta_boxly()
 meta_boxly <- function() {
-
   adsl <- boxly_adsl
   adlb <- boxly_adlb
 
