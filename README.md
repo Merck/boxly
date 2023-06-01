@@ -7,7 +7,7 @@
 
 ## Overview
 
-The boxly package creates interactive boxplots for clinical trial analysis & reporting.
+The boxly package creates interactive box plots for clinical trial analysis & reporting.
 
 We assume ADaM datasets are ready for analysis and
 leverage [metalite](https://merck.github.io/metalite/) data structure to define
@@ -17,28 +17,28 @@ inputs and outputs.
 
 The general workflow is:
 
-1. construct an input metadata for from ADaM datasets using `metalite`. e.g. `meta_boxly()` 
-1. `prepare_boxly()` prepare datasets for interactive forest plot.
-1. `boxly()` generates an interactive box plot.
+1. Construct input metadata from ADaM datasets using metalite.
+   For example, `meta_boxly()`.
+1. Use `prepare_boxly()` to prepare datasets for interactive box plot.
+1. Use `boxly()` to generate an interactive box plot.
 
-Here is a quick example using dummy dataset
+Here is a quick example using an example dataset:
 
 ```r
-library("boxploy")
+library("boxly")
 
 meta_boxly() |>
   prepare_boxly(
-    meta,
     population = "apat",
     observation = "wk12",
-    parameter = "sodium;bili;urate",
-    analysis = "lb_boxly"
+    analysis = "lb_boxly",
+    parameter = "sodium;bili;urate"
   ) |>
-  boxply()
+  boxly()
 ```
 
 ## Highlighted features
 
-- Parameter selection: Drop down menu to select parameter of interest.
-- Interactivity: display summary statistics and outlier information interactively.
-- Listing: provide detail information in interactive listing. 
+- Parameter selection: Drop-down menu to select parameter of interest.
+- Interactivity: Display summary statistics and outlier information interactively.
+- Listing: Provide detailed information in interactive listing.
