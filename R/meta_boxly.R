@@ -40,7 +40,7 @@
 #'   boxly_adlb,
 #'   population_term = "apat",
 #'   observation_term = "wk12"
-#'   )
+#' )
 meta_boxly <- function(
     dataset_adsl,
     dataset_param,
@@ -48,18 +48,16 @@ meta_boxly <- function(
     population_subset = SAFFL == "Y",
     observation_term,
     observation_subset = SAFFL == "Y",
-    parameters = unique(dataset_param$PARAMCD)
-){
-
+    parameters = unique(dataset_param$PARAMCD)) {
   # Input Checking
   require_param <- c("PARAM", "PARAMCD", "AVISITN", "CHG")
 
-  if(! all(require_param %in% names(dataset_param)) ){
+  if (!all(require_param %in% names(dataset_param))) {
     dataset_param_diff <- paste(setdiff(names(dataset_param), require_param), collapse = ";")
     stop("Missing Standard Variable in dataset_param: ", dataset_param_diff)
   }
 
-  if(! all(parameters %in% dataset_param$PARAMCD)){
+  if (!all(parameters %in% dataset_param$PARAMCD)) {
     param_diff <- paste(setdiff(parameters, unique(dataset_param$PARAMCD)), collapse = ";")
     stop("Mismatch parameters in dataset_param$PARAMCD: ", param_diff)
   }
@@ -100,19 +98,19 @@ meta_boxly <- function(
       y = "CHG"
     )
 
-    # Add parameter definition
-    u_param <- unique(dataset_param[, c("PARAM", "PARAMCD")])
-    u_param <- u_param[u_param[["PARAMCD"]] %in% parameters,]
+  # Add parameter definition
+  u_param <- unique(dataset_param[, c("PARAM", "PARAMCD")])
+  u_param <- u_param[u_param[["PARAMCD"]] %in% parameters, ]
 
-    for(i in seq(parameters)){
-      term <- paste0("PARAMCD == '", u_param[["PARAMCD"]][i], "'")
-      meta <- meta |>
-        metalite::define_parameter(
-          name = u_param[["PARAMCD"]][i],
-          label = u_param[["PARAM"]][i],
-          subset = str2lang(term)
-        )
-    }
+  for (i in seq(parameters)) {
+    term <- paste0("PARAMCD == '", u_param[["PARAMCD"]][i], "'")
+    meta <- meta |>
+      metalite::define_parameter(
+        name = u_param[["PARAMCD"]][i],
+        label = u_param[["PARAM"]][i],
+        subset = str2lang(term)
+      )
+  }
 
-    metalite::meta_build(meta)
+  metalite::meta_build(meta)
 }
