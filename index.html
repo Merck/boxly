@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="Interactive box plot using `plotly` for clinical trial analysis. ">
+<meta name="description" content="Interactive box plot using plotly for clinical trial analysis.">
 <title>Interactive Box Plot • boxly</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
@@ -19,7 +19,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="pkgdown.js"></script><link href="extra.css" rel="stylesheet">
 <meta property="og:title" content="Interactive Box Plot">
-<meta property="og:description" content="Interactive box plot using `plotly` for clinical trial analysis. ">
+<meta property="og:description" content="Interactive box plot using plotly for clinical trial analysis.">
 <meta property="og:image" content="https://merck.github.io/boxly/logo.png">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -84,7 +84,7 @@
 <div class="section level2">
 <h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
 </h2>
-<p>The boxly package creates interactive boxplots for clinical trial analysis &amp; reporting.</p>
+<p>The boxly package creates interactive box plots for clinical trial analysis &amp; reporting.</p>
 <p>We assume ADaM datasets are ready for analysis and leverage <a href="https://merck.github.io/metalite/" class="external-link">metalite</a> data structure to define inputs and outputs.</p>
 </div>
 <div class="section level2">
@@ -92,34 +92,30 @@
 </h2>
 <p>The general workflow is:</p>
 <ol style="list-style-type: decimal">
-<li>construct an input metadata for from ADaM datasets using <code>metalite</code>. e.g. <code><a href="reference/meta_boxly.html">meta_boxly()</a></code>
-</li>
-<li>
-<code><a href="reference/prepare_boxly.html">prepare_boxly()</a></code> prepare datasets for interactive forest plot.</li>
-<li>
-<code><a href="reference/boxly.html">boxly()</a></code> generates an interactive box plot.</li>
+<li>Construct input metadata from ADaM datasets using metalite. For example, <code><a href="reference/meta_boxly.html">meta_boxly()</a></code>.</li>
+<li>Use <code><a href="reference/prepare_boxly.html">prepare_boxly()</a></code> to prepare datasets for interactive box plot.</li>
+<li>Use <code><a href="reference/boxly.html">boxly()</a></code> to generate an interactive box plot.</li>
 </ol>
-<p>Here is a quick example using dummy dataset</p>
+<p>Here is a quick example using an example dataset:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st">"boxploy"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://merck.github.io/boxly/">"boxly"</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="reference/meta_boxly.html">meta_boxly</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="reference/prepare_boxly.html">prepare_boxly</a></span><span class="op">(</span></span>
-<span>    <span class="va">meta</span>,</span>
 <span>    population <span class="op">=</span> <span class="st">"apat"</span>,</span>
 <span>    observation <span class="op">=</span> <span class="st">"wk12"</span>,</span>
-<span>    parameter <span class="op">=</span> <span class="st">"sodium;bili;urate"</span>,</span>
-<span>    analysis <span class="op">=</span> <span class="st">"lb_boxly"</span></span>
+<span>    analysis <span class="op">=</span> <span class="st">"lb_boxly"</span>,</span>
+<span>    parameter <span class="op">=</span> <span class="st">"sodium;bili;urate"</span></span>
 <span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">boxply</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu"><a href="reference/boxly.html">boxly</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="highlighted-features">Highlighted features<a class="anchor" aria-label="anchor" href="#highlighted-features"></a>
 </h2>
 <ul>
-<li>Parameter selection: Drop down menu to select parameter of interest.</li>
-<li>Interactivity: display summary statistics and outlier information interactively.</li>
-<li>Listing: provide detail information in interactive listing.</li>
+<li>Parameter selection: Drop-down menu to select parameter of interest.</li>
+<li>Interactivity: Display summary statistics and outlier information interactively.</li>
+<li>Listing: Provide detailed information in interactive listing.</li>
 </ul>
 </div>
 </div>
