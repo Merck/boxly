@@ -4,14 +4,47 @@
 \alias{meta_boxly}
 \title{Create an example metadata object}
 \usage{
-meta_boxly()
+meta_boxly(
+  dataset_adsl,
+  dataset_param,
+  population_term,
+  population_subset = SAFFL == "Y",
+  observation_term,
+  observation_subset = SAFFL == "Y",
+  parameters = unique(dataset_param$PARAMCD)
+)
+}
+\arguments{
+\item{dataset_adsl}{ADSL source dataset.}
+
+\item{dataset_param}{Observation level source dataset for boxplot.}
+
+\item{population_term}{A character value of population term name.}
+
+\item{population_subset}{An unquoted condition for selecting the
+populations from ADSL dataset.}
+
+\item{observation_term}{A character value of observation term name.}
+
+\item{observation_subset}{An unquoted condition for selecting the
+observations from \code{dataset_param} dataset.}
+
+\item{parameters}{A chracter vector of parameters defined in \code{dataset_param$PARAMCD}}
+
+\item{parameter_term}{A character value of parameter term name.}
 }
 \value{
-Metadata for creating interactive box plot.
+A metalite object.
 }
 \description{
 Create an example metadata object
 }
 \examples{
-meta_boxly()
+
+meta_boxly(
+  boxly_adsl,
+  boxly_adlb,
+  population_term = "apat",
+  observation_term = "wk12"
+  )
 }
