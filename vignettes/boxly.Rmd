@@ -32,7 +32,8 @@ meta <- meta_boxly(
 ```
 
 ```{r}
-outdata <- prepare_boxly()
+outdata <- prepare_boxly(meta)
+outdata
 ```
 
 ```{r}

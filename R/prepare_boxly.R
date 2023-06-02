@@ -23,7 +23,7 @@
 #'   The term name is used as key to link information.
 #' @param observation A character value of observation term name.
 #'   The term name is used as key to link information.
-#' @param parameter A character value of parameter term name.
+#' @param analysis A character value of analysis term name.
 #'   The term name is used as key to link information.
 #'
 #' @return Metadata list with plotting dataset.
