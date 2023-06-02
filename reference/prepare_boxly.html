@@ -58,7 +58,7 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">prepare_boxly</span><span class="op">(</span><span class="va">meta</span>, <span class="va">population</span>, <span class="va">observation</span>, <span class="va">analysis</span>, <span class="va">parameter</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">prepare_boxly</span><span class="op">(</span><span class="va">meta</span>, population <span class="op">=</span> <span class="cn">NULL</span>, observation <span class="op">=</span> <span class="cn">NULL</span>, analysis <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -78,11 +78,7 @@ The term name is used as key to link information.</p></dd>
 
 
 <dt>analysis</dt>
-<dd><p>Name of analysis plan.</p></dd>
-
-
-<dt>parameter</dt>
-<dd><p>A character value of parameter term name.
+<dd><p>A character value of analysis term name.
 The term name is used as key to link information.</p></dd>
 
 </dl></div>
@@ -106,12 +102,7 @@ The term name is used as key to link information.</p></dd>
 <span class="r-in"><span>  population_term <span class="op">=</span> <span class="st">"apat"</span>,</span></span>
 <span class="r-in"><span>  observation_term <span class="op">=</span> <span class="st">"wk12"</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">prepare_boxly</span><span class="op">(</span><span class="va">meta</span>,</span></span>
-<span class="r-in"><span>  population <span class="op">=</span> <span class="st">"apat"</span>,</span></span>
-<span class="r-in"><span>  observation <span class="op">=</span> <span class="st">"wk12"</span>,</span></span>
-<span class="r-in"><span>  analysis <span class="op">=</span> <span class="st">"boxly"</span>,</span></span>
-<span class="r-in"><span>  parameter <span class="op">=</span> <span class="va">meta</span><span class="op">$</span><span class="va">plan</span><span class="op">$</span><span class="va">parameter</span></span></span>
-<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">prepare_boxly</span><span class="op">(</span><span class="va">meta</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> In observation level data, the facet variable 'PARAM' is automatically transformed into a factor!</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> In observation level data, the group variable 'AVISITN' is automatically transformed into a factor!</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> List of 13</span>
