@@ -42,19 +42,19 @@
 #' if (interactive()) {
 #'   library(metalite)
 #'
-#' meta_boxly(
-#'   boxly_adsl,
-#'   boxly_adlb,
-#'   population_term = "apat",
-#'   observation_term = "wk12"
-#' ) |>
-#' prepare_boxly(
-#'   population = "apat",
-#'   observation = "wk12",
-#'   analysis = "boxly",
-#'   parameter = meta$plan$parameter
-#'  ) |>
-#'  boxly()
+#'   meta_boxly(
+#'     boxly_adsl,
+#'     boxly_adlb,
+#'     population_term = "apat",
+#'     observation_term = "wk12"
+#'   ) |>
+#'     prepare_boxly(
+#'       population = "apat",
+#'       observation = "wk12",
+#'       analysis = "boxly",
+#'       parameter = meta$plan$parameter
+#'     ) |>
+#'     boxly()
 #' }
 boxly <- function(outdata,
                   color = NULL,
