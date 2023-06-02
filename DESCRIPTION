@@ -2,16 +2,16 @@ Package: boxly
 Title: Interactive Box Plot
 Version: 0.0.9
 Authors@R: c(
-        person("Benjamin", "Wang", email = "benjamin.wang@merck.com", role = c("aut", "cre")),
-        person("Yujie", "Zhao", role = c("aut")),
-        person("Yilong", "Zhang", role = c("ctb")),
-        person("Nan", "Xiao", role = c("ctb")),
-        person("Sarad", "Nepal",  role = c("ctb")),
-        person("Madhusudhan", "Ginnaram", role = c("ctb")),
-        person("Venkatesh", "Burla", role = c("ctb")),
-        person("Merck Sharp & Dohme Corp", role = "cph")
-       )
-Description: Interactive box plot using `plotly` for clinical trial analysis. 
+    person("Benjamin", "Wang", email = "benjamin.wang@merck.com", role = c("aut", "cre")),
+    person("Yujie", "Zhao", role = c("aut")),
+    person("Yilong", "Zhang", role = c("ctb")),
+    person("Nan", "Xiao", role = c("ctb")),
+    person("Sarad", "Nepal",  role = c("ctb")),
+    person("Madhusudhan", "Ginnaram", role = c("ctb")),
+    person("Venkatesh", "Burla", role = c("ctb")),
+    person("Merck Sharp & Dohme Corp", role = "cph")
+    )
+Description: Interactive box plot using 'plotly' for clinical trial analysis.
 License: GPL (>= 3)
 URL: https://merck.github.io/boxly/, https://github.com/Merck/boxly
 BugReports: https://github.com/Merck/boxly/issues
@@ -33,8 +33,7 @@ Suggests:
     covr,
     knitr,
     rmarkdown,
-    testthat (>= 3.0.0),
-    pkgdown
+    testthat (>= 3.0.0)
 VignetteBuilder:
     knitr
 Config/testthat/edition: 3

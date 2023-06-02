@@ -23,7 +23,7 @@ footer:
     blank: "<span></span>"
 
 reference:
-- title: Interactive Box plot
+- title: Interactive box plot
   contents:
   - meta_boxly
   - prepare_boxly
