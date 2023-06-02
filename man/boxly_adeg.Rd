@@ -6,48 +6,15 @@
 \title{An example ADEG dataset}
 \format{
 A data frame with 32139 and 35 variables:
-\describe{
-\item{STUDYID}{Study Identifier}
-\item{SITEID}{Study Site Identifier}
-\item{USUBJID}{Unique Subject Identifier}
-\item{AGE}{Age}
-\item{AGEGR1}{Pooled Age Group 1}
-\item{AGEGR1N}{Pooled Age Group 1 (N)}
-\item{RACE}{Race}
-\item{RACEN}{Race (N)}
-\item{SEX}{Sex}
-\item{SAFFL}{Safety Population Flag}
-\item{TRTSDT}{Date of First Exposure to Treatment}
-\item{TRTEDT}{Date of Last Exposure to Treatment}
-\item{TRTP}{Planned Treatment}
-\item{TRTPN}{Planned Treatment (N)}
-\item{TRTA}{Actual Treatment}
-\item{TRTAN}{Actual Treatment (N)}
-\item{PARAMCD}{Parameter Code}
-\item{PARAMN}{Parameter Number}
-\item{ADT}{Analysis Date}
-\item{ADY}{Analysis Relative Day}
-\item{ATPTN}{Analysis Timepoint (N)}
-\item{ATPT}{Analysis Timepoint}
-\item{AVISIT}{Analysis Visit}
-\item{AVISITN}{Analysis Visit (N)}
-\item{AVAL}{Analysis Value}
-\item{VISITNUM}{Visit Number}
-\item{VISIT}{Visit Name}
-\item{VSSEQ}{Sequence Number}
-\item{ANL01FL}{Analysis Record Flag 01}
-\item{ABLFL}{Baseline Record Flag}
-\item{base}{Baseline Value}
-\item{chg}{Change from Baseline}
-\item{pchg}{Percent Change from Baseline}
-\item{PARAM}{Parameter}
-\item{PARCAT}{Parameter Category}
 }
+\source{
+\url{https://github.com/phuse-org/phuse-scripts/tree/master/data/adam/cdisc}
 }
 \usage{
 boxly_adeg
 }
 \description{
-An example ADEG dataset
+Definition of each variable can be found in
+\url{https://github.com/phuse-org/phuse-scripts/tree/master/data/adam/cdisc}
 }
 \keyword{datasets}

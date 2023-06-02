@@ -30,8 +30,6 @@ populations from ADSL dataset.}
 observations from \code{dataset_param} dataset.}
 
 \item{parameters}{A chracter vector of parameters defined in \code{dataset_param$PARAMCD}}
-
-\item{parameter_term}{A character value of parameter term name.}
 }
 \value{
 A metalite object.

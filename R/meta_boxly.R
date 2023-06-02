@@ -26,7 +26,6 @@
 #' @param observation_term A character value of observation term name.
 #' @param observation_subset An unquoted condition for selecting the
 #'   observations from `dataset_param` dataset.
-#' @param parameter_term A character value of parameter term name.
 #' @param parameters A chracter vector of parameters defined in `dataset_param$PARAMCD`
 #'
 #' @return A metalite object.
