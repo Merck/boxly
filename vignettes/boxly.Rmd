@@ -28,7 +28,7 @@ meta <- meta_boxly(
   population_term = "apat",
   observation_term = "wk12",
   observation_subset = AVISITN <= 12 & !is.na(CHG)
-  )
+)
 ```
 
 ```{r}
