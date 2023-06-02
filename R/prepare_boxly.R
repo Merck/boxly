@@ -104,22 +104,22 @@ prepare_boxly <- function(meta,
 
   # Input checking
   if (!"factor" %in% class(obs[[obs_group]])) {
-    message("In observation level data, the group variable '", obs_group, "' is automatically transformed into a factor!")
+    message("In observation level data, the group variable '", obs_group, "' is automatically transformed into a factor.")
     obs[[obs_group]] <- factor(obs[[obs_group]], levels = sort(unique(obs[[obs_group]])))
   }
 
   if (!"factor" %in% class(obs[[obs_var]])) {
-    message("In observation level data, the facet variable '", obs_var, "' is automatically transformed into a factor!")
+    message("In observation level data, the facet variable '", obs_var, "' is automatically transformed into a factor.")
     obs[[obs_var]] <- factor(obs[[obs_var]], levels = sort(unique(obs[[obs_var]])))
   }
 
   if (!"factor" %in% class(obs[[x]])) {
-    message("In observation level data, the group variable '", x, "' is automatically transformed into a factor!")
+    message("In observation level data, the group variable '", x, "' is automatically transformed into a factor.")
     obs[[x]] <- factor(obs[[x]], levels = sort(unique(obs[[x]])))
   }
 
   if (!"numeric" %in% class(obs[[y]])) {
-    message("In observation level data, the group variable '", y, "' is automatically transformed into a numerical number!")
+    message("In observation level data, the group variable '", y, "' is automatically transformed into a numerical number.")
     obs[[y]] <- as.numeric(obs[[y]])
   }
 
