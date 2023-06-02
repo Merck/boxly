@@ -12,13 +12,13 @@ Please see <https://merck.github.io/boxly/articles/> for the full documentation.
 ```{r, eval = FALSE}
 library("boxploy")
 
-meta_boxly() |>
-  prepare_boxly(
-    meta,
-    population = "apat",
-    observation = "wk12",
-    parameter = "sodium;bili;urate",
-    analysis = "lb_boxly"
-  ) |>
+meta_boxly(
+  boxly_adsl,
+  boxly_adlb,
+  population_term = "apat",
+  observation_term = "wk12",
+  observation_subset = AVISITN <= 12 & !is.na(CHG)
+) |>
+  prepare_boxly() |>
   boxply()
 ```

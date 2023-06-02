@@ -25,7 +25,6 @@
 #'   The term name is used as key to link information.
 #' @param parameter A character value of parameter term name.
 #'   The term name is used as key to link information.
-#' @param analysis Name of analysis plan.
 #'
 #' @return Metadata list with plotting dataset.
 #'
@@ -40,20 +39,42 @@
 #'   population_term = "apat",
 #'   observation_term = "wk12"
 #' )
-#' prepare_boxly(meta,
-#'   population = "apat",
-#'   observation = "wk12",
-#'   analysis = "boxly",
-#'   parameter = meta$plan$parameter
-#' )
+#' prepare_boxly(meta)
 #'
 #' @return Metadata list with plotting dataset
 #' @export
 prepare_boxly <- function(meta,
-                          population,
-                          observation,
-                          analysis,
-                          parameter) {
+                          population = NULL,
+                          observation = NULL,
+                          analysis = NULL) {
+
+
+  if (is.null(population)) {
+    if (length(meta$population) == 1) {
+      population <- meta$population[[1]]$name
+    } else {
+      stop("Population term should be one selected from metadata.")
+    }
+  }
+
+  if (is.null(observation)) {
+    if (length(meta$observation) == 1) {
+      observation <- meta$observation[[1]]$name
+    } else {
+      stop("Observation term should be one selected from metadata.")
+    }
+  }
+
+  if (is.null(analysis)) {
+    if (nrow(meta$plan) == 1) {
+      analysis <- meta$plan[1, "analysis"]
+    } else {
+      stop("Analysis term should be one selected from metadata.")
+    }
+  }
+
+  parameter <- meta$plan$parameter[meta$plan$analysis == analysis]
+
   # Obtain variables
   obs_var <- metalite::collect_adam_mapping(meta, observation)$var
   pop_var <- metalite::collect_adam_mapping(meta, population)$var

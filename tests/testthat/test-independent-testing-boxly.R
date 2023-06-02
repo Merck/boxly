@@ -25,12 +25,7 @@ meta <- meta_boxly(
   observation_subset = AVISITN <= 12 & !is.na(CHG)
 )
 
-x <- prepare_boxly(meta,
-  population = "apat",
-  observation = "wk12",
-  parameter = meta$plan$parameter,
-  analysis = "boxly"
-)
+x <- prepare_boxly(meta)
 
 test_that("validation of boxly plot Case 1", {
   y <- boxly(x,

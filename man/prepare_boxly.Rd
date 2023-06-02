@@ -4,7 +4,7 @@
 \alias{prepare_boxly}
 \title{Prepare data for interactive box plot}
 \usage{
-prepare_boxly(meta, population, observation, analysis, parameter)
+prepare_boxly(meta, population = NULL, observation = NULL, analysis = NULL)
 }
 \arguments{
 \item{meta}{A metadata object created by metalite.}
@@ -14,8 +14,6 @@ The term name is used as key to link information.}
 
 \item{observation}{A character value of observation term name.
 The term name is used as key to link information.}
-
-\item{analysis}{Name of analysis plan.}
 
 \item{parameter}{A character value of parameter term name.
 The term name is used as key to link information.}
@@ -37,11 +35,6 @@ meta <- meta_boxly(
   population_term = "apat",
   observation_term = "wk12"
 )
-prepare_boxly(meta,
-  population = "apat",
-  observation = "wk12",
-  analysis = "boxly",
-  parameter = meta$plan$parameter
-)
+prepare_boxly(meta)
 
 }
