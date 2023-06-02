@@ -16,18 +16,20 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-library(metalite)
-library(ggplot2)
-library(dplyr)
-
-meta <- meta_boxly()
+meta <- meta_boxly(
+  boxly_adsl,
+  boxly_adlb,
+  population_term = "apat",
+  observation_term = "wk12",
+  observation_subset = AVISITN <= 12 & !is.na(CHG)
+)
 
 test_that("Its class is 'outdata'", {
   output <- prepare_boxly(meta,
-    population = "apat",
-    observation = "wk12",
-    analysis = "lb_boxly",
-    parameter = "sodium;bili;urate"
+                           population = "apat",
+                           observation = "wk12",
+                           parameter = meta$plan$parameter,
+                           analysis = "boxly"
   )
   expect_equal(class(output), "outdata")
   expect_equal(output$population, "apat")
@@ -36,7 +38,7 @@ test_that("Its class is 'outdata'", {
   expect_equal(output$y_var, "CHG")
   expect_equal(output$group_var, "TRTA")
   expect_equal(output$param_var, "PARAM")
-  expect_equal(output$parameter, "sodium;bili;urate")
+  expect_equal(output$parameter,  meta$plan$parameter)
   expect_equal(output$order, NULL)
   expect_equal(output$group, NULL)
   expect_equal(names(output), c("meta", "population", "observation", "parameter", "n", "order", "group", "reference_group", "x_var", "y_var", "group_var", "param_var", "plotds"))
