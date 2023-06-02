@@ -47,8 +47,6 @@ prepare_boxly <- function(meta,
                           population = NULL,
                           observation = NULL,
                           analysis = NULL) {
-
-
   if (is.null(population)) {
     if (length(meta$population) == 1) {
       population <- meta$population[[1]]$name
