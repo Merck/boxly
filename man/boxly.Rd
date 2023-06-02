@@ -50,12 +50,7 @@ if (interactive()) {
     population_term = "apat",
     observation_term = "wk12"
   ) |>
-    prepare_boxly(
-      population = "apat",
-      observation = "wk12",
-      analysis = "boxly",
-      parameter = meta$plan$parameter
-    ) |>
+    prepare_boxly() |>
     boxly()
 }
 }

@@ -32,12 +32,7 @@ meta <- meta_boxly(
 ```
 
 ```{r}
-outdata <- prepare_boxly(meta,
-  population = "apat",
-  observation = "wk12",
-  parameter = meta$plan$parameter,
-  analysis = "boxly"
-)
+outdata <- prepare_boxly()
 ```
 
 ```{r}

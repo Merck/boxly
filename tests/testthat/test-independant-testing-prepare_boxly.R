@@ -25,12 +25,8 @@ meta <- meta_boxly(
 )
 
 test_that("Its class is 'outdata'", {
-  output <- prepare_boxly(meta,
-    population = "apat",
-    observation = "wk12",
-    parameter = meta$plan$parameter,
-    analysis = "boxly"
-  )
+  output <- prepare_boxly(meta)
+
   expect_equal(class(output), "outdata")
   expect_equal(output$population, "apat")
   expect_equal(output$observation, "wk12")

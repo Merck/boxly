@@ -17,8 +17,8 @@ inputs and outputs.
 
 The general workflow is:
 
-1. Construct input metadata from ADaM datasets using metalite.
-   For example, `meta_boxly()`.
+1. Use `meta_boxly()` or metalite package to construct input metadata from ADaM datasets.
+   For example,.
 1. Use `prepare_boxly()` to prepare datasets for interactive box plot.
 1. Use `boxly()` to generate an interactive box plot.
 
@@ -27,13 +27,14 @@ Here is a quick example using an example dataset:
 ```r
 library("boxly")
 
-meta_boxly() |>
-  prepare_boxly(
-    population = "apat",
-    observation = "wk12",
-    analysis = "lb_boxly",
-    parameter = "sodium;bili;urate"
-  ) |>
+meta_boxly(
+  boxly_adsl,
+  boxly_adlb,
+  population_term = "apat",
+  observation_term = "wk12",
+  observation_subset = AVISITN <= 12 & !is.na(CHG)
+) |>
+  prepare_boxly() |>
   boxly()
 ```
 
