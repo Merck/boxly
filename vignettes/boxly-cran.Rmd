@@ -10,7 +10,7 @@ vignette: >
 Please see <https://merck.github.io/boxly/articles/> for the full documentation. Here is only a minimal example:
 
 ```{r, eval = FALSE}
-library("boxploy")
+library("boxly")
 
 meta_boxly(
   boxly_adsl,
@@ -20,5 +20,5 @@ meta_boxly(
   observation_subset = AVISITN <= 12 & !is.na(CHG)
 ) |>
   prepare_boxly() |>
-  boxply()
+  boxly()
 ```
