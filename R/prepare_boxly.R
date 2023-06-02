@@ -34,13 +34,19 @@
 #' @examples
 #' library(metalite)
 #'
-#' meta <- meta_boxly()
+#' meta <- meta_boxly(
+#'   boxly_adsl,
+#'   boxly_adlb,
+#'   population_term = "apat",
+#'   observation_term = "wk12"
+#' )
 #' prepare_boxly(meta,
 #'   population = "apat",
 #'   observation = "wk12",
-#'   analysis = "lb_boxly",
-#'   parameter = "sodium;bili;urate"
+#'   analysis = "boxly",
+#'   parameter = meta$plan$parameter
 #' )
+#'
 #' @return Metadata list with plotting dataset
 #' @export
 prepare_boxly <- function(meta,
@@ -79,22 +85,22 @@ prepare_boxly <- function(meta,
 
   # Input checking
   if (!"factor" %in% class(obs[[obs_group]])) {
-    warning("In observation level data, the group variable '", obs_group, "' is automatically transformed into a factor!")
+    message("In observation level data, the group variable '", obs_group, "' is automatically transformed into a factor!")
     obs[[obs_group]] <- factor(obs[[obs_group]], levels = sort(unique(obs[[obs_group]])))
   }
 
   if (!"factor" %in% class(obs[[obs_var]])) {
-    warning("In observation level data, the facet variable '", obs_var, "' is automatically transformed into a factor!")
+    message("In observation level data, the facet variable '", obs_var, "' is automatically transformed into a factor!")
     obs[[obs_var]] <- factor(obs[[obs_var]], levels = sort(unique(obs[[obs_var]])))
   }
 
   if (!"factor" %in% class(obs[[x]])) {
-    warning("In observation level data, the group variable '", x, "' is automatically transformed into a factor!")
+    message("In observation level data, the group variable '", x, "' is automatically transformed into a factor!")
     obs[[x]] <- factor(obs[[x]], levels = sort(unique(obs[[x]])))
   }
 
   if (!"numeric" %in% class(obs[[y]])) {
-    warning("In observation level data, the group variable '", y, "' is automatically transformed into a numerical number!")
+    message("In observation level data, the group variable '", y, "' is automatically transformed into a numerical number!")
     obs[[y]] <- as.numeric(obs[[y]])
   }
 

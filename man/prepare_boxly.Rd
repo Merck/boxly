@@ -31,11 +31,17 @@ Prepare data for interactive box plot
 \examples{
 library(metalite)
 
-meta <- meta_boxly()
+meta <- meta_boxly(
+  boxly_adsl,
+  boxly_adlb,
+  population_term = "apat",
+  observation_term = "wk12"
+)
 prepare_boxly(meta,
   population = "apat",
   observation = "wk12",
-  analysis = "lb_boxly",
-  parameter = "sodium;bili;urate"
+  analysis = "boxly",
+  parameter = meta$plan$parameter
 )
+
 }
