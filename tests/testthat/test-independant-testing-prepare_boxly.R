@@ -26,10 +26,10 @@ meta <- meta_boxly(
 
 test_that("Its class is 'outdata'", {
   output <- prepare_boxly(meta,
-                           population = "apat",
-                           observation = "wk12",
-                           parameter = meta$plan$parameter,
-                           analysis = "boxly"
+    population = "apat",
+    observation = "wk12",
+    parameter = meta$plan$parameter,
+    analysis = "boxly"
   )
   expect_equal(class(output), "outdata")
   expect_equal(output$population, "apat")
@@ -38,7 +38,7 @@ test_that("Its class is 'outdata'", {
   expect_equal(output$y_var, "CHG")
   expect_equal(output$group_var, "TRTA")
   expect_equal(output$param_var, "PARAM")
-  expect_equal(output$parameter,  meta$plan$parameter)
+  expect_equal(output$parameter, meta$plan$parameter)
   expect_equal(output$order, NULL)
   expect_equal(output$group, NULL)
   expect_equal(names(output), c("meta", "population", "observation", "parameter", "n", "order", "group", "reference_group", "x_var", "y_var", "group_var", "param_var", "plotds"))

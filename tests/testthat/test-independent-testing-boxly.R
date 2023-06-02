@@ -26,14 +26,13 @@ meta <- meta_boxly(
 )
 
 x <- prepare_boxly(meta,
-                   population = "apat",
-                   observation = "wk12",
-                   parameter = meta$plan$parameter,
-                   analysis = "boxly"
+  population = "apat",
+  observation = "wk12",
+  parameter = meta$plan$parameter,
+  analysis = "boxly"
 )
 
 test_that("validation of boxly plot Case 1", {
-
   y <- boxly(x,
     color = c("black", "grey", "red"),
     hover_summary_var = c("n", "min", "q1", "median", "mean", "q3", "max"),
@@ -65,7 +64,6 @@ test_that("validation of boxly plot Case 1", {
 
 
 test_that("validation of boxly plot Case 2", {
-
   y <- boxly(x,
     color = c("green", "yellow", "red"),
     hover_summary_var = c("n", "min", "q1", "mean", "q3"),
