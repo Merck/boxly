@@ -46,5 +46,5 @@ meta_boxly(
   boxly_adlb,
   population_term = "apat",
   observation_term = "wk12"
-  )
+)
 }
