@@ -23,7 +23,7 @@ function filter_default() {
   document
     .getElementById("filter_param")
     .getElementsByClassName("selectized")[0]
-    .selectize.setValue("Bilirubin (umol/L)", false);
+    .selectize.setValue("Alanine Aminotransferase (U/L)", false);
   document
     .getElementById("filter_param")
     .getElementsByClassName("selectized")[0]

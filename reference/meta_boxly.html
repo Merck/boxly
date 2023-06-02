@@ -27,7 +27,8 @@
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/boxly-design-pattern.html">Boxly Design Pattern</a>
+    <a class="dropdown-item" href="../articles/boxly-cran.html">An Introduction to the boxly Package</a>
+    <a class="dropdown-item" href="../articles/design-pattern.html">Boxly Design Pattern</a>
   </div>
 </li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
@@ -57,49 +58,100 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">meta_boxly</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">meta_boxly</span><span class="op">(</span></span>
+<span>  <span class="va">dataset_adsl</span>,</span>
+<span>  <span class="va">dataset_param</span>,</span>
+<span>  <span class="va">population_term</span>,</span>
+<span>  population_subset <span class="op">=</span> <span class="va">SAFFL</span> <span class="op">==</span> <span class="st">"Y"</span>,</span>
+<span>  <span class="va">observation_term</span>,</span>
+<span>  observation_subset <span class="op">=</span> <span class="va">SAFFL</span> <span class="op">==</span> <span class="st">"Y"</span>,</span>
+<span>  parameters <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">dataset_param</span><span class="op">$</span><span class="va">PARAMCD</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
+    <div class="section level2">
+    <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
+    <dl><dt>dataset_adsl</dt>
+<dd><p>ADSL source dataset.</p></dd>
+
+
+<dt>dataset_param</dt>
+<dd><p>Observation level source dataset for boxplot.</p></dd>
+
+
+<dt>population_term</dt>
+<dd><p>A character value of population term name.</p></dd>
+
+
+<dt>population_subset</dt>
+<dd><p>An unquoted condition for selecting the
+populations from ADSL dataset.</p></dd>
+
+
+<dt>observation_term</dt>
+<dd><p>A character value of observation term name.</p></dd>
+
+
+<dt>observation_subset</dt>
+<dd><p>An unquoted condition for selecting the
+observations from <code>dataset_param</code> dataset.</p></dd>
+
+
+<dt>parameters</dt>
+<dd><p>A chracter vector of parameters defined in <code>dataset_param$PARAMCD</code></p></dd>
+
+</dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     
 
-<p>Metadata for creating interactive box plot.</p>
+<p>A metalite object.</p>
     </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">meta_boxly</span><span class="op">(</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">meta_boxly</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="va">boxly_adsl</span>,</span></span>
+<span class="r-in"><span>  <span class="va">boxly_adlb</span>,</span></span>
+<span class="r-in"><span>  population_term <span class="op">=</span> <span class="st">"apat"</span>,</span></span>
+<span class="r-in"><span>  observation_term <span class="op">=</span> <span class="st">"wk12"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ADaM metadata: </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    .$data_population 	Population data with 254 subjects </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    .$data_observation 	Observation data with 24746 records </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    .$plan 	Analysis plan with 2 plans </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    .$plan 	Analysis plan with 1 plans </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Analysis population type:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     name        id  group var       subset                         label</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 'apat' 'USUBJID' 'TRTA'     SAFFL == 'Y' 'All Participants as Treated'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     name        id  group var       subset label</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 'apat' 'USUBJID' 'TRTA'     SAFFL == 'Y'    ''</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Analysis observation type:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     name        id  group     var</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 'wk12' 'USUBJID' 'TRTA' 'PARAM'</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 'wk24' 'USUBJID' 'TRTA' 'PARAM'</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        subset            label</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1                ANL01FL == 'Y' &amp; AVISITN &lt;= 12 &amp; !is.na(CHG)  'Weeks 0 to 12'</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 ANL01FL == 'Y' &amp; AVISITN &gt; 12 &amp; AVISITN &lt;= 24 &amp; !is.na(CHG) 'Weeks 12 to 24'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     name        id  group     var       subset label</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 'wk12' 'USUBJID' 'TRTA' 'PARAM' SAFFL == 'Y'    ''</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Analysis parameter type:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       name                label              subset</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 'sodium'    'Sodium (mmol/L)' PARAMCD == 'SODIUM'</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2   'bili' 'Bilirubin (umol/L)'   PARAMCD == 'BILI'</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3  'urate'     'Urate (umol/L)'  PARAMCD == 'URATE'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        name                              label              subset</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1  'SODIUM'                  'Sodium (mmol/L)' PARAMCD == 'SODIUM'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2       'K'               'Potassium (mmol/L)'      PARAMCD == 'K'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3      'CL'                'Chloride (mmol/L)'     PARAMCD == 'CL'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4    'BILI'               'Bilirubin (umol/L)'   PARAMCD == 'BILI'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5     'ALP'       'Alkaline Phosphatase (U/L)'    PARAMCD == 'ALP'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6     'GGT' 'Gamma Glutamyl Transferase (U/L)'    PARAMCD == 'GGT'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7     'ALT'   'Alanine Aminotransferase (U/L)'    PARAMCD == 'ALT'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8     'AST' 'Aspartate Aminotransferase (U/L)'    PARAMCD == 'AST'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9     'BUN'     'Blood Urea Nitrogen (mmol/L)'    PARAMCD == 'BUN'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10  'CREAT'              'Creatinine (umol/L)'  PARAMCD == 'CREAT'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11  'URATE'                   'Urate (umol/L)'  PARAMCD == 'URATE'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12   'PHOS'               'Phosphate (mmol/L)'   PARAMCD == 'PHOS'</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Analysis function:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         name                                          label</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 'lb_boxly' 'Interactive: box plot for laboratory results'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      name                  label</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 'boxly' 'Interactive Box Plot'</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 </code></pre></div>
     </div>

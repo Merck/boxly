@@ -2,9 +2,10 @@ pandoc: 2.19.2
 pkgdown: 2.0.7
 pkgdown_sha: ~
 articles:
-  boxly-design-pattern: boxly-design-pattern.html
+  boxly-cran: boxly-cran.html
   boxly: boxly.html
-last_built: 2023-06-01T16:48Z
+  design-pattern: design-pattern.html
+last_built: 2023-06-02T01:42Z
 urls:
   reference: https://merck.github.io/boxly/reference
   article: https://merck.github.io/boxly/articles
