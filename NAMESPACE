@@ -3,6 +3,7 @@
 export(boxly)
 export(meta_boxly)
 export(prepare_boxly)
+importFrom(ggplot2,.data)
 importFrom(ggplot2,aes)
 importFrom(ggplot2,geom_point)
 importFrom(ggplot2,ggplot)

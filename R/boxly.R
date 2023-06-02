@@ -31,7 +31,7 @@
 #' @return Interactive box plot.
 #'
 #' @importFrom ggplot2 ggplot aes geom_point position_jitterdodge
-#'   scale_color_manual ylab xlab theme_bw
+#'   scale_color_manual ylab xlab theme_bw .data
 #' @importFrom plotly config layout add_trace ggplotly
 #' @importFrom stats reshape
 #'
@@ -149,8 +149,11 @@ boxly <- function(outdata,
   p <- ggplot(
     box_all,
     aes(
-      x = x, y = outlier, color = group, group = group,
-      text = text
+      x = .data$x,
+      y = .data$outlier,
+      color = .data$group,
+      group = .data$group,
+      text = .data$text
     )
   ) +
     geom_point(position = position_jitterdodge(jitter.width = 0), show.legend = FALSE) +
