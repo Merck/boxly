@@ -12,7 +12,6 @@ Third party R packages listed by License type
 --------------------------------------------------
 
 MIT / X11 License (or adaptations) (https://www.opensource.org/licenses/MIT)
-  * dplyr - https://dplyr.tidyverse.org/LICENSE.html
   * ggplot2 - https://ggplot2.tidyverse.org/LICENSE.html
   * plotly - https://github.com/plotly/plotly.R/blob/master/LICENSE
   * htmlwidgets - https://github.com/ramnathv/htmlwidgets/blob/master/DESCRIPTION

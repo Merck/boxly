@@ -6,37 +6,15 @@
 \title{An example ADLB dataset}
 \format{
 A data frame with 24746 and 24 variables:
-\describe{
-\item{USUBJID}{Unique Subject Identifier}
-\item{TRTA}{Actual Treatment}
-\item{TRTAN}{Actual Treatment (N)}
-\item{AGE}{Age}
-\item{RACE}{Race}
-\item{SEX}{Sex}
-\item{SAFFL}{Safety Population Flag}
-\item{AVISIT}{Analysis Visit}
-\item{AVISITN}{Analysis Visit (N)}
-\item{ADY}{Analysis Relative Day}
-\item{ADT}{Analysis Date}
-\item{VISIT}{Visit Name}
-\item{VISITNUM}{Visit Number}
-\item{PARAM}{Parameter}
-\item{PARAMCD}{Parameter Code}
-\item{PARAMN}{Parameter (N)}
-\item{AVAL}{Analysis Value}
-\item{BASE}{Baseline Value}
-\item{CHG}{Change from Baseline}
-\item{ANL01FL}{Analysis Record Flag 1}
-\item{ALBTRVAL}{Amount Threshold Range}
-\item{ANRIND}{Analysis Reference Range Indicator}
-\item{BNRIND}{Baseline Reference Range Indicator}
-\item{ABLFL}{Baseline Record Flag}
 }
+\source{
+\url{https://github.com/phuse-org/phuse-scripts/tree/master/data/adam/cdisc}
 }
 \usage{
 boxly_adlb
 }
 \description{
-An example ADLB dataset
+Definition of each variable can be found in
+\url{https://github.com/phuse-org/phuse-scripts/tree/master/data/adam/cdisc}
 }
 \keyword{datasets}

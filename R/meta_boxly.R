@@ -18,66 +18,98 @@
 
 #' Create an example metadata object
 #'
-#' @return Metadata for creating interactive box plot.
+#' @param dataset_adsl ADSL source dataset.
+#' @param dataset_param Observation level source dataset for boxplot.
+#' @param population_term A character value of population term name.
+#' @param population_subset An unquoted condition for selecting the
+#'   populations from ADSL dataset.
+#' @param observation_term A character value of observation term name.
+#' @param observation_subset An unquoted condition for selecting the
+#'   observations from `dataset_param` dataset.
+#' @param parameters A chracter vector of parameters defined in `dataset_param$PARAMCD`
+#'
+#' @return A metalite object.
 #'
 #' @export
 #'
 #' @examples
-#' meta_boxly()
-meta_boxly <- function() {
-  adsl <- boxly_adsl
-  adlb <- boxly_adlb
+#'
+#' meta_boxly(
+#'   boxly_adsl,
+#'   boxly_adlb,
+#'   population_term = "apat",
+#'   observation_term = "wk12"
+#' )
+meta_boxly <- function(
+    dataset_adsl,
+    dataset_param,
+    population_term,
+    population_subset = SAFFL == "Y",
+    observation_term,
+    observation_subset = SAFFL == "Y",
+    parameters = unique(dataset_param$PARAMCD)) {
+  # Input Checking
+  require_param <- c("PARAM", "PARAMCD", "AVISITN", "CHG")
+
+  if (!all(require_param %in% names(dataset_param))) {
+    dataset_param_diff <- paste(setdiff(names(dataset_param), require_param), collapse = ";")
+    stop("Missing Standard Variable in dataset_param: ", dataset_param_diff)
+  }
+
+  if (!all(parameters %in% dataset_param$PARAMCD)) {
+    param_diff <- paste(setdiff(parameters, unique(dataset_param$PARAMCD)), collapse = ";")
+    stop("Mismatch parameters in dataset_param$PARAMCD: ", param_diff)
+  }
+
+  # Analysis Plan
+  parameter_term <- paste(parameters, collapse = ";")
 
   plan <- metalite::plan(
-    analysis = "lb_boxly", population = "apat",
-    observation = c("wk12", "wk24"), parameter = "sodium;bili;urate"
+    analysis = "boxly",
+    population = population_term,
+    observation = observation_term,
+    parameter = parameter_term
   )
 
-  metalite::meta_adam(
-    population = adsl,
-    observation = adlb
+  # Define metalite object
+  meta <- metalite::meta_adam(
+    population = dataset_adsl,
+    observation = dataset_param
   ) |>
     metalite::define_plan(plan = plan) |>
     metalite::define_population(
-      name = "apat",
+      name = population_term,
       group = "TRTA",
-      subset = quote(SAFFL == "Y")
+      subset = !!rlang::enquo(population_subset),
+      label = ""
     ) |>
     metalite::define_observation(
-      name = "wk12",
+      name = observation_term,
       group = "TRTA",
       var = "PARAM",
-      subset = ANL01FL == "Y" & AVISITN <= 12 & !is.na(CHG),
-      label = "Weeks 0 to 12"
-    ) |>
-    metalite::define_observation(
-      name = "wk24",
-      group = "TRTA",
-      var = "PARAM",
-      subset = ANL01FL == "Y" & AVISITN > 12 & AVISITN <= 24 & !is.na(CHG),
-      label = "Weeks 12 to 24"
+      subset = !!rlang::enquo(observation_subset),
+      label = ""
     ) |>
     metalite::define_analysis(
-      name = "lb_boxly",
-      label = "Interactive: box plot for laboratory results",
-      title = "Interactive Boxplot of Laboratory Results",
+      name = "boxly",
+      label = "Interactive Box Plot",
       x = "AVISITN",
       y = "CHG"
-    ) |>
-    metalite::define_parameter(
-      name = "sodium",
-      label = "Sodium (mmol/L)",
-      subset = PARAMCD == "SODIUM"
-    ) |>
-    metalite::define_parameter(
-      name = "bili",
-      label = "Bilirubin (umol/L)",
-      subset = PARAMCD == "BILI"
-    ) |>
-    metalite::define_parameter(
-      name = "urate",
-      label = "Urate (umol/L)",
-      subset = PARAMCD == "URATE"
-    ) |>
-    metalite::meta_build()
+    )
+
+  # Add parameter definition
+  u_param <- unique(dataset_param[, c("PARAM", "PARAMCD")])
+  u_param <- u_param[u_param[["PARAMCD"]] %in% parameters, ]
+
+  for (i in seq(parameters)) {
+    term <- paste0("PARAMCD == '", u_param[["PARAMCD"]][i], "'")
+    meta <- meta |>
+      metalite::define_parameter(
+        name = u_param[["PARAMCD"]][i],
+        label = u_param[["PARAM"]][i],
+        subset = str2lang(term)
+      )
+  }
+
+  metalite::meta_build(meta)
 }

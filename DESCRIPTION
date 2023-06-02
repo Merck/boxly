@@ -22,6 +22,7 @@ Depends:
 Imports:
     DT,
     brew,
+    rlang,
     crosstalk,
     ggplot2,
     htmlwidgets,
@@ -30,7 +31,6 @@ Imports:
     plotly
 Suggests:
     covr,
-    dplyr,
     knitr,
     rmarkdown,
     testthat (>= 3.0.0)

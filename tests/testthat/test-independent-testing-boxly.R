@@ -16,21 +16,23 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+
+meta <- meta_boxly(
+  boxly_adsl,
+  boxly_adlb,
+  population_term = "apat",
+  observation_term = "wk12",
+  observation_subset = AVISITN <= 12 & !is.na(CHG)
+)
+
+x <- prepare_boxly(meta,
+  population = "apat",
+  observation = "wk12",
+  parameter = meta$plan$parameter,
+  analysis = "boxly"
+)
+
 test_that("validation of boxly plot Case 1", {
-  library(metalite)
-  library(ggplot2)
-  library(plotly)
-  library(dplyr)
-
-  meta <- meta_boxly()
-
-  x <- prepare_boxly(meta,
-    population = "apat",
-    observation = "wk12",
-    analysis = "lb_boxly",
-    parameter = "sodium;bili;urate"
-  )
-
   y <- boxly(x,
     color = c("black", "grey", "red"),
     hover_summary_var = c("n", "min", "q1", "median", "mean", "q3", "max"),
@@ -62,15 +64,6 @@ test_that("validation of boxly plot Case 1", {
 
 
 test_that("validation of boxly plot Case 2", {
-  meta <- meta_boxly()
-
-  x <- prepare_boxly(meta,
-    population = "apat",
-    observation = "wk12",
-    analysis = "lb_boxly",
-    parameter = "sodium;bili;urate"
-  )
-
   y <- boxly(x,
     color = c("green", "yellow", "red"),
     hover_summary_var = c("n", "min", "q1", "mean", "q3"),

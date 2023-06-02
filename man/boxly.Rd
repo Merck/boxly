@@ -44,12 +44,17 @@ Create an interactive box plot
 if (interactive()) {
   library(metalite)
 
-  meta_boxly() |>
+  meta_boxly(
+    boxly_adsl,
+    boxly_adlb,
+    population_term = "apat",
+    observation_term = "wk12"
+  ) |>
     prepare_boxly(
       population = "apat",
       observation = "wk12",
-      analysis = "lb_boxly",
-      parameter = "sodium;bili;urate"
+      analysis = "boxly",
+      parameter = meta$plan$parameter
     ) |>
     boxly()
 }

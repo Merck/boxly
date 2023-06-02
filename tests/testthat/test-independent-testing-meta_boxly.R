@@ -16,11 +16,13 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-library(metalite)
-library(ggplot2)
-library(dplyr)
-
-x <- meta_boxly()
+x <- meta_boxly(
+  boxly_adsl,
+  boxly_adlb,
+  population_term = "apat",
+  observation_term = "wk12",
+  observation_subset = AVISITN <= 12 & !is.na(CHG)
+)
 
 test_that("meta_boxly() structure", {
   expect_equal(class(x), "meta_adam")

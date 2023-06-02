@@ -1,5 +1,5 @@
 ---
-title: "boxly"
+title: "Interactive Box Plot"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{boxly}
@@ -22,16 +22,21 @@ library(boxly)
 ```
 
 ```{r}
-meta <- meta_boxly()
-meta
+meta <- meta_boxly(
+  boxly_adsl,
+  boxly_adlb,
+  population_term = "apat",
+  observation_term = "wk12",
+  observation_subset = AVISITN <= 12 & !is.na(CHG)
+)
 ```
 
 ```{r}
 outdata <- prepare_boxly(meta,
   population = "apat",
   observation = "wk12",
-  parameter = "sodium;bili;urate",
-  analysis = "lb_boxly"
+  parameter = meta$plan$parameter,
+  analysis = "boxly"
 )
 ```
 
