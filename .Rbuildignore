@@ -10,3 +10,6 @@
 ^boxly.*\.tar\.gz$
 ^boxly.*\.tgz$
 ^codecov\.yml$
+
+^vignettes/design-pattern.Rmd$
+^vignettes/boxly.Rmd$

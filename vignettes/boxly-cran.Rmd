@@ -1,0 +1,24 @@
+---
+title: "An Introduction to the boxly Package"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{An Introduction to the boxly Package}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+Please see <https://merck.github.io/boxly/articles/> for the full documentation. Here is only a minimal example:
+
+```{r, eval = FALSE}
+library("boxploy")
+
+meta_boxly() |>
+  prepare_boxly(
+    meta,
+    population = "apat",
+    observation = "wk12",
+    parameter = "sodium;bili;urate",
+    analysis = "lb_boxly"
+  ) |>
+  boxply()
+```
