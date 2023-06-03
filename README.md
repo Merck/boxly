@@ -9,7 +9,7 @@
 
 The boxly package creates interactive box plots for clinical trial analysis & reporting.
 
-<video src="https://user-images.githubusercontent.com/85646030/242961824-13439ec6-afa8-43c2-8257-22b1de3d80a0.mp4" data-canonical-src="https://user-images.githubusercontent.com/85646030/242961824-13439ec6-afa8-43c2-8257-22b1de3d80a0.mp4" controls="controls" muted="muted" class="d-block rounded-bottom-2 width-fit" style="max-height:640px;">
+<video src="https://user-images.githubusercontent.com/85646030/242961824-13439ec6-afa8-43c2-8257-22b1de3d80a0.mp4" data-canonical-src="https://user-images.githubusercontent.com/85646030/242961824-13439ec6-afa8-43c2-8257-22b1de3d80a0.mp4" controls="controls" muted="muted" class="d-block rounded-bottom-2 width-fit" style="max-height:640px;max-width:960px">
 
 </video>
 
