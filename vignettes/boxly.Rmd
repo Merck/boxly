@@ -2,7 +2,7 @@
 title: "Interactive Box Plot"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{boxly}
+  %\VignetteIndexEntry{Interactive Box Plot}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -19,7 +19,8 @@ knitr::opts_chunk$set(
 ```
 
 ```{r}
-library(boxly)
+# library(boxly)
+devtools::load_all()
 ```
 
 # Overview
@@ -41,9 +42,10 @@ Some common interactive features of the box plots include:
 # Mental model
 
 Creating the box plot using this package involves the below steps:
-      - Create a list of metadata (Ex: meta) using `meta_boxly()`
-      - Call `prepare_boxly()` function to prepare the metadata as required by the user 
-      - Call `boxly()` function to create the interactive plot
+
+  - Create a list of metadata (Ex: meta) using `meta_boxly()`
+  - Call `prepare_boxly()` function to prepare the metadata as required by the user 
+  - Call `boxly()` function to create the interactive plot
 
 
 ## Example: Interactive Box Plot Using Labs Data
@@ -62,7 +64,7 @@ meta <- meta_boxly(
 
 Step2: Call `prepare_boxly()` function to prepare the metadata as required by the user
 
-```{rE}
+```{r}
 outdata <- prepare_boxly(meta)
 outdata
 ```
