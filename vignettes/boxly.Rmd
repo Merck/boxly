@@ -7,10 +7,11 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r setup, include=FALSE}
+```{r, include=FALSE}
 knitr::opts_chunk$set(
   echo = TRUE,
   collapse = TRUE,
+  eval = TRUE,
   comment = "#>",
   warning = FALSE,
   message = FALSE
@@ -20,6 +21,34 @@ knitr::opts_chunk$set(
 ```{r}
 library(boxly)
 ```
+
+# Overview
+
+Interactive box plots refers to the graphical representations that allow users to explore and 
+analyze data through an interactive interface. They provide a way to visualize the distribution, 
+central tendency, and variability of a dataset using a box-and-whisker plot, while also 
+providing additional interactivity for deeper exploration.
+
+Some common interactive features of the box plots include: 
+
+ - Hovering: When the user hovers the mouse cursor over a specific part of the plot, additional information 
+   related to that specific data point or summary statistic is displayed. This includes the descriptive 
+   statistics (N, Mean, Median, Q1, Q3, Min and Max), Subject ID and Change from Baseline 
+   
+ - Filtering: It is possible to apply filters to the data, enabling users to select specific Parameter 
+   from a domain (Labs, Vitals, ECG)
+  
+# Mental model
+
+Creating the box plot using this package involves the below steps:
+      - Create a list of metadata (Ex: meta) using `meta_boxly()`
+      - Call `prepare_boxly()` function to prepare the metadata as required by the user 
+      - Call `boxly()` function to create the interactive plot
+
+
+## Example: Interactive Box Plot Using Labs Data
+
+Step1: Create a list of metadata (Ex: meta) using `meta_boxly()`
 
 ```{r}
 meta <- meta_boxly(
@@ -31,12 +60,15 @@ meta <- meta_boxly(
 )
 ```
 
-```{r}
+Step2: Call `prepare_boxly()` function to prepare the metadata as required by the user
+
+```{rE}
 outdata <- prepare_boxly(meta)
 outdata
 ```
 
+Step 3: Call `boxly()` function to create the interactive plot
+
 ```{r}
-tmp1 <- outdata |> boxly()
-tmp1
+boxly(outdata)
 ```
