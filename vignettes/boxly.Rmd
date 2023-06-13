@@ -19,8 +19,7 @@ knitr::opts_chunk$set(
 ```
 
 ```{r}
-# library(boxly)
-devtools::load_all()
+library(boxly)
 ```
 
 # Overview
