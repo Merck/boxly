@@ -20,13 +20,28 @@
  */
 
 function filter_default() {
-  document
-    .getElementById("filter_param")
-    .getElementsByClassName("selectized")[0]
-    .selectize.setValue("<%=default_param%>", false);
-  document
-    .getElementById("filter_param")
-    .getElementsByClassName("selectized")[0]
-    .selectize.removeOption("");
+  const uniqueIds = [];
+  const elements = document.querySelectorAll('[id*="filter_param_"]');
+
+  for (const element of elements) {
+    const id = element.id;
+    if (!uniqueIds.includes(id)) {
+      uniqueIds.push(id);
+    }
+  }
+  console.log(uniqueIds);
+  for (const id of uniqueIds) {
+    const default_value = id.split("|").pop(); // extract value after the last "|" character
+    console.log(default_value);
+    document
+      .getElementById(id)
+      .getElementsByClassName("selectized")[0]
+      .selectize.setValue(default_value, false);
+    document
+      .getElementById(id)
+      .getElementsByClassName("selectized")[0]
+      .selectize.removeOption("");
+  }
 }
+
 window.onload = filter_default;
