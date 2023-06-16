@@ -28,7 +28,8 @@ Imports:
     htmlwidgets,
     htmltools,
     metalite,
-    plotly
+    plotly,
+    uuid
 Suggests:
     covr,
     knitr,

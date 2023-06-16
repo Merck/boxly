@@ -115,7 +115,7 @@ boxly <- function(outdata,
   bar$range <- bar$max - bar$min
   bar <- unique.data.frame(bar)
 
-  shareddata_id <- paste0("shareddata_", sample(1:9999, 1))
+  shareddata_id <- uuid::UUIDgenerate()
   bar <- crosstalk::SharedData$new(bar, key = ~param, group = shareddata_id)
 
   # create 2 shareddata, 1 all data + 1 outlier data only
@@ -135,7 +135,7 @@ boxly <- function(outdata,
   # Get first parameter name
   default_param <- as.character(unique(tbl$param)[1])
 
-  random_id <- paste0("filter_param_", sample(1:9999, 1), "|", default_param)
+  random_id <- paste0("filter_param_", uuid::UUIDgenerate(), "|", default_param)
   # get the select list of parameters
   select_list <- crosstalk::filter_select(
     id = random_id,
