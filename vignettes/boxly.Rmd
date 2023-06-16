@@ -47,7 +47,7 @@ Creating the box plot using this package involves the below steps:
   - Call `boxly()` function to create the interactive plot
 
 
-## Example: Interactive Box Plot Using Labs Data
+## Example 1: Interactive Box Plot Using Labs Data
 
 Step1: Create a list of metadata (Ex: meta) using `meta_boxly()`
 
@@ -72,4 +72,32 @@ Step 3: Call `boxly()` function to create the interactive plot
 
 ```{r}
 boxly(outdata)
+```
+
+## Example 2: Interactive Box Plot Using Vital Signs Data
+
+```{r}
+meta_boxly(
+  boxly_adsl,
+  boxly_advs,
+  population_term = "apat",
+  observation_term = "wk12",
+  observation_subset = AVISITN <= 12 & !is.na(CHG)
+) |>
+  prepare_boxly() |>
+  boxly()
+```
+
+## Example 3: Interactive Box Plot Using ECG Data
+
+```{r}
+meta_boxly(
+  boxly_adsl,
+  boxly_adeg,
+  population_term = "apat",
+  observation_term = "wk12",
+  observation_subset = AVISITN <= 12 & !is.na(CHG)
+) |>
+  prepare_boxly() |>
+  boxly()
 ```

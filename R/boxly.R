@@ -115,11 +115,12 @@ boxly <- function(outdata,
   bar$range <- bar$max - bar$min
   bar <- unique.data.frame(bar)
 
-  bar <- crosstalk::SharedData$new(bar, key = ~param, group = "groupdata")
+  shareddata_id <- uuid::UUIDgenerate()
+  bar <- crosstalk::SharedData$new(bar, key = ~param, group = shareddata_id)
 
   # create 2 shareddata, 1 all data + 1 outlier data only
-  box_all <- crosstalk::SharedData$new(tbl, key = ~param, group = "groupdata")
-  box_outlier <- crosstalk::SharedData$new(tbl |> subset(is.na(tbl$outlier)), key = ~param, group = "groupdata")
+  box_all <- crosstalk::SharedData$new(tbl, key = ~param, group = shareddata_id)
+  box_outlier <- crosstalk::SharedData$new(tbl |> subset(is.na(tbl$outlier)), key = ~param, group = shareddata_id)
 
   # get the summary of subjects counts
   cnt <- tbl[!duplicated(tbl[, c("param", "x", "group", "n")]), c("param", "x", "group", "n")] |>
@@ -128,12 +129,16 @@ boxly <- function(outdata,
   names(cnt) <- c("param", "Treatment Group", as.character(unique(tbl$AVISITN)))
   row.names(cnt) <- NULL
 
-  cnt <- crosstalk::SharedData$new(cnt, key = ~param, group = "groupdata")
+  cnt <- crosstalk::SharedData$new(cnt, key = ~param, group = shareddata_id)
 
 
+  # Get first parameter name
+  default_param <- as.character(unique(tbl$param)[1])
+
+  random_id <- paste0("filter_param_", uuid::UUIDgenerate(), "|", default_param)
   # get the select list of parameters
   select_list <- crosstalk::filter_select(
-    id = "filter_param",
+    id = random_id,
     label = heading_select_list,
     sharedData = box_all,
     group = ~param,
@@ -195,9 +200,6 @@ boxly <- function(outdata,
   )
 
   offline <- TRUE
-
-  # Get first parameter name
-  default_param <- as.character(unique(tbl$param)[1])
 
   brew::brew(system.file("js/filter_default.js", package = "boxly"),
     output = file.path(tempdir(), "filter_default.js")
