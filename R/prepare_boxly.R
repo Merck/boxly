@@ -144,11 +144,13 @@ prepare_boxly <- function(meta,
       } else if (nrow(s) > 0) {
         s$outlier <- NA
       } else {
-        warning(paste0("There is no record for the combination of `var` and `group` in `meta$observation`, and `x` in `meta$analysis`: ",
-                       u))
+        warning(paste0(
+          "There is no record for the combination of `var` and `group` in `meta$observation`, and `x` in `meta$analysis`: ",
+          u
+        ))
       }
       # mutate ans for output
-      if (nrow(s) > 0){
+      if (nrow(s) > 0) {
         ans <- s
         ans$min <- t[1]
         ans$q1 <- t[2]
