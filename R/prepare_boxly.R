@@ -163,7 +163,8 @@ prepare_boxly <- function(meta,
       }
     },
     split(tbl, list(tbl[[obs_var]], tbl[[obs_group]], tbl[[x]])),
-    names(split(tbl, list(tbl[[obs_var]], tbl[[obs_group]], tbl[[x]]), sep = ", "))
+    names(split(tbl, list(tbl[[obs_var]], tbl[[obs_group]], tbl[[x]]), sep = ", ")),
+    SIMPLIFY = FALSE
   )
 
   plotds <- do.call(rbind, plotds)
