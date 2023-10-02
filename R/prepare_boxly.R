@@ -132,9 +132,8 @@ prepare_boxly <- function(meta,
   tbl <- merge(obs, n_tbl, all.x = TRUE)
 
   # Calculate summary statistics and add these variables into tbl
-  plotds <- lapply(
-    split(tbl, list(tbl[[obs_var]], tbl[[obs_group]], tbl[[x]])),
-    function(s) {
+  plotds <- mapply(
+    function(s, u) {
       t <- as.vector(summary(s[[y]]))
 
       if (nrow(s) > 5) {
@@ -142,21 +141,32 @@ prepare_boxly <- function(meta,
         upper_outliers <- t[5] + iqr.range * 1.5
         lower_outliers <- t[2] - iqr.range * 1.5
         s$outlier <- ifelse((s[[y]] > upper_outliers | s[[y]] < lower_outliers), s[[y]], NA)
-      } else {
+      } else if (nrow(s) > 0) {
         s$outlier <- NA
+      } else {
+        warning(paste0(
+          "There is no record for the combination of `var` and `group` in `meta$observation`, and `x` in `meta$analysis`: ",
+          u
+        ))
       }
       # mutate ans for output
-      ans <- s
-      ans$min <- t[1]
-      ans$q1 <- t[2]
-      ans$median <- t[3]
-      ans$mean <- t[4]
-      ans$q3 <- t[5]
-      ans$max <- t[6]
+      if (nrow(s) > 0) {
+        ans <- s
+        ans$min <- t[1]
+        ans$q1 <- t[2]
+        ans$median <- t[3]
+        ans$mean <- t[4]
+        ans$q3 <- t[5]
+        ans$max <- t[6]
 
-      ans
-    }
+        ans
+      }
+    },
+    split(tbl, list(tbl[[obs_var]], tbl[[obs_group]], tbl[[x]])),
+    names(split(tbl, list(tbl[[obs_var]], tbl[[obs_group]], tbl[[x]]), sep = ", ")),
+    SIMPLIFY = FALSE
   )
+
   plotds <- do.call(rbind, plotds)
   rownames(plotds) <- NULL
 
