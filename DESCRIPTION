@@ -1,11 +1,12 @@
 Package: boxly
 Title: Interactive Box Plot
-Version: 0.1.0
+Version: 0.1.1
 Authors@R: c(
     person("Benjamin", "Wang", email = "benjamin.wang@merck.com", role = c("aut", "cre")),
     person("Yujie", "Zhao", role = c("aut")),
     person("Yilong", "Zhang", role = c("ctb")),
     person("Nan", "Xiao", role = c("ctb")),
+    person("Hiroaki", "Fukuda", role = c("ctb")),
     person("Sarad", "Nepal",  role = c("ctb")),
     person("Madhusudhan", "Ginnaram", role = c("ctb")),
     person("Venkatesh", "Burla", role = c("ctb")),
