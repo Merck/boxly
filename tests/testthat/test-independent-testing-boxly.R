@@ -16,18 +16,17 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-
-meta <- meta_boxly(
-  boxly_adsl,
-  boxly_adlb,
-  population_term = "apat",
-  observation_term = "wk12",
-  observation_subset = AVISITN <= 12 & !is.na(CHG)
-)
-
-x <- prepare_boxly(meta)
-
 test_that("validation of boxly plot Case 1", {
+  meta <- meta_boxly(
+    boxly_adsl,
+    boxly_adlb,
+    population_term = "apat",
+    observation_term = "wk12",
+    observation_subset = AVISITN <= 12 & !is.na(CHG)
+  )
+
+  x <- suppressMessages(prepare_boxly(meta))
+
   y <- boxly(x,
     color = c("black", "grey", "red"),
     hover_summary_var = c("n", "min", "q1", "median", "mean", "q3", "max"),
@@ -57,8 +56,17 @@ test_that("validation of boxly plot Case 1", {
   expect_equal(baselabel, "Change from Baseline: ")
 })
 
-
 test_that("validation of boxly plot Case 2", {
+  meta <- meta_boxly(
+    boxly_adsl,
+    boxly_adlb,
+    population_term = "apat",
+    observation_term = "wk12",
+    observation_subset = AVISITN <= 12 & !is.na(CHG)
+  )
+
+  x <- suppressMessages(prepare_boxly(meta))
+
   y <- boxly(x,
     color = c("green", "yellow", "red"),
     hover_summary_var = c("n", "min", "q1", "mean", "q3"),

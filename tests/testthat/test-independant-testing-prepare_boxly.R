@@ -16,16 +16,16 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-meta <- meta_boxly(
-  boxly_adsl,
-  boxly_adlb,
-  population_term = "apat",
-  observation_term = "wk12",
-  observation_subset = AVISITN <= 12 & !is.na(CHG)
-)
-
 test_that("Its class is 'outdata'", {
-  output <- prepare_boxly(meta)
+  meta <- meta_boxly(
+    boxly_adsl,
+    boxly_adlb,
+    population_term = "apat",
+    observation_term = "wk12",
+    observation_subset = AVISITN <= 12 & !is.na(CHG)
+  )
+
+  output <- suppressMessages(prepare_boxly(meta))
 
   expect_equal(class(output), "outdata")
   expect_equal(output$population, "apat")

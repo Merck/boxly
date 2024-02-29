@@ -16,15 +16,15 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-x <- meta_boxly(
-  boxly_adsl,
-  boxly_adlb,
-  population_term = "apat",
-  observation_term = "wk12",
-  observation_subset = AVISITN <= 12 & !is.na(CHG)
-)
-
 test_that("meta_boxly() structure", {
+  x <- meta_boxly(
+    boxly_adsl,
+    boxly_adlb,
+    population_term = "apat",
+    observation_term = "wk12",
+    observation_subset = AVISITN <= 12 & !is.na(CHG)
+  )
+
   expect_equal(class(x), "meta_adam")
   expect_equal(class(x$data_population), "data.frame")
   expect_equal(class(x$data_observation), c("tbl_df", "tbl", "data.frame"))
