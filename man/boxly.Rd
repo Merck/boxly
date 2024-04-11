@@ -8,7 +8,8 @@ boxly(
   outdata,
   color = NULL,
   hover_summary_var = c("n", "min", "q1", "median", "mean", "q3", "max"),
-  hover_outlier_label = c("Participant Id", "Parameter value"),
+  hover_outlier_display = c("USUBJID", outdata$y_var),
+  hover_outlier_label = c("Participant ID", "Parameter value"),
   x_label = "Visit",
   y_label = "Change",
   heading_select_list = "Lab parameter",
@@ -22,6 +23,8 @@ boxly(
 
 \item{hover_summary_var}{A character vector of statistics to be displayed
 on hover label of box.}
+
+\item{hover_outlier_display}{A character vector of hover variable for outlier.}
 
 \item{hover_outlier_label}{A character vector of hover label for outlier.}
 

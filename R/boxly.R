@@ -22,6 +22,7 @@
 #' @param color Color for box plot.
 #' @param hover_summary_var A character vector of statistics to be displayed
 #'   on hover label of box.
+#' @param hover_outlier_display A character vector of hover variable for outlier.
 #' @param hover_outlier_label A character vector of hover label for outlier.
 #' @param x_label x-axis label.
 #' @param y_label y-axis label.
@@ -54,13 +55,15 @@
 boxly <- function(outdata,
                   color = NULL,
                   hover_summary_var = c("n", "min", "q1", "median", "mean", "q3", "max"),
-                  hover_outlier_label = c("Participant Id", "Parameter value"),
+                  hover_outlier_display = c("USUBJID", outdata$y_var),
+                  hover_outlier_label = c("Participant ID", "Parameter value"),
                   x_label = "Visit",
                   y_label = "Change",
                   heading_select_list = "Lab parameter",
                   heading_summary_table = "Number of Participants") {
   x_var <- outdata$x_var
   y_var <- outdata$y_var
+  id_var <- outdata$id_var
   group_var <- outdata$group_var
   param_var <- outdata$param_var
   hover_var_outlier <- outdata$hover_var_outlier
@@ -94,13 +97,43 @@ boxly <- function(outdata,
   }
 
   # paste multiple hover_outlier_labels
-  tbl$text <- ifelse(!is.na(tbl$outlier),
-    paste0(
-      hover_outlier_label[1], ": ", tbl[["USUBJID"]],
-      "\n", hover_outlier_label[2], ": ", tbl[["outlier"]]
-    ),
-    NA
-  )
+  # Check length of variables and labels
+  if (length(hover_outlier_label) > 0) {
+    if (!length(hover_outlier_display) == length(hover_outlier_label)) {
+      message("hover_outlier_display should have the same length as hover_outlier_label.")
+    }
+  }
+
+  # Set labels
+  label <- vapply(tbl, function(x) {
+    if (is.null(attr(x, "label"))) {
+      return(NA_character_)
+    } else {
+      attr(x, "label")
+    }
+  }, FUN.VALUE = character(1))
+  listing_label <- ifelse(is.na(label), names(tbl), label)
+
+  tbl$text <- apply(tbl, 1, function (x) {
+    text <- NULL
+    var <- NULL
+    if (!is.na(x[["outlier"]])) {
+      for (i in seq(hover_outlier_display)) {
+        var <- hover_outlier_display[i]
+        if (!is.null(hover_outlier_label)) {
+          label <- ifelse(!is.na(hover_outlier_label[i]), hover_outlier_label[i], listing_label[var])
+        } else {
+          label <- listing_label[var]
+        }
+        text <- ifelse(i == 1,
+                       paste0(text, label, ": ", x[[var]]),
+                       paste0(text, "\n", label, ": ", x[[var]]))
+      }
+    } else {
+      text <- NA
+    }
+    return(text)
+  })
 
   # implement color
   if (is.null(color)) {

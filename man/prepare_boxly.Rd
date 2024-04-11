@@ -4,7 +4,13 @@
 \alias{prepare_boxly}
 \title{Prepare data for interactive box plot}
 \usage{
-prepare_boxly(meta, population = NULL, observation = NULL, analysis = NULL)
+prepare_boxly(
+  meta,
+  population = NULL,
+  observation = NULL,
+  analysis = NULL,
+  hover_var_outlier = c("USUBJID", metalite::collect_adam_mapping(meta, analysis)$y)
+)
 }
 \arguments{
 \item{meta}{A metadata object created by metalite.}
@@ -17,6 +23,8 @@ The term name is used as key to link information.}
 
 \item{analysis}{A character value of analysis term name.
 The term name is used as key to link information.}
+
+\item{hover_var_outlier}{A character vector of hover variable for outlier.}
 }
 \value{
 Metadata list with plotting dataset.

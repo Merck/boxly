@@ -25,6 +25,7 @@
 #'   The term name is used as key to link information.
 #' @param analysis A character value of analysis term name.
 #'   The term name is used as key to link information.
+#' @param hover_var_outlier A character vector of hover variable for outlier.
 #'
 #' @return Metadata list with plotting dataset.
 #'
@@ -46,7 +47,9 @@
 prepare_boxly <- function(meta,
                           population = NULL,
                           observation = NULL,
-                          analysis = NULL) {
+                          analysis = NULL,
+                          hover_var_outlier = c("USUBJID", metalite::collect_adam_mapping(meta, analysis)$y)
+                          ) {
   if (is.null(population)) {
     if (length(meta$population) == 1) {
       population <- meta$population[[1]]$name
@@ -89,7 +92,7 @@ prepare_boxly <- function(meta,
       function(s) {
         metalite::collect_observation_record(meta, population, observation,
           parameter = s,
-          var = unique(c(obs_var, y, x))
+          var = unique(c(obs_var, y, x, hover_var_outlier))
         )
       }
     )
@@ -169,6 +172,30 @@ prepare_boxly <- function(meta,
 
   plotds <- do.call(rbind, plotds)
   rownames(plotds) <- NULL
+
+  # Get all labels from the un-subset data
+  label <- vapply(obs, function(x) {
+    if (is.null(attr(x, "label"))) {
+      return(NA_character_)
+    } else {
+      attr(x, "label")
+    }
+  }, FUN.VALUE = character(1))
+  listing_label <- ifelse(is.na(label), names(obs), label)
+
+  name <- names(plotds)
+  var <- names(plotds)
+  label <- listing_label[match(names(plotds), names(listing_label))]
+  diff <- setdiff(name, names(plotds))
+  if (length(diff) > 0) {
+    var <- c(var, diff)
+    label <- c(label, diff)
+  }
+
+  # Assign label
+  for (i in seq(name)) {
+    attr(plotds[[i]], "label") <- label[names(plotds[i]) == var]
+  }
 
   # Return value
   metalite::outdata(meta, population, observation, parameter,
