@@ -48,8 +48,7 @@ prepare_boxly <- function(meta,
                           population = NULL,
                           observation = NULL,
                           analysis = NULL,
-                          hover_var_outlier = c("USUBJID", metalite::collect_adam_mapping(meta, analysis)$y)
-                          ) {
+                          hover_var_outlier = c("USUBJID", metalite::collect_adam_mapping(meta, analysis)$y)) {
   if (is.null(population)) {
     if (length(meta$population) == 1) {
       population <- meta$population[[1]]$name

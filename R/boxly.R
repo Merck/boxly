@@ -114,7 +114,7 @@ boxly <- function(outdata,
   }, FUN.VALUE = character(1))
   listing_label <- ifelse(is.na(label), names(tbl), label)
 
-  tbl$text <- apply(tbl, 1, function (x) {
+  tbl$text <- apply(tbl, 1, function(x) {
     text <- NULL
     var <- NULL
     if (!is.na(x[["outlier"]])) {
@@ -126,8 +126,9 @@ boxly <- function(outdata,
           label <- listing_label[var]
         }
         text <- ifelse(i == 1,
-                       paste0(text, label, ": ", x[[var]]),
-                       paste0(text, "\n", label, ": ", x[[var]]))
+          paste0(text, label, ": ", x[[var]]),
+          paste0(text, "\n", label, ": ", x[[var]])
+        )
       }
     } else {
       text <- NA
