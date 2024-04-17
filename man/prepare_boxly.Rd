@@ -24,7 +24,7 @@ The term name is used as key to link information.}
 \item{analysis}{A character value of analysis term name.
 The term name is used as key to link information.}
 
-\item{hover_var_outlier}{A character vector of hover variable for outlier.}
+\item{hover_var_outlier}{A character vector of hover variables for outlier.}
 }
 \value{
 Metadata list with plotting dataset.

@@ -25,7 +25,7 @@
 #'   The term name is used as key to link information.
 #' @param analysis A character value of analysis term name.
 #'   The term name is used as key to link information.
-#' @param hover_var_outlier A character vector of hover variable for outlier.
+#' @param hover_var_outlier A character vector of hover variables for outlier.
 #'
 #' @return Metadata list with plotting dataset.
 #'
@@ -80,7 +80,6 @@ prepare_boxly <- function(meta,
   pop_var <- metalite::collect_adam_mapping(meta, population)$var
   y <- metalite::collect_adam_mapping(meta, analysis)$y
   x <- metalite::collect_adam_mapping(meta, analysis)$x
-  # hover_outlier <- collect_adam_mapping(meta, analysis)$hover_outlier
 
   # Obtain Data
   pop <- metalite::collect_population_record(meta, population, var = pop_var)
@@ -199,7 +198,7 @@ prepare_boxly <- function(meta,
   # Return value
   metalite::outdata(meta, population, observation, parameter,
     x_var = x, y_var = y, group_var = obs_group,
-    param_var = obs_var,
+    param_var = obs_var, hover_var_outlier = hover_var_outlier,
     n = n_tbl, order = NULL, group = NULL, reference_group = NULL,
     plotds = plotds
   )

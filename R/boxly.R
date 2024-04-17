@@ -22,8 +22,8 @@
 #' @param color Color for box plot.
 #' @param hover_summary_var A character vector of statistics to be displayed
 #'   on hover label of box.
-#' @param hover_outlier_display A character vector of hover variable for outlier.
 #' @param hover_outlier_label A character vector of hover label for outlier.
+#'   A label from an input data is used if `NA` for a variable is specified.
 #' @param x_label x-axis label.
 #' @param y_label y-axis label.
 #' @param heading_select_list Select list menu label.
@@ -55,7 +55,6 @@
 boxly <- function(outdata,
                   color = NULL,
                   hover_summary_var = c("n", "min", "q1", "median", "mean", "q3", "max"),
-                  hover_outlier_display = c("USUBJID", outdata$y_var),
                   hover_outlier_label = c("Participant ID", "Parameter value"),
                   x_label = "Visit",
                   y_label = "Change",
@@ -99,8 +98,8 @@ boxly <- function(outdata,
   # paste multiple hover_outlier_labels
   # Check length of variables and labels
   if (length(hover_outlier_label) > 0) {
-    if (!length(hover_outlier_display) == length(hover_outlier_label)) {
-      message("hover_outlier_display should have the same length as hover_outlier_label.")
+    if (!length(hover_var_outlier) == length(hover_outlier_label)) {
+      warning("The Length of hover labels should be same as that of hover variables.")
     }
   }
 
@@ -118,8 +117,8 @@ boxly <- function(outdata,
     text <- NULL
     var <- NULL
     if (!is.na(x[["outlier"]])) {
-      for (i in seq(hover_outlier_display)) {
-        var <- hover_outlier_display[i]
+      for (i in seq(hover_var_outlier)) {
+        var <- hover_var_outlier[i]
         if (!is.null(hover_outlier_label)) {
           label <- ifelse(!is.na(hover_outlier_label[i]), hover_outlier_label[i], listing_label[var])
         } else {
