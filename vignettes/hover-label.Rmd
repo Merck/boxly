@@ -2,7 +2,7 @@
 title: "Customize Hover Labels in Interactive Box Plot"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Boxly Hover Label}
+  %\VignetteIndexEntry{Customize Hover Labels in Interactive Box Plot}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -26,7 +26,7 @@ knitr::opts_chunk$set(
 Hovering is one of the interactive feature for the box plots. When the user hovers the mouse cursor over a specific part of the plot, additional information related to that specific data point or summary statistic is displayed. 
 
 
-Hovering feature in interactive box plots contains two parts:**Hover label of box** and **Hover label of outlier**.
+Hovering feature in interactive box plots contains two parts: **Hover label of box** and **Hover label of outlier**.
 
 - Hover label of box is to display the descriptive statistics for the plots on the hovering box.
 
@@ -39,36 +39,39 @@ Hovering feature in interactive box plots contains two parts:**Hover label of bo
   
 # Hover label in function `prepare_boxly()`:
 
-**hover_var_outlier**: A character vector of hover variables for outlier.
+**`hover_var_outlier`**: A character vector of hover variables for outlier.
 
 ```{r, eval=FALSE}
 prepare_boxly <- function(meta,
                           hover_var_outlier = c("USUBJID", metalite::collect_adam_mapping(meta, analysis)$y)
-                          ...)
+                          ...
+                          
+)
 ```
 
-The information for the outlier out of the box could be defined as hover_var_outlier. The developers could update hover_var_outlier to customize what to display in the hovering. The default variables selected from meta objects are "USUBJID" and the y axis variable from meta analysis plan (for boxly plot, the y axis is "CHG"). Note that the variables defined in hover_var_outlier should be one-to-one mapping to the hover_outlier_label in boxly() function which will talk about in the next section.
+The information for the outlier out of the box could be defined as `hover_var_outlier`. The developers could update `hover_var_outlier` to customize what to display in the hovering. The default variables selected from meta objects are "USUBJID" and the y axis variable from meta analysis plan (for boxly plot, the y axis is "CHG"). Note that the variables defined in `hover_var_outlier` should be one-to-one mapping to the `hover_outlier_label` in `boxly()` function which will talk about in the next section.
 
 # Hover label in function `boxly()`:
 
-**hover_summary_var**: A character vector of statistics to be displayed on hover label of box.
+**`hover_summary_var`**: A character vector of statistics to be displayed on hover label of box.
 
-**hover_outlier_label**: A character vector of hover label for outlier.
+**`hover_outlier_label`**: A character vector of hover label for outlier.
 
 ```{r, eval=FALSE}
 boxly <- function(outdata,
                   hover_summary_var = c("n", "min", "q1", "median", "mean", "q3", "max"),
                   hover_outlier_label = c("Participant ID", "Parameter value"),
-                  ...)
+                  ...
+                  
+)
 ```
 
-The preferred display label name in hover label of outlier corresponding to the value from meta objects could be defined as hover_outlier_label. The default label are "Participant ID" showing the "USUBJID" and the "Parameter value" showing the "CHG" (Change from Baseline). The developer could add more information (i.e. Baseline value, Analysis date). Make sure that the number of hover_outlier_label should match hover_var_outlier and the one-to-one mapping relationship between them.
+The preferred display label name in hover label of outlier corresponding to the value from meta objects could be defined as `hover_outlier_label`. The default label are "Participant ID" showing the "USUBJID" and the "Parameter value" showing the "CHG" (Change from Baseline). The developer could add more information (i.e., Baseline value, Analysis date). Make sure that the number of `hover_outlier_label` should match `hover_var_outlier` and the one-to-one mapping relationship between them.
 
-The descriptive statistics displayed on hover label of box are defined as hover_summary_var. The developer could choose to display only partial descriptive statistics among 
+The descriptive statistics displayed on hover label of box are defined as `hover_summary_var`. The developer could choose to display only partial descriptive statistics among 
 "n", "min", "q1", "median", "mean", "q3" or "max". The default value are including all these descriptive statistics.
 
-
-# Example 1: Add Hover Label of outlier
+# Example 1: Add hover label of outlier
 
 In this example, we plan to add more hover labels for outliers.
 
@@ -76,7 +79,7 @@ In this example, we plan to add more hover labels for outliers.
 library(boxly)
 ```
 
-Step1: Create a list of metadata using [meta_boxly()](https://merck.github.io/boxly/reference/meta_boxly.html). Using Lab data as example.
+Step1: Create a list of metadata using `meta_boxly()`. Using Lab data as example.
 
 ```{r}
 meta <- meta_boxly(
@@ -88,28 +91,40 @@ meta <- meta_boxly(
 )
 ```
 
-Step2: Call [prepare_boxly()](https://merck.github.io/boxly/reference/prepare_boxly.html) function to prepare the metadata as required by the user. In this example, we plan to add Baseline Value and Analysis Date, so besides the default "USUBJID" and "CHG"(as y axis label collected from meta mapping object),"BASE" and "ADT" are also included in the hover_var_outlier.
+Step2: Call `prepare_boxly()` function to prepare the metadata as required by the user. In this example, we plan to add Baseline Value and Analysis Date, so besides the default "USUBJID" and "CHG"(as y axis label collected from meta mapping object),"BASE" and "ADT" are also included in the `hover_var_outlier`.
 
 ```{r}
-outdata <- prepare_boxly(meta,
-  hover_var_outlier = c("USUBJID", metalite::collect_adam_mapping(meta, meta$plan$analysis)$y, "BASE", "ADT")
+outdata <- prepare_boxly(
+  meta,
+  hover_var_outlier = c(
+    "USUBJID",
+    metalite::collect_adam_mapping(meta, meta$plan$analysis)$y,
+    "BASE",
+    "ADT"
+  )
 )
 ```
 
-Step 3: Call [boxly()](https://merck.github.io/boxly/reference/boxly.html) function to create the interactive plot. In this step, "Base Value" and "Analysis Date" are included in hover_outlier_label as displaying label for "BASE" and "ADT" which were defined in hover_var_outlier from previous step.
+Step 3: Call `boxly()` function to create the interactive plot. In this step, "Base Value" and "Analysis Date" are included in `hover_outlier_label` as displaying label for "BASE" and "ADT" which were defined in `hover_var_outlier` from previous step.
 
 ```{r}
-boxly(outdata,
-  hover_outlier_label = c("Participant ID", "Parameter value", "Base Value", "Analysis Date")
+boxly(
+  outdata,
+  hover_outlier_label = c(
+    "Participant ID",
+    "Parameter value",
+    "Base Value",
+    "Analysis Date"
+  )
 )
 ```
 Here, you will notice "Participant ID", "Parameter value","Base Value"and "Analysis Date" are all displaying when pointing to the outlier plot. 
 
-# Example 2: Choose Hover Label of box
+# Example 2: Choose hover label of box
 
 In this example, we plan to only display number of participant, Q1, mean, median, Q3 for the hover label of box.
 
-Step1: Create a list of metadata using [meta_boxly()](https://merck.github.io/boxly/reference/meta_boxly.html). Using Vital Sign data as example.
+Step1: Create a list of metadata using `meta_boxly()`. Using Vital Sign data as example.
 
 ```{r}
 meta_boxly(
@@ -121,22 +136,22 @@ meta_boxly(
 )
 ```
 
-Step2: Call [prepare_boxly()](https://merck.github.io/boxly/reference/prepare_boxly.html) function to prepare the metadata as required by the user. In this step, we did not change hover_var_outlier, so the hover label for the outlier will display the default value "Participant ID" and "Parameter value" for "USUBJID" and "CHG".
+Step2: Call `prepare_boxly()` function to prepare the metadata as required by the user. In this step, we did not change `hover_var_outlier`, so the hover label for the outlier will display the default value "Participant ID" and "Parameter value" for "USUBJID" and "CHG".
 
 ```{r}
 outdata <- prepare_boxly(meta)
 ```
 
-Step 3: Call [boxly()](https://merck.github.io/boxly/reference/boxly.html) function to create the interactive plot. We only include "n" for number of participant, "q1" for Q1, "median" for Median, "mean" for Mean, "q3" for Q3. We remove the "min" and "max" from the default value.
+Step 3: Call `boxly()` function to create the interactive plot. We only include "n" for number of participant, "q1" for Q1, "median" for Median, "mean" for Mean, "q3" for Q3. We remove the "min" and "max" from the default value.
 
 ```{r}
 boxly(outdata,
-  hover_summary_var = c("n", "q1", "median", "mean", "q3")
-)
+      hover_summary_var = c("n", "q1", "median", "mean", "q3"))
 ```
 Here, you will notice that only number of participant, Q1, mean, median, Q3 are displaying when pointing to the plot in the box.
 
-# Example 3: Cutomize Label of outlier and Hover Label of box
+# Example 3: Cutomize label of outlier and hover label of box
+
 In this example, we plan to combine Example 1 and Example 2 to customize label of outlier and label of box at the same step. Using ECG data as example.
 
 ```{r}
@@ -150,15 +165,29 @@ meta_boxly(
 ```
 
 ```{r}
-outdata <- prepare_boxly(meta,
-  hover_var_outlier = c("USUBJID", metalite::collect_adam_mapping(meta, meta$plan$analysis)$y, "BASE", "ADT", "AVAL")
+outdata <- prepare_boxly(
+  meta,
+  hover_var_outlier = c(
+    "USUBJID",
+    metalite::collect_adam_mapping(meta, meta$plan$analysis)$y,
+    "BASE",
+    "ADT",
+    "AVAL"
+  )
 )
 ```
 
 ```{r}
-boxly(outdata,
+boxly(
+  outdata,
   hover_summary_var = c("n", "q1", "median", "mean", "q3"),
-  hover_outlier_label = c("Participant ID", "Parameter value", "Base Value", "Analysis Date", "Analysis Value")
+  hover_outlier_label = c(
+    "Participant ID",
+    "Parameter value",
+    "Base Value",
+    "Analysis Date",
+    "Analysis Value"
+  )
 )
 ```
 
