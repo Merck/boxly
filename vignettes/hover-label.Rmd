@@ -1,5 +1,5 @@
 ---
-title: "Boxly Hover Label"
+title: "Customize Hover Labels in Interactive Box Plot"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Boxly Hover Label}
@@ -41,30 +41,28 @@ Hovering feature in interactive box plots contains two parts:**Hover label of bo
 
 **hover_var_outlier**: A character vector of hover variables for outlier.
 
-```
-prepare_boxly(
-  meta,
-  hover_var_outlier = c("USUBJID", metalite::collect_adam_mapping(meta, analysis)$y)
-  ...
-)
+```{r, eval=FALSE}
+prepare_boxly <- function(meta,
+                          hover_var_outlier = c("USUBJID", metalite::collect_adam_mapping(meta, analysis)$y)
+                          ...)
 ```
 
-Here, the information for the outlier out of the box could be defined as hover_var_outlier. The developers could update hover_var_outlier to cutomize what to display in the hovering.
-
+The information for the outlier out of the box could be defined as hover_var_outlier. The developers could update hover_var_outlier to customize what to display in the hovering. The default variables selected from meta objects are "USUBJID" and the y axis variable from meta analysis plan (for boxly plot, the y axis is "CHG"). Note that the variables defined in hover_var_outlier should be one-to-one mapping to the hover_outlier_label in boxly() function which will talk about in the next section.
 
 # Hover label in function `boxly()`:
 
 **hover_summary_var**: A character vector of statistics to be displayed on hover label of box.
 
 **hover_outlier_label**: A character vector of hover label for outlier.
-```
+
+```{r, eval=FALSE}
 boxly <- function(outdata,
                   hover_summary_var = c("n", "min", "q1", "median", "mean", "q3", "max"),
                   hover_outlier_label = c("Participant ID", "Parameter value"),
                   ...)
 ```
 
-The preferred display label name in hover label of outlier corresponding to the value from meta objects could be defined as hover_outlier_label. The default label are "Participant ID" showing the "USUBJID" and the "Parameter value" showing the "CHG" (Change from Baseline). The developer could add more information (i.e. Baseline value, Analysis date). Make sure that the number of hover_outlier_label should match hover_var_outlier.
+The preferred display label name in hover label of outlier corresponding to the value from meta objects could be defined as hover_outlier_label. The default label are "Participant ID" showing the "USUBJID" and the "Parameter value" showing the "CHG" (Change from Baseline). The developer could add more information (i.e. Baseline value, Analysis date). Make sure that the number of hover_outlier_label should match hover_var_outlier and the one-to-one mapping relationship between them.
 
 The descriptive statistics displayed on hover label of box are defined as hover_summary_var. The developer could choose to display only partial descriptive statistics among 
 "n", "min", "q1", "median", "mean", "q3" or "max". The default value are including all these descriptive statistics.
