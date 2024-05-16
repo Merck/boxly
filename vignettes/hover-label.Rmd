@@ -94,14 +94,16 @@ Step2: Call [prepare_boxly()](https://merck.github.io/boxly/reference/prepare_bo
 
 ```{r}
 outdata <- prepare_boxly(meta,
-                         hover_var_outlier = c("USUBJID", metalite::collect_adam_mapping(meta, meta$plan$analysis)$y,"BASE","ADT"))
+  hover_var_outlier = c("USUBJID", metalite::collect_adam_mapping(meta, meta$plan$analysis)$y, "BASE", "ADT")
+)
 ```
 
 Step 3: Call [boxly()](https://merck.github.io/boxly/reference/boxly.html) function to create the interactive plot. In this step, "Base Value" and "Analysis Date" are included in hover_outlier_label as displaying label for "BASE" and "ADT" which were defined in hover_var_outlier from previous step.
 
 ```{r}
 boxly(outdata,
-      hover_outlier_label = c("Participant ID", "Parameter value","Base Value","Analysis Date"))
+  hover_outlier_label = c("Participant ID", "Parameter value", "Base Value", "Analysis Date")
+)
 ```
 Here, you will notice "Participant ID", "Parameter value","Base Value"and "Analysis Date" are all displaying when pointing to the outlier plot. 
 
@@ -131,7 +133,8 @@ Step 3: Call [boxly()](https://merck.github.io/boxly/reference/boxly.html) funct
 
 ```{r}
 boxly(outdata,
-      hover_summary_var = c("n", "q1", "median", "mean", "q3"))
+  hover_summary_var = c("n", "q1", "median", "mean", "q3")
+)
 ```
 Here, you will notice that only number of participant, Q1, mean, median, Q3 are displaying when pointing to the plot in the box.
 
@@ -150,13 +153,15 @@ meta_boxly(
 
 ```{r}
 outdata <- prepare_boxly(meta,
-                         hover_var_outlier = c("USUBJID", metalite::collect_adam_mapping(meta, meta$plan$analysis)$y,"BASE","ADT","AVAL"))
+  hover_var_outlier = c("USUBJID", metalite::collect_adam_mapping(meta, meta$plan$analysis)$y, "BASE", "ADT", "AVAL")
+)
 ```
 
 ```{r}
 boxly(outdata,
-      hover_summary_var = c("n", "q1", "median", "mean", "q3"),
-      hover_outlier_label = c("Participant ID", "Parameter value","Base Value","Analysis Date","Analysis Value"))
+  hover_summary_var = c("n", "q1", "median", "mean", "q3"),
+  hover_outlier_label = c("Participant ID", "Parameter value", "Base Value", "Analysis Date", "Analysis Value")
+)
 ```
 
 Here, you will notice that both label of outlier and label of box are different from the default value. Please follow above steps to customize the interactive box plot hover label to meet your study needs. 
