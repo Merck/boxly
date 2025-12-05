@@ -41,13 +41,14 @@
 #'   observation_term = "wk12"
 #' )
 meta_boxly <- function(
-    dataset_adsl,
-    dataset_param,
-    population_term,
-    population_subset = SAFFL == "Y",
-    observation_term,
-    observation_subset = SAFFL == "Y",
-    parameters = unique(dataset_param$PARAMCD)) {
+  dataset_adsl,
+  dataset_param,
+  population_term,
+  population_subset = SAFFL == "Y",
+  observation_term,
+  observation_subset = SAFFL == "Y",
+  parameters = unique(dataset_param$PARAMCD)
+) {
   # Input Checking
   require_param <- c("PARAM", "PARAMCD", "AVISITN", "CHG")
 

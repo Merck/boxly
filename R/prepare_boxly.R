@@ -113,8 +113,10 @@ prepare_boxly <- function(meta,
   }
 
   if (!filter_var %in% obs_var) {
-    stop(paste("The filter variable '", filter_var, "' is not found in the observation data.",
-               "Please check the metadata for observation and `filter_var`."))
+    stop(paste(
+      "The filter variable '", filter_var, "' is not found in the observation data.",
+      "Please check the metadata for observation and `filter_var`."
+    ))
   }
 
   obs[, obs_var] <- lapply(obs_var, function(var) {
