@@ -25,6 +25,8 @@
 #'   The term name is used as key to link information.
 #' @param analysis A character value of analysis term name.
 #'   The term name is used as key to link information.
+#' @param filter_var A character value of variable name used for filtering.
+#'   Default is "PARAM".
 #' @param hover_var_outlier A character vector of hover variables for outlier.
 #'
 #' @return Metadata list with plotting dataset.
@@ -48,6 +50,7 @@ prepare_boxly <- function(meta,
                           population = NULL,
                           observation = NULL,
                           analysis = NULL,
+                          filter_var = "PARAM",
                           hover_var_outlier = c("USUBJID", metalite::collect_adam_mapping(meta, analysis)$y)) {
   if (is.null(population)) {
     if (length(meta$population) == 1) {
@@ -109,10 +112,20 @@ prepare_boxly <- function(meta,
     obs[[obs_group]] <- factor(obs[[obs_group]], levels = sort(unique(obs[[obs_group]])))
   }
 
-  if (!"factor" %in% class(obs[[obs_var]])) {
-    message("In observation level data, the facet variable '", obs_var, "' is automatically transformed into a factor.")
-    obs[[obs_var]] <- factor(obs[[obs_var]], levels = sort(unique(obs[[obs_var]])))
+  if (!filter_var %in% obs_var) {
+    stop(paste("The filter variable '", filter_var, "' is not found in the observation data.",
+               "Please check the metadata for observation and `filter_var`."))
   }
+
+  obs[, obs_var] <- lapply(obs_var, function(var) {
+    x <- obs[[var]]
+    if (!is.factor(x)) {
+      message("In observation level data, the facet variable '", var, "' is automatically transformed into a factor.")
+      factor(x, levels = sort(unique(x)))
+    } else {
+      x
+    }
+  })
 
   if (!"factor" %in% class(obs[[x]])) {
     message("In observation level data, the group variable '", x, "' is automatically transformed into a factor.")
@@ -163,8 +176,8 @@ prepare_boxly <- function(meta,
         ans
       }
     },
-    split(tbl, list(tbl[[obs_var]], tbl[[obs_group]], tbl[[x]])),
-    names(split(tbl, list(tbl[[obs_var]], tbl[[obs_group]], tbl[[x]]), sep = ", ")),
+    split(tbl, tbl[, c(obs_var, obs_group, x)]),
+    names(split(tbl, tbl[, c(obs_var, obs_group, x)], sep = ", ")),
     SIMPLIFY = FALSE
   )
 
@@ -198,7 +211,7 @@ prepare_boxly <- function(meta,
   # Return value
   metalite::outdata(meta, population, observation, parameter,
     x_var = x, y_var = y, group_var = obs_group,
-    param_var = obs_var, hover_var_outlier = hover_var_outlier,
+    param_var = filter_var, hover_var_outlier = hover_var_outlier,
     n = n_tbl, order = NULL, group = NULL, reference_group = NULL,
     plotds = plotds
   )
