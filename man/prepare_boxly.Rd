@@ -9,6 +9,7 @@ prepare_boxly(
   population = NULL,
   observation = NULL,
   analysis = NULL,
+  filter_var = "PARAM",
   hover_var_outlier = c("USUBJID", metalite::collect_adam_mapping(meta, analysis)$y)
 )
 }
@@ -23,6 +24,9 @@ The term name is used as key to link information.}
 
 \item{analysis}{A character value of analysis term name.
 The term name is used as key to link information.}
+
+\item{filter_var}{A character value of variable name used for filtering.
+Default is "PARAM".}
 
 \item{hover_var_outlier}{A character vector of hover variables for outlier.}
 }
