@@ -1,13 +1,12 @@
 pandoc: 3.1.11
-pkgdown: 2.0.9
+pkgdown: 2.2.0
 pkgdown_sha: ~
 articles:
   boxly-cran: boxly-cran.html
   boxly: boxly.html
   design-pattern: design-pattern.html
   hover-label: hover-label.html
-last_built: 2024-05-17T04:17Z
+last_built: 2025-12-10T19:06Z
 urls:
   reference: https://merck.github.io/boxly/reference
   article: https://merck.github.io/boxly/articles
-

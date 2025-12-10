@@ -1,0 +1,98 @@
+# boxly
+
+## Installation
+
+The easiest way to get boxly is to install from CRAN:
+
+``` r
+install.packages("boxly")
+```
+
+Alternatively, to use a new feature or get a bug fix, you can install
+the development version of boxly from GitHub:
+
+``` r
+# install.packages("remotes")
+remotes::install_github("Merck/boxly")
+```
+
+## Overview
+
+The boxly package creates interactive box plots for clinical trial
+analysis & reporting.
+
+We assume ADaM datasets are ready for analysis and leverage
+[metalite](https://merck.github.io/metalite/) data structure to define
+inputs and outputs.
+
+## Workflow
+
+The general workflow is:
+
+1.  Use
+    [`meta_boxly()`](https://merck.github.io/boxly/reference/meta_boxly.md)
+    or metalite package to construct input metadata from ADaM datasets.
+    For example,.
+2.  Use
+    [`prepare_boxly()`](https://merck.github.io/boxly/reference/prepare_boxly.md)
+    to prepare datasets for interactive box plot.
+3.  Use [`boxly()`](https://merck.github.io/boxly/reference/boxly.md) to
+    generate an interactive box plot.
+
+Here is a quick example using an example dataset:
+
+``` r
+library("boxly")
+
+meta_boxly(
+  boxly_adsl,
+  boxly_adlb,
+  population_term = "apat",
+  observation_term = "wk12",
+  observation_subset = AVISITN <= 12 & !is.na(CHG)
+) |>
+  prepare_boxly() |>
+  boxly()
+```
+
+## Highlighted features
+
+- Parameter selection: Drop-down menu to select parameter of interest.
+- Interactivity: Display summary statistics and outlier information
+  interactively.
+- Listing: Provide detailed information in interactive listing.
+
+# Package index
+
+## Interactive box plot
+
+- [`meta_boxly()`](https://merck.github.io/boxly/reference/meta_boxly.md)
+  : Create an example metadata object
+- [`prepare_boxly()`](https://merck.github.io/boxly/reference/prepare_boxly.md)
+  : Prepare data for interactive box plot
+- [`boxly()`](https://merck.github.io/boxly/reference/boxly.md) : Create
+  an interactive box plot
+
+## Example data
+
+- [`boxly_adsl`](https://merck.github.io/boxly/reference/boxly_adsl.md)
+  : A Subject Level Demographic Dataset
+- [`boxly_adlb`](https://merck.github.io/boxly/reference/boxly_adlb.md)
+  : An example ADLB dataset
+- [`boxly_adeg`](https://merck.github.io/boxly/reference/boxly_adeg.md)
+  : An example ADEG dataset
+- [`boxly_advs`](https://merck.github.io/boxly/reference/boxly_advs.md)
+  : An example ADVS dataset
+
+# Articles
+
+### All vignettes
+
+- [An Introduction to the boxly
+  Package](https://merck.github.io/boxly/articles/boxly-cran.md):
+- [Interactive Box
+  Plot](https://merck.github.io/boxly/articles/boxly.md):
+- [Boxly Design
+  Pattern](https://merck.github.io/boxly/articles/design-pattern.md):
+- [Customize Hover Labels in Interactive Box
+  Plot](https://merck.github.io/boxly/articles/hover-label.md):
