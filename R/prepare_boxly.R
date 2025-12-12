@@ -150,13 +150,15 @@ prepare_boxly <- function(meta,
   # Calculate summary statistics and add these variables into tbl
   plotds <- mapply(
     function(s, u) {
-      t <- as.vector(summary(s[[y]]))
+      vals <- stats::quantile(s[[y]], probs = c(0, 0.25, 0.5, 0.75, 1),
+                              type = 2, na.rm = TRUE, names = FALSE)
 
       if (nrow(s) > 5) {
-        iqr.range <- t[5] - t[2]
-        upper_outliers <- t[5] + iqr.range * 1.5
-        lower_outliers <- t[2] - iqr.range * 1.5
-        s$outlier <- ifelse((s[[y]] > upper_outliers | s[[y]] < lower_outliers), s[[y]], NA)
+        iqr.range <- vals[4] - vals[2]                    # Q3 - Q1 (type=2)
+        upper_outliers <- vals[4] + iqr.range * 1.5       # Q3 + 1.5*IQR
+        lower_outliers <- vals[2] - iqr.range * 1.5       # Q1 - 1.5*IQR
+        s$outlier <- ifelse((s[[y]] > upper_outliers | s[[y]] < lower_outliers),
+                            s[[y]], NA)
       } else if (nrow(s) > 0) {
         s$outlier <- NA
       } else {
@@ -168,18 +170,21 @@ prepare_boxly <- function(meta,
       # mutate ans for output
       if (nrow(s) > 0) {
         ans <- s
-        ans$min <- t[1]
-        ans$q1 <- t[2]
-        ans$median <- t[3]
-        ans$mean <- t[4]
-        ans$q3 <- t[5]
-        ans$max <- t[6]
+        # ensure vals and mean_val exist (vals from quantile(..., type=2) earlier)
+        mean_val <- mean(s[[y]], na.rm = TRUE)
+
+        ans$min    <- vals[1]
+        ans$q1     <- vals[2]
+        ans$median <- vals[3]
+        ans$mean   <- mean_val
+        ans$q3     <- vals[4]
+        ans$max    <- vals[5]
 
         ans
       }
     },
-    split(tbl, tbl[, c(obs_var, obs_group, x)]),
-    names(split(tbl, tbl[, c(obs_var, obs_group, x)], sep = ", ")),
+    split(tbl, list(tbl[[obs_var]], tbl[[obs_group]], tbl[[x]])),
+    names(split(tbl, list(tbl[[obs_var]], tbl[[obs_group]], tbl[[x]]), sep = ", ")),
     SIMPLIFY = FALSE
   )
 
