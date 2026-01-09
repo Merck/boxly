@@ -25,13 +25,13 @@
 Source:
 [`DESCRIPTION`](https://github.com/Merck/boxly/blob/main/DESCRIPTION)
 
-Wang B, Zhao Y (2025). *boxly: Interactive Box Plot*. R package version
+Wang B, Zhao Y (2026). *boxly: Interactive Box Plot*. R package version
 0.1.1, <https://merck.github.io/boxly/>.
 
     @Manual{,
       title = {boxly: Interactive Box Plot},
       author = {Benjamin Wang and Yujie Zhao},
-      year = {2025},
+      year = {2026},
       note = {R package version 0.1.1},
       url = {https://merck.github.io/boxly/},
     }
