@@ -32,7 +32,6 @@ outdata <- prepare_boxly(meta, mean_decimal = 5)
 
 # Step 4: Generate the interactive box plot
 boxly(outdata)
-
 ```
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
