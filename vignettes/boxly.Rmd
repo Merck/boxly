@@ -146,8 +146,8 @@ meta_boxly(
   population_term = "apat",
   observation_term = "wk12",
   observation_subset = AVISITN <= 12 & !is.na(CHG)
-) |> 
-  prepare_boxly(mean_decimal = 1) |> 
+) |>
+  prepare_boxly(mean_decimal = 1) |>
   boxly()
 ```
 
