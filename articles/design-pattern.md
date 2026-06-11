@@ -49,10 +49,12 @@ is generated in the boxly package for illustration purpose. Users should
 create metadata with similar structure.
 
 ``` r
+
 library(boxly)
 ```
 
 ``` r
+
 meta <- meta_boxly()
 meta
 ```
@@ -90,6 +92,7 @@ Here is the structure for the expected output list of
 [`prepare_boxly()`](https://merck.github.io/boxly/reference/prepare_boxly.md):
 
 ``` r
+
 outdata <- prepare_boxly(meta,
   population = "apat",
   observation = "wk12",
@@ -103,6 +106,7 @@ Here is the example for the plotting dataset should be contained in
 output `list`:
 
 ``` r
+
 head(outdata$plotds)
 ```
 
@@ -149,22 +153,23 @@ part above.
 
 > Argument list
 
-| Argument               |                                          Description                                           | Default Value | Required (Y/N) | Valid Values | Comments |
-|------------------------|:----------------------------------------------------------------------------------------------:|--------------:|:--------------:|:------------:|:--------:|
-| `outdata`              | List object from [`prepare_boxly()`](https://merck.github.io/boxly/reference/prepare_boxly.md) |               |       Y        |              |          |
-| `color`                |                              Vector of color defined for box plot                              |               |       N        |              |          |
-| `x_label`              |                                          x-axis label                                          |               |       N        |              |          |
-| `y_label`              |                                          y-axis label                                          |               |       N        |              |          |
-| `vline`                |                                                                                                |               |                |              |          |
-| `vline_label`          |                                                                                                |               |                |              |          |
-| `header_summary_table` |                                                                                                |               |                |              |          |
-| `header_select_list`   |                                                                                                |               |                |              |          |
-| `header_slider_bar`    |                                                                                                |               |                |              |          |
+| Argument | Description | Default Value | Required (Y/N) | Valid Values | Comments |
+|----|:--:|---:|:--:|:--:|:--:|
+| `outdata` | List object from [`prepare_boxly()`](https://merck.github.io/boxly/reference/prepare_boxly.md) |  | Y |  |  |
+| `color` | Vector of color defined for box plot |  | N |  |  |
+| `x_label` | x-axis label |  | N |  |  |
+| `y_label` | y-axis label |  | N |  |  |
+| `vline` |  |  |  |  |  |
+| `vline_label` |  |  |  |  |  |
+| `header_summary_table` |  |  |  |  |  |
+| `header_select_list` |  |  |  |  |  |
+| `header_slider_bar` |  |  |  |  |  |
 
 > Here is the minimum viable production. The layout and labels are just
 > for illustration now.
 
 ``` r
+
 p_list <- prepare_boxly(meta,
   population = "apat",
   observation = "wk12",

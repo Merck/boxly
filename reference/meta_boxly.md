@@ -54,6 +54,7 @@ A metalite object.
 ## Examples
 
 ``` r
+
 meta_boxly(
   boxly_adsl,
   boxly_adlb,

@@ -1,5 +1,13 @@
 # Changelog
 
+## boxly 0.1.2
+
+- Enable user to customize hover label variables for outliers
+- Add example in vignettes for customize label in boxly
+- Fix bug for multiple variables in observation
+- Update prepare_boxly to display outlier using different type
+- Change maintainer
+
 ## boxly 0.1.1
 
 CRAN release: 2023-10-24

@@ -83,6 +83,7 @@ statistics.
 In this example, we plan to add more hover labels for outliers.
 
 ``` r
+
 library(boxly)
 ```
 
@@ -91,6 +92,7 @@ Step1: Create a list of metadata using
 Using Lab data as example.
 
 ``` r
+
 meta <- meta_boxly(
   boxly_adsl,
   boxly_adlb,
@@ -108,6 +110,7 @@ default “USUBJID” and “CHG”(as y axis label collected from meta mapping
 object),“BASE” and “ADT” are also included in the `hover_var_outlier`.
 
 ``` r
+
 outdata <- prepare_boxly(
   meta,
   hover_var_outlier = c(
@@ -127,6 +130,7 @@ Date” are included in `hover_outlier_label` as displaying label for
 step.
 
 ``` r
+
 boxly(
   outdata,
   hover_outlier_label = c(
@@ -156,6 +160,7 @@ Step1: Create a list of metadata using
 Using Vital Sign data as example.
 
 ``` r
+
 meta_boxly(
   boxly_adsl,
   boxly_advs,
@@ -202,6 +207,7 @@ outlier will display the default value “Participant ID” and “Parameter
 value” for “USUBJID” and “CHG”.
 
 ``` r
+
 outdata <- prepare_boxly(meta)
 ```
 
@@ -212,6 +218,7 @@ participant, “q1” for Q1, “median” for Median, “mean” for Mean, “q
 Q3. We remove the “min” and “max” from the default value.
 
 ``` r
+
 boxly(outdata,
       hover_summary_var = c("n", "q1", "median", "mean", "q3"))
 ```
@@ -230,6 +237,7 @@ label of outlier and label of box at the same step. Using ECG data as
 example.
 
 ``` r
+
 meta_boxly(
   boxly_adsl,
   boxly_adeg,
@@ -269,6 +277,7 @@ meta_boxly(
 ```
 
 ``` r
+
 outdata <- prepare_boxly(
   meta,
   hover_var_outlier = c(
@@ -282,6 +291,7 @@ outdata <- prepare_boxly(
 ```
 
 ``` r
+
 boxly(
   outdata,
   hover_summary_var = c("n", "q1", "median", "mean", "q3"),

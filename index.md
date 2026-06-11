@@ -5,6 +5,7 @@
 The easiest way to get boxly is to install from CRAN:
 
 ``` r
+
 install.packages("boxly")
 ```
 
@@ -12,6 +13,7 @@ Alternatively, to use a new feature or get a bug fix, you can install
 the development version of boxly from GitHub:
 
 ``` r
+
 # install.packages("remotes")
 remotes::install_github("Merck/boxly")
 ```
@@ -42,6 +44,7 @@ The general workflow is:
 Here is a quick example using an example dataset:
 
 ``` r
+
 library("boxly")
 
 meta_boxly(

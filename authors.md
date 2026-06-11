@@ -2,9 +2,9 @@
 
 ## Authors
 
-- **Benjamin Wang**. Author, maintainer.
+- **Yujie Zhao**. Author, maintainer.
 
-- **Yujie Zhao**. Author.
+- **Benjamin Wang**. Author.
 
 - **Yilong Zhang**. Contributor.
 
@@ -25,13 +25,13 @@
 Source:
 [`DESCRIPTION`](https://github.com/Merck/boxly/blob/main/DESCRIPTION)
 
-Wang B, Zhao Y (2026). *boxly: Interactive Box Plot*. R package version
-0.1.1, <https://merck.github.io/boxly/>.
+Zhao Y, Wang B (2026). *boxly: Interactive Box Plot*. R package version
+0.1.2, <https://merck.github.io/boxly/>.
 
     @Manual{,
       title = {boxly: Interactive Box Plot},
-      author = {Benjamin Wang and Yujie Zhao},
+      author = {Yujie Zhao and Benjamin Wang},
       year = {2026},
-      note = {R package version 0.1.1},
+      note = {R package version 0.1.2},
       url = {https://merck.github.io/boxly/},
     }

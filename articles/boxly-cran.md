@@ -4,6 +4,7 @@ Please see <https://merck.github.io/boxly/articles/> for the full
 documentation. Here is only a minimal example:
 
 ``` r
+
 library("boxly")
 
 meta_boxly(

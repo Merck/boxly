@@ -1,6 +1,7 @@
 # Interactive Box Plot
 
 ``` r
+
 library(boxly)
 ```
 
@@ -41,6 +42,7 @@ Step1: Create a list of metadata (Ex: meta) using
 [`meta_boxly()`](https://merck.github.io/boxly/reference/meta_boxly.md)
 
 ``` r
+
 meta <- meta_boxly(
   boxly_adsl,
   boxly_adlb,
@@ -55,6 +57,7 @@ Step2: Call
 function to prepare the metadata as required by the user
 
 ``` r
+
 outdata <- prepare_boxly(meta)
 outdata
 #> List of 14
@@ -79,6 +82,7 @@ Step 3: Call
 to create the interactive plot
 
 ``` r
+
 boxly(outdata)
 ```
 
@@ -89,6 +93,7 @@ Number of Participants
 ### Example 2: Interactive Box Plot Using Vital Signs Data
 
 ``` r
+
 meta_boxly(
   boxly_adsl,
   boxly_advs,
@@ -107,6 +112,7 @@ Number of Participants
 ### Example 3: Interactive Box Plot Using ECG Data
 
 ``` r
+
 meta_boxly(
   boxly_adsl,
   boxly_adeg,
