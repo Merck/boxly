@@ -19,6 +19,15 @@
  *
  */
 
+function waitForSelectize(select, callback) {
+  const timer = setInterval(function() {
+    if (select.selectize) {
+      clearInterval(timer);
+      callback(select.selectize);
+    }
+  }, 100);
+}
+
 function filter_default() {
   const uniqueIds = [];
   const elements = document.querySelectorAll('[id*="filter_param_"]');
@@ -29,18 +38,18 @@ function filter_default() {
       uniqueIds.push(id);
     }
   }
+
   console.log(uniqueIds);
   for (const id of uniqueIds) {
     const default_value = id.split("|").pop(); // extract value after the last "|" character
     console.log(default_value);
-    document
-      .getElementById(id)
-      .getElementsByClassName("selectized")[0]
-      .selectize.setValue(default_value, false);
-    document
-      .getElementById(id)
-      .getElementsByClassName("selectized")[0]
-      .selectize.removeOption("");
+
+    const parent = document.getElementById(id);
+    const select = parent.querySelector("select");
+    waitForSelectize(select, function(s) {
+        s.setValue(default_value, false);
+        s.removeOption("");
+    });
   }
 }
 

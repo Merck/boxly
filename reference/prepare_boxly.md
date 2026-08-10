@@ -63,7 +63,7 @@ meta <- meta_boxly(
   observation_term = "wk12"
 )
 prepare_boxly(meta)
-#> In observation level data, the facet variable 'PARAM' is automatically transformed into a factor.
+#> In observation level data, the filter variable 'PARAM' is automatically transformed into a factor.
 #> In observation level data, the group variable 'AVISITN' is automatically transformed into a factor.
 #> List of 14
 #>  $ meta             :List of 7

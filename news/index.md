@@ -2,6 +2,8 @@
 
 ## boxly 0.1.2
 
+CRAN release: 2026-06-12
+
 - Enable user to customize hover label variables for outliers
 - Add example in vignettes for customize label in boxly
 - Fix bug for multiple variables in observation
