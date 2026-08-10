@@ -119,15 +119,10 @@ prepare_boxly <- function(meta,
     ))
   }
 
-  obs[, obs_var] <- lapply(obs_var, function(var) {
-    x <- obs[[var]]
-    if (!is.factor(x)) {
-      message("In observation level data, the facet variable '", var, "' is automatically transformed into a factor.")
-      factor(x, levels = sort(unique(x)))
-    } else {
-      x
-    }
-  })
+  if (!is.factor(obs[[filter_var]])) {
+    message("In observation level data, the filter variable '", filter_var, "' is automatically transformed into a factor.")
+    obs[[filter_var]] <- factor(obs[[filter_var]], levels = sort(unique(obs[[filter_var]])))
+  }
 
   if (!"factor" %in% class(obs[[x]])) {
     message("In observation level data, the group variable '", x, "' is automatically transformed into a factor.")
@@ -140,7 +135,7 @@ prepare_boxly <- function(meta,
   }
 
   # a table calculates the number of subjects per parameter per visit per arm
-  n_tbl <- table(obs[, c(x, obs_group, obs_var)]) |>
+  n_tbl <- table(obs[, c(x, obs_group, filter_var)]) |>
     as.data.frame()
 
   n_tbl$n <- n_tbl$Freq
@@ -148,19 +143,27 @@ prepare_boxly <- function(meta,
   tbl <- merge(obs, n_tbl, all.x = TRUE)
 
   # Calculate summary statistics and add these variables into tbl
+  split_vars <- c(filter_var, obs_group, x)
+
   plotds <- mapply(
     function(s, u) {
-      vals <- stats::quantile(s[[y]],
+      vals <- stats::quantile(
+        s[[y]],
         probs = c(0, 0.25, 0.5, 0.75, 1),
-        type = 2, na.rm = TRUE, names = FALSE
+        type = 2,
+        na.rm = TRUE,
+        names = FALSE
       )
 
       if (nrow(s) > 5) {
         iqr.range <- vals[4] - vals[2] # Q3 - Q1 (type=2)
         upper_outliers <- vals[4] + iqr.range * 1.5 # Q3 + 1.5*IQR
         lower_outliers <- vals[2] - iqr.range * 1.5 # Q1 - 1.5*IQR
-        s$outlier <- ifelse((s[[y]] > upper_outliers | s[[y]] < lower_outliers),
-          s[[y]], NA
+
+        s$outlier <- ifelse(
+          s[[y]] > upper_outliers | s[[y]] < lower_outliers,
+          s[[y]],
+          NA
         )
       } else if (nrow(s) > 0) {
         s$outlier <- NA
@@ -186,8 +189,8 @@ prepare_boxly <- function(meta,
         ans
       }
     },
-    split(tbl, list(tbl[[obs_var]], tbl[[obs_group]], tbl[[x]])),
-    names(split(tbl, list(tbl[[obs_var]], tbl[[obs_group]], tbl[[x]]), sep = ", ")),
+    split(tbl, tbl[split_vars], sep = ", "),
+    names(split(tbl, tbl[split_vars], sep = ", ")),
     SIMPLIFY = FALSE
   )
 
