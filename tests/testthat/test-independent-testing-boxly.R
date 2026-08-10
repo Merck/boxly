@@ -17,12 +17,11 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 test_that("validation of boxly plot Case 1", {
-  meta <- meta_boxly(
+  meta <- meta_boxly_test(
     boxly_adsl,
     boxly_adlb,
     population_term = "apat",
-    observation_term = "wk12",
-    observation_subset = AVISITN <= 12 & !is.na(CHG)
+    observation_term = "wk12"
   )
 
   x <- suppressMessages(prepare_boxly(meta))
@@ -57,12 +56,11 @@ test_that("validation of boxly plot Case 1", {
 })
 
 test_that("validation of boxly plot Case 2", {
-  meta <- meta_boxly(
+  meta <- meta_boxly_test(
     boxly_adsl,
     boxly_adlb,
     population_term = "apat",
-    observation_term = "wk12",
-    observation_subset = AVISITN <= 12 & !is.na(CHG)
+    observation_term = "wk12"
   )
 
   x <- suppressMessages(prepare_boxly(meta))
