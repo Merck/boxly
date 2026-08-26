@@ -101,3 +101,59 @@ meta_boxly(
   prepare_boxly() |>
   boxly()
 ```
+
+
+## Example 4: Format Mean Values in Summary Statistics
+
+### Overview
+
+When displaying summary statistics in the interactive box plot hover labels, you may want to control 
+the precision (number of decimal places) of the mean value. The `mean_decimal` parameter in 
+`prepare_boxly()` allows you to format the mean values to a specific number of decimal places.
+
+This is particularly useful when you need to:
+
+- Match a specific reporting format required by your analysis plan or regulatory submission
+- Improve readability by reducing unnecessary decimal places
+- Ensure consistency with other statistics displayed in your report
+- Control the level of precision shown to stakeholders
+
+### Basic Usage
+
+Use the `mean_decimal` parameter to specify the number of decimal places for rounding the mean value:
+
+```{r}
+meta <- meta_boxly(
+  boxly_adsl,
+  boxly_adlb,
+  population_term = "apat",
+  observation_term = "wk12",
+  observation_subset = AVISITN <= 12 & !is.na(CHG)
+)
+
+# Format mean values to 2 decimal places
+outdata <- prepare_boxly(meta, mean_decimal = 2)
+boxly(outdata)
+```
+
+### Example with Different Decimal Places
+
+```{r}
+# Format mean values to 1 decimal place
+meta_boxly(
+  boxly_adsl,
+  boxly_adlb,
+  population_term = "apat",
+  observation_term = "wk12",
+  observation_subset = AVISITN <= 12 & !is.na(CHG)
+) |>
+  prepare_boxly(mean_decimal = 1) |>
+  boxly()
+```
+
+### Notes
+
+- When `mean_decimal` is `NULL` (default), the mean values are displayed with full precision (not rounded)
+- The mean values are rounded using base R's `round()` function
+- Other summary statistics (Min, Q1, Median, Q3, Max) are not affected by this parameter
+- The formatted mean values will appear in the hover label when you move your cursor over the box plot

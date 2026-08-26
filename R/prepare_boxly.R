@@ -51,7 +51,8 @@ prepare_boxly <- function(meta,
                           observation = NULL,
                           analysis = NULL,
                           filter_var = "PARAM",
-                          hover_var_outlier = c("USUBJID", metalite::collect_adam_mapping(meta, analysis)$y)) {
+                          hover_var_outlier = c("USUBJID", metalite::collect_adam_mapping(meta, analysis)$y),
+                          mean_decimal = NULL) {
   if (is.null(population)) {
     if (length(meta$population) == 1) {
       population <- meta$population[[1]]$name
@@ -182,7 +183,11 @@ prepare_boxly <- function(meta,
         ans$min <- vals[1]
         ans$q1 <- vals[2]
         ans$median <- vals[3]
-        ans$mean <- mean_val
+        if (!is.null(mean_decimal)) {
+          ans$mean <- round(mean_val, mean_decimal)
+        } else {
+          ans$mean <- mean_val
+        }
         ans$q3 <- vals[4]
         ans$max <- vals[5]
 
