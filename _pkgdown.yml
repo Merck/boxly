@@ -26,7 +26,6 @@ footer:
 reference:
 - title: Interactive box plot
   contents:
-  - meta_boxly
   - prepare_boxly
   - boxly
 - title: Example data

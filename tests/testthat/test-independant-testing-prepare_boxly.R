@@ -17,12 +17,11 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 test_that("Its class is 'outdata'", {
-  meta <- meta_boxly(
+  meta <- meta_boxly_test(
     boxly_adsl,
     boxly_adlb,
     population_term = "apat",
-    observation_term = "wk12",
-    observation_subset = AVISITN <= 12 & !is.na(CHG)
+    observation_term = "wk12"
   )
 
   output <- suppressMessages(prepare_boxly(meta))
