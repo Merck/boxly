@@ -2,8 +2,6 @@
 
 ## Interactive box plot
 
-- [`meta_boxly()`](https://merck.github.io/boxly/reference/meta_boxly.md)
-  : Create an example metadata object
 - [`prepare_boxly()`](https://merck.github.io/boxly/reference/prepare_boxly.md)
   : Prepare data for interactive box plot
 - [`boxly()`](https://merck.github.io/boxly/reference/boxly.md) : Create

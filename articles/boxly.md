@@ -28,8 +28,7 @@ Some common interactive features of the box plots include:
 
 Creating the box plot using this package involves the below steps:
 
-- Create a list of metadata (Ex: meta) using
-  [`meta_boxly()`](https://merck.github.io/boxly/reference/meta_boxly.md)
+- Create a metadata object using the metalite package
 - Call
   [`prepare_boxly()`](https://merck.github.io/boxly/reference/prepare_boxly.md)
   function to prepare the metadata as required by the user
@@ -38,18 +37,57 @@ Creating the box plot using this package involves the below steps:
 
 ### Example 1: Interactive Box Plot Using Labs Data
 
-Step1: Create a list of metadata (Ex: meta) using
-[`meta_boxly()`](https://merck.github.io/boxly/reference/meta_boxly.md)
+Step 1: Create a metadata object using the metalite package
 
 ``` r
 
-meta <- meta_boxly(
-  boxly_adsl,
-  boxly_adlb,
-  population_term = "apat",
-  observation_term = "wk12",
-  observation_subset = AVISITN <= 12 & !is.na(CHG)
+analysis_plan <- metalite::plan(
+  analysis = "boxly",
+  population = "apat",
+  observation = "wk12",
+  parameter = "SODIUM;K;CL"
 )
+
+meta <- metalite::meta_adam(
+  population = boxly_adsl,
+  observation = boxly_adlb
+) |>
+  metalite::define_plan(analysis_plan) |>
+  metalite::define_population(
+    name = "apat",
+    group = "TRTA",
+    subset = SAFFL == "Y",
+    label = "Safety Population"
+  ) |>
+  metalite::define_observation(
+    name = "wk12",
+    group = "TRTA",
+    var = "PARAM",
+    subset = AVISITN <= 12 & !is.na(CHG),
+    label = "Weeks 0 to 12"
+  ) |>
+  metalite::define_parameter(
+    name = "SODIUM",
+    label = "Sodium (mmol/L)",
+    subset = PARAMCD == "SODIUM"
+  ) |>
+  metalite::define_parameter(
+    name = "K",
+    label = "Potassium (mmol/L)",
+    subset = PARAMCD == "K"
+  ) |>
+  metalite::define_parameter(
+    name = "CL",
+    label = "Chloride (mmol/L)",
+    subset = PARAMCD == "CL"
+  ) |>
+  metalite::define_analysis(
+    name = "boxly",
+    label = "Interactive Box Plot",
+    x = "AVISITN",
+    y = "CHG"
+  ) |>
+  metalite::meta_build()
 ```
 
 Step2: Call
@@ -64,8 +102,8 @@ outdata
 #>  $ meta             :List of 7
 #>  $ population       : chr "apat"
 #>  $ observation      : chr "wk12"
-#>  $ parameter        : chr "SODIUM;K;CL;BILI;ALP;GGT;ALT;AST;BUN;CREAT;URATE;PHOS"
-#>  $ n                :'data.frame':   180 obs. of  5 variables:
+#>  $ parameter        : chr "SODIUM;K;CL"
+#>  $ n                :'data.frame':   45 obs. of  5 variables:
 #>  $ order            : NULL
 #>  $ group            : NULL
 #>  $ reference_group  : NULL
@@ -74,7 +112,7 @@ outdata
 #>  $ group_var        : chr "TRTA"
 #>  $ param_var        : chr "PARAM"
 #>  $ hover_var_outlier: chr [1:2] "USUBJID" "CHG"
-#>  $ plotds           :'data.frame':   12212 obs. of  15 variables:
+#>  $ plotds           :'data.frame':   3049 obs. of  15 variables:
 ```
 
 Step 3: Call
@@ -94,13 +132,55 @@ Number of Participants
 
 ``` r
 
-meta_boxly(
-  boxly_adsl,
-  boxly_advs,
-  population_term = "apat",
-  observation_term = "wk12",
-  observation_subset = AVISITN <= 12 & !is.na(CHG)
+analysis_plan <- metalite::plan(
+  analysis = "boxly",
+  population = "apat",
+  observation = "wk12",
+  parameter = "DIABP;PULSE;SYSBP"
+)
+
+meta <- metalite::meta_adam(
+  population = boxly_adsl,
+  observation = boxly_advs
 ) |>
+  metalite::define_plan(analysis_plan) |>
+  metalite::define_population(
+    name = "apat",
+    group = "TRTA",
+    subset = SAFFL == "Y",
+    label = "Safety Population"
+  ) |>
+  metalite::define_observation(
+    name = "wk12",
+    group = "TRTA",
+    var = "PARAM",
+    subset = AVISITN <= 12 & !is.na(CHG),
+    label = "Weeks 0 to 12"
+  ) |>
+  metalite::define_parameter(
+    name = "DIABP",
+    label = "Diastolic Blood Pressure (mmHg)",
+    subset = PARAMCD == "DIABP"
+  ) |>
+  metalite::define_parameter(
+    name = "PULSE",
+    label = "Pulse Rate (BEATS/MIN)",
+    subset = PARAMCD == "PULSE"
+  ) |>
+  metalite::define_parameter(
+    name = "SYSBP",
+    label = "Systolic Blood Pressure (mmHg)",
+    subset = PARAMCD == "SYSBP"
+  ) |>
+  metalite::define_analysis(
+    name = "boxly",
+    label = "Interactive Box Plot",
+    x = "AVISITN",
+    y = "CHG"
+  ) |>
+  metalite::meta_build()
+
+meta |>
   prepare_boxly() |>
   boxly()
 ```
@@ -113,13 +193,55 @@ Number of Participants
 
 ``` r
 
-meta_boxly(
-  boxly_adsl,
-  boxly_adeg,
-  population_term = "apat",
-  observation_term = "wk12",
-  observation_subset = AVISITN <= 12 & !is.na(CHG)
+analysis_plan <- metalite::plan(
+  analysis = "boxly",
+  population = "apat",
+  observation = "wk12",
+  parameter = "ARATE;PR;QRS"
+)
+
+meta <- metalite::meta_adam(
+  population = boxly_adsl,
+  observation = boxly_adeg
 ) |>
+  metalite::define_plan(analysis_plan) |>
+  metalite::define_population(
+    name = "apat",
+    group = "TRTA",
+    subset = SAFFL == "Y",
+    label = "Safety Population"
+  ) |>
+  metalite::define_observation(
+    name = "wk12",
+    group = "TRTA",
+    var = "PARAM",
+    subset = AVISITN <= 12 & !is.na(CHG),
+    label = "Weeks 0 to 12"
+  ) |>
+  metalite::define_parameter(
+    name = "ARATE",
+    label = "Atrial Rate (beats/min)",
+    subset = PARAMCD == "ARATE"
+  ) |>
+  metalite::define_parameter(
+    name = "PR",
+    label = "PR Interval (msec)",
+    subset = PARAMCD == "PR"
+  ) |>
+  metalite::define_parameter(
+    name = "QRS",
+    label = "QRS Interval (msec)",
+    subset = PARAMCD == "QRS"
+  ) |>
+  metalite::define_analysis(
+    name = "boxly",
+    label = "Interactive Box Plot",
+    x = "AVISITN",
+    y = "CHG"
+  ) |>
+  metalite::meta_build()
+
+meta |>
   prepare_boxly() |>
   boxly()
 ```

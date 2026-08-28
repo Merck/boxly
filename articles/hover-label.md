@@ -87,19 +87,48 @@ In this example, we plan to add more hover labels for outliers.
 library(boxly)
 ```
 
-Step1: Create a list of metadata using
-[`meta_boxly()`](https://merck.github.io/boxly/reference/meta_boxly.md).
-Using Lab data as example.
+Step 1: Create metadata using the metalite package. Using Lab data as
+example.
 
 ``` r
 
-meta <- meta_boxly(
-  boxly_adsl,
-  boxly_adlb,
-  population_term = "apat",
-  observation_term = "wk12",
-  observation_subset = AVISITN <= 12 & !is.na(CHG)
+analysis_plan <- metalite::plan(
+  analysis = "boxly",
+  population = "apat",
+  observation = "wk12",
+  parameter = "SODIUM"
 )
+
+meta <- metalite::meta_adam(
+  population = boxly_adsl,
+  observation = boxly_adlb
+) |>
+  metalite::define_plan(analysis_plan) |>
+  metalite::define_population(
+    name = "apat",
+    group = "TRTA",
+    subset = SAFFL == "Y",
+    label = "Safety Population"
+  ) |>
+  metalite::define_observation(
+    name = "wk12",
+    group = "TRTA",
+    var = "PARAM",
+    subset = AVISITN <= 12 & !is.na(CHG),
+    label = "Weeks 0 to 12"
+  ) |>
+  metalite::define_parameter(
+    name = "SODIUM",
+    label = "Sodium (mmol/L)",
+    subset = PARAMCD == "SODIUM"
+  ) |>
+  metalite::define_analysis(
+    name = "boxly",
+    label = "Interactive Box Plot",
+    x = "AVISITN",
+    y = "CHG"
+  ) |>
+  metalite::meta_build()
 ```
 
 Step2: Call
@@ -155,48 +184,48 @@ outlier plot.
 In this example, we plan to only display number of participant, Q1,
 mean, median, Q3 for the hover label of box.
 
-Step1: Create a list of metadata using
-[`meta_boxly()`](https://merck.github.io/boxly/reference/meta_boxly.md).
-Using Vital Sign data as example.
+Step 1: Create metadata using the metalite package. Using Vital Sign
+data as example.
 
 ``` r
 
-meta_boxly(
-  boxly_adsl,
-  boxly_advs,
-  population_term = "apat",
-  observation_term = "wk12",
-  observation_subset = AVISITN <= 12 & !is.na(CHG)
+analysis_plan <- metalite::plan(
+  analysis = "boxly",
+  population = "apat",
+  observation = "wk12",
+  parameter = "PULSE"
 )
-#> ADaM metadata: 
-#>    .$data_population     Population data with 254 subjects 
-#>    .$data_observation    Observation data with 32139 records 
-#>    .$plan    Analysis plan with 1 plans 
-#> 
-#> 
-#>   Analysis population type:
-#>     name        id  group var       subset label
-#> 1 'apat' 'USUBJID' 'TRTA'     SAFFL == 'Y'    ''
-#> 
-#> 
-#>   Analysis observation type:
-#>     name        id  group     var                      subset label
-#> 1 'wk12' 'USUBJID' 'TRTA' 'PARAM' AVISITN <= 12 & !is.na(CHG)    ''
-#> 
-#> 
-#>   Analysis parameter type:
-#>       name                             label              subset
-#> 1  'DIABP' 'Diastolic Blood Pressure (mmHg)'  PARAMCD == 'DIABP'
-#> 2 'HEIGHT'                     'Height (cm)' PARAMCD == 'HEIGHT'
-#> 3  'PULSE'          'Pulse Rate (BEATS/MIN)'  PARAMCD == 'PULSE'
-#> 4  'SYSBP'  'Systolic Blood Pressure (mmHg)'  PARAMCD == 'SYSBP'
-#> 5   'TEMP'                 'Temperature (C)'   PARAMCD == 'TEMP'
-#> 6 'WEIGHT'                     'Weight (kg)' PARAMCD == 'WEIGHT'
-#> 
-#> 
-#>   Analysis function:
-#>      name                  label
-#> 1 'boxly' 'Interactive Box Plot'
+
+meta <- metalite::meta_adam(
+  population = boxly_adsl,
+  observation = boxly_advs
+) |>
+  metalite::define_plan(analysis_plan) |>
+  metalite::define_population(
+    name = "apat",
+    group = "TRTA",
+    subset = SAFFL == "Y",
+    label = "Safety Population"
+  ) |>
+  metalite::define_observation(
+    name = "wk12",
+    group = "TRTA",
+    var = "PARAM",
+    subset = AVISITN <= 12 & !is.na(CHG),
+    label = "Weeks 0 to 12"
+  ) |>
+  metalite::define_parameter(
+    name = "PULSE",
+    label = "Pulse Rate (BEATS/MIN)",
+    subset = PARAMCD == "PULSE"
+  ) |>
+  metalite::define_analysis(
+    name = "boxly",
+    label = "Interactive Box Plot",
+    x = "AVISITN",
+    y = "CHG"
+  ) |>
+  metalite::meta_build()
 ```
 
 Step2: Call
@@ -238,42 +267,43 @@ example.
 
 ``` r
 
-meta_boxly(
-  boxly_adsl,
-  boxly_adeg,
-  population_term = "apat",
-  observation_term = "wk12",
-  observation_subset = AVISITN <= 12 & !is.na(CHG)
+analysis_plan <- metalite::plan(
+  analysis = "boxly",
+  population = "apat",
+  observation = "wk12",
+  parameter = "QTCF"
 )
-#> ADaM metadata: 
-#>    .$data_population     Population data with 254 subjects 
-#>    .$data_observation    Observation data with 32139 records 
-#>    .$plan    Analysis plan with 1 plans 
-#> 
-#> 
-#>   Analysis population type:
-#>     name        id  group var       subset label
-#> 1 'apat' 'USUBJID' 'TRTA'     SAFFL == 'Y'    ''
-#> 
-#> 
-#>   Analysis observation type:
-#>     name        id  group     var                      subset label
-#> 1 'wk12' 'USUBJID' 'TRTA' 'PARAM' AVISITN <= 12 & !is.na(CHG)    ''
-#> 
-#> 
-#>   Analysis parameter type:
-#>      name                            label             subset
-#> 1 'ARATE'        'Atrial Rate (beats/min)' PARAMCD == 'ARATE'
-#> 2    'PR'             'PR Interval (msec)'    PARAMCD == 'PR'
-#> 3   'QRS'            'QRS Interval (msec)'   PARAMCD == 'QRS'
-#> 4    'QT'             'QT Interval (msec)'    PARAMCD == 'QT'
-#> 5  'QTCF' 'QTc Interval Fridericia (msec)'  PARAMCD == 'QTCF'
-#> 6    'RR'             'RR Interval (msec)'    PARAMCD == 'RR'
-#> 
-#> 
-#>   Analysis function:
-#>      name                  label
-#> 1 'boxly' 'Interactive Box Plot'
+
+meta <- metalite::meta_adam(
+  population = boxly_adsl,
+  observation = boxly_adeg
+) |>
+  metalite::define_plan(analysis_plan) |>
+  metalite::define_population(
+    name = "apat",
+    group = "TRTA",
+    subset = SAFFL == "Y",
+    label = "Safety Population"
+  ) |>
+  metalite::define_observation(
+    name = "wk12",
+    group = "TRTA",
+    var = "PARAM",
+    subset = AVISITN <= 12 & !is.na(CHG),
+    label = "Weeks 0 to 12"
+  ) |>
+  metalite::define_parameter(
+    name = "QTCF",
+    label = "QTc Interval Fridericia (msec)",
+    subset = PARAMCD == "QTCF"
+  ) |>
+  metalite::define_analysis(
+    name = "boxly",
+    label = "Interactive Box Plot",
+    x = "AVISITN",
+    y = "CHG"
+  ) |>
+  metalite::meta_build()
 ```
 
 ``` r

@@ -31,10 +31,8 @@ inputs and outputs.
 
 The general workflow is:
 
-1.  Use
-    [`meta_boxly()`](https://merck.github.io/boxly/reference/meta_boxly.md)
-    or metalite package to construct input metadata from ADaM datasets.
-    For example,.
+1.  Use the metalite package to construct input metadata from ADaM
+    datasets.
 2.  Use
     [`prepare_boxly()`](https://merck.github.io/boxly/reference/prepare_boxly.md)
     to prepare datasets for interactive box plot.
@@ -47,13 +45,45 @@ Here is a quick example using an example dataset:
 
 library("boxly")
 
-meta_boxly(
-  boxly_adsl,
-  boxly_adlb,
-  population_term = "apat",
-  observation_term = "wk12",
-  observation_subset = AVISITN <= 12 & !is.na(CHG)
+analysis_plan <- metalite::plan(
+  analysis = "boxly",
+  population = "apat",
+  observation = "wk12",
+  parameter = "SODIUM"
+)
+
+meta <- metalite::meta_adam(
+  population = boxly_adsl,
+  observation = boxly_adlb
 ) |>
+  metalite::define_plan(analysis_plan) |>
+  metalite::define_population(
+    name = "apat",
+    group = "TRTA",
+    subset = SAFFL == "Y",
+    label = "Safety Population"
+  ) |>
+  metalite::define_observation(
+    name = "wk12",
+    group = "TRTA",
+    var = "PARAM",
+    subset = AVISITN <= 12 & !is.na(CHG),
+    label = "Weeks 0 to 12"
+  ) |>
+  metalite::define_parameter(
+    name = "SODIUM",
+    label = "Sodium (mmol/L)",
+    subset = PARAMCD == "SODIUM"
+  ) |>
+  metalite::define_analysis(
+    name = "boxly",
+    label = "Interactive Box Plot",
+    x = "AVISITN",
+    y = "CHG"
+  ) |>
+  metalite::meta_build()
+
+meta |>
   prepare_boxly() |>
   boxly()
 ```
